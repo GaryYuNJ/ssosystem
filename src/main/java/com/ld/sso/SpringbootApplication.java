@@ -1,6 +1,8 @@
-package com.ld.sso.app;
+package com.ld.sso;
 
 import java.security.MessageDigest;
+
+import javax.annotation.Resource;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,29 +13,35 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ld.sso.mapper.HotelMapper;
-import com.ld.sso.util.mapper.MyMapper;
+import com.ld.sso.crm.mapper.CRMCustmemberModelMapper;
+import com.ld.sso.redis.service.IRedisService;
+
 
 @SpringBootApplication
 @RestController
-@MapperScan(basePackages = "com.ld.sso.mapper", markerInterface = MyMapper.class)
+@MapperScan(basePackages = "com.ld.sso.crm.mapper")
 @EnableCaching
 @EnableScheduling
-public class App {
+public class SpringbootApplication {
 	
 	@Autowired
-	private HotelMapper hotelMapper;
+	private CRMCustmemberModelMapper custmemberMapper;
+	
+	@Resource
+    private IRedisService redisService;
 	
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    	
+        SpringApplication.run(SpringbootApplication.class, args);
     	//System.out.println(getSha1("1489390750794pamtest"));
     }
 
     @RequestMapping(value = "/")
     String hello() {
     	
-    	System.out.println(this.hotelMapper.selectByCityId(1));
+    	// 测试redis
+        redisService.textfun();
+        
+    	System.out.println(this.custmemberMapper.selectByPrimaryKey("0000000230"));
         return "Hello World!";
     }
     
