@@ -12,7 +12,9 @@ public interface CRMCustmemberModelMapper  {
 
     CRMCustmemberModel selectByPrimaryKey(String cmmemid);
 
+    CRMCustmemberModel selectTokenInfoByPrimaryKey(String cmmemid);
+    
     int updateByPrimaryKeySelective(CRMCustmemberModel record);
-
+    int updateTokenByPrimaryKey(CRMCustmemberModel record);
     //int updateByPrimaryKey(CRMCustmemberModel record);
 }

@@ -2,75 +2,106 @@ package com.ld.sso.redis.service.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.SetOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import com.ld.sso.crm.domain.CRMCustmemberModel;
+import com.ld.sso.crm.databean.CRMAccessTokenInfo;
+import com.ld.sso.midlayer.databean.CRMCustmemberBasicInfo;
 import com.ld.sso.redis.service.IRedisService;
 
-import java.util.concurrent.TimeUnit;
 
 /**
  */
-@CacheConfig(cacheNames="userinfo")
+@CacheConfig(cacheNames="userbasicinfo")
 @Service
 public class RedisService implements IRedisService {
 
 	Logger logger = LogManager.getLogger(this.getClass());
 	
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
-
-    @Override
-    public void textfun() {
-
-        SetOperations set = stringRedisTemplate.opsForSet();
-        set.add("openid", "oevMOt4FQdG5wxAuKUEWQ7H1C-Y");
-        
-        ValueOperations value = stringRedisTemplate.opsForValue();
-        value.set("openid1", "oevMOt4FQdG5wxAuKUEWQ7H1C-Y");
-        
-        logger.info("!CollectionUtils.isEmpty(set.members( \"openid\")) = " + !CollectionUtils.isEmpty(set.members("openid")));
-        logger.info("set.members(\"openid\") = " + set.members("openid"));
-        try {
-            Thread.sleep(1500);
-            logger.info("!CollectionUtils.isEmpty(set.members(\"openid\")) = " + !CollectionUtils.isEmpty(set.members("openid")));
-            stringRedisTemplate.expire("openid", 60, TimeUnit.SECONDS);
-            Thread.sleep(1500);
-            logger.info("!CollectionUtils.isEmpty(set.members(\"openid\"))) = " + !CollectionUtils.isEmpty(set.members("openid")));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Autowired
+//    StringRedisTemplate stringRedisTemplate;
+//
+//    @Override
+//    public void textfun() {
+//
+//        SetOperations set = stringRedisTemplate.opsForSet();
+//        set.add("openid", "oevMOt4FQdG5wxAuKUEWQ7H1C-Y");
+//        
+//        ValueOperations value = stringRedisTemplate.opsForValue();
+//        value.set("openid1", "oevMOt4FQdG5wxAuKUEWQ7H1C-Y");
+//        
+//        logger.info("!CollectionUtils.isEmpty(set.members( \"openid\")) = " + !CollectionUtils.isEmpty(set.members("openid")));
+//        logger.info("set.members(\"openid\") = " + set.members("openid"));
+//        try {
+//            Thread.sleep(1500);
+//            logger.info("!CollectionUtils.isEmpty(set.members(\"openid\")) = " + !CollectionUtils.isEmpty(set.members("openid")));
+//            stringRedisTemplate.expire("openid", 60, TimeUnit.SECONDS);
+//            Thread.sleep(1500);
+//            logger.info("!CollectionUtils.isEmpty(set.members(\"openid\"))) = " + !CollectionUtils.isEmpty(set.members("openid")));
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
     
-	//当key已存在时不保存，只读取
+	//当key已存在时，只读取缓存；不存在就走方法取值并保存
 	//@Cacheable(value="test1122", key="#id+'test1'")    
-	@Cacheable(key="#id+'test1'")
-	public CRMCustmemberModel searchUserInfo(int id) {
-		logger.info("id: {}, city: {}", id);
+	@Override
+	@Cacheable(value="userbasicinfo", key="#ticket")
+	public CRMCustmemberBasicInfo searchUserInfoByTicket(String ticket) {
+		logger.info("--searchUserInfoByTicket()---ticket: {} --- related userinfo in redis is null", ticket);
+		//无缓存的时候调用这里
 		return null;
 	}
 		
-	//不管存不存在都会更新key对于的内容
-//	@CachePut (key="#id+'test1'")    
-//	public CityInfo saveCity(int id, String city) {
-//		logger.info("id: {}, city: {}", id, city);
-//		return new CityInfo(id, city);
-//	}
+	//	不管存不存在都会更新key对于的内容
+	@Override
+	@CachePut (value="userbasicinfo", key="#ticket")    
+	public CRMCustmemberBasicInfo saveUserInfoInCache(String ticket, CRMCustmemberBasicInfo userinfo) {
+		logger.info("--saveUserInfo()--ticket: {}, userinfo.getCmmemid(): {}", ticket, userinfo.getCmmemid());
+		return userinfo;
+	}
 		
 	//删除key对应的内容
-	@CacheEvict(key="#id+'test1'")    
-	public void deleteCity(int id) {
-		logger.info("id: {}, city: {}", id);
+	@Override
+	@CacheEvict(value="userbasicinfo", key="#ticket")    
+	public void deleteUserInfoInCacheByTicket(String ticket) {
+		logger.info("--deleteUserInfoInCacheByTicket（）--ticket: {}", ticket);
+	}
+
+	//不管存不存在都会更新key对于的内容
+	@Override
+	@CachePut (value="CRMAccessToken", key="accessToken")   
+	public CRMAccessTokenInfo saveCRMAccessToken(CRMAccessTokenInfo accessTokenInfo) {
+		logger.info("--saveCRMAccessToken（）--accessTokenInfo.getAccessToken(): {}", accessTokenInfo.getAccessToken());
+		return accessTokenInfo;
+	}
+
+	//获取缓存中的accessToken，不存在就走方法取值并保存
+	@Override
+	@Cacheable(value="CRMAccessToken", key="accessToken")  
+	public CRMAccessTokenInfo getCRMAccessToken() {
+		//如果缓存不存在走这里，
+		//调用CRM interface service获取最新的access token并保存到缓存中；
+		//
+		//
+		return null;
+	}
+
+	@Override
+	@CachePut(value="CRMUserToken", key="#cmmemId")  
+	public String saveCRMUserToken(String cmmemId, String userToken) {
+		logger.info("--saveCRMUserToken()--cmmemId: {} --userToken: {}", cmmemId, userToken);
+		return userToken;
+	}
+
+	@Override
+	@Cacheable(value="CRMUserToken", key="#cmmemId")  
+	public String getCRMUserToken(String cmmemId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

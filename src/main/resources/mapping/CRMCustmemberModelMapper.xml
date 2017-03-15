@@ -174,6 +174,12 @@
     from CUSTMEMBER
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </select>
+  <select id="selectTokenInfoByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    CMTOKEN,CMTOKEN2,CMTOKENDATE
+    from CUSTMEMBER
+    where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from CUSTMEMBER
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
@@ -1759,6 +1765,12 @@
       CMPTNAME = #{cmptname,jdbcType=VARCHAR},
       CMCZZ = #{cmczz,jdbcType=DECIMAL},
       CMREFEREE = #{cmreferee,jdbcType=VARCHAR}
+    where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateTokenByPrimaryKey" parameterType="com.ld.sso.crm.domain.CRMCustmemberModel" >
+    update CUSTMEMBER
+    set CMTOKEN = #{cmtoken,jdbcType=VARCHAR},
+      CMTOKENDATE = #{cmtokendate,jdbcType=DATE}
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </update>
 </mapper>

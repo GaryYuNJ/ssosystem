@@ -1,12 +1,26 @@
 package com.ld.sso.redis.service;
 
+import com.ld.sso.crm.databean.CRMAccessTokenInfo;
+import com.ld.sso.midlayer.databean.CRMCustmemberBasicInfo;
+
 /**
- * Created by IntelliJ IDEA 14.
- * User: karl.zhao
- * Time: 2016/2/16 0016.
- * 目前模版使用的spring boot自带的redis，其他的jedis包也可以代替它
  */
 public interface IRedisService {
     /*请像下面的代码一样定义*/
-    void textfun();
+    //void textfun();
+
+	CRMCustmemberBasicInfo searchUserInfoByTicket(String ticket);
+
+	CRMCustmemberBasicInfo saveUserInfoInCache(String ticket,
+			CRMCustmemberBasicInfo userinfo);
+
+	void deleteUserInfoInCacheByTicket(String ticket);
+	
+	CRMAccessTokenInfo saveCRMAccessToken(CRMAccessTokenInfo accessTokenInfo);
+	
+	CRMAccessTokenInfo getCRMAccessToken();
+	
+	String saveCRMUserToken(String ticket, String userToken);
+	
+	String getCRMUserToken(String ticket);
 }

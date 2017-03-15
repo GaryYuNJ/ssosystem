@@ -11,7 +11,7 @@ public interface CardmainModelMapper {
 
     CardmainModel selectByPrimaryKey(String cdmno);
 
-    //int updateByPrimaryKeySelective(CardmainModel record);
+    int updateByPrimaryKeySelective(CardmainModel record);
 
     //int updateByPrimaryKey(CardmainModel record);
 }

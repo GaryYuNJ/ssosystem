@@ -1,0 +1,144 @@
+package com.ld.sso.crm.properties;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+/*
+#CRM interface code
+#8001 会员登陆验证
+loginCode=8001
+#8002 会员密码修改
+modifyPasswdCode=8002
+#8013 会员信息变更
+modifyUserinfoCode=8013
+#8014 会员信息单个查询
+queryuserinfoCode=8014
+#8006 积分增减
+changeJFCode=8006
+#8009 会员积分记录查询接口
+queryJFrecordCode=8009
+#8012 会员注册
+registerCode=8012
+#8015 个人房产信息查询
+queryHouseCode=8015
+#8020 储值账户余额查询
+queryBalanceCode=8020
+#8021 储值账户消费明细查询
+queryBalancedetailCode=8021
+#8023 储值账户消费
+consumeBalanceCode=8023
+#8025 储值账户记录
+queryBalanceRecordCode=8025
+
+*/
+
+@ConfigurationProperties(prefix = "crm.interface")
+public class CRMInterfaceProperties {
+	
+	private String serviceUrl;
+	private String accessTokenUrl;
+	
+	private String loginCode;
+	private String modifyPasswdCode;
+	private String modifyUserinfoCode;
+	private String queryuserinfoCode;
+	private String changeJFCode;
+	private String queryJFrecordCode;
+	private String registerCode;
+	private String queryHouseCode;
+	private String queryBalanceCode;
+	private String queryBalancedetailCode;
+	private String consumeBalanceCode;
+	private String queryBalanceRecordCode;
+	
+	
+	public String getServiceUrl() {
+		return serviceUrl;
+	}
+	public void setServiceUrl(String serviceUrl) {
+		this.serviceUrl = serviceUrl;
+	}
+	
+	public String getAccessTokenUrl() {
+		return accessTokenUrl;
+	}
+	public void setAccessTokenUrl(String accessTokenUrl) {
+		this.accessTokenUrl = accessTokenUrl;
+	}
+	public String getLoginCode() {
+		return loginCode;
+	}
+	public void setLoginCode(String loginCode) {
+		this.loginCode = loginCode;
+	}
+	public String getModifyPasswdCode() {
+		return modifyPasswdCode;
+	}
+	public void setModifyPasswdCode(String modifyPasswdCode) {
+		this.modifyPasswdCode = modifyPasswdCode;
+	}
+	public String getModifyUserinfoCode() {
+		return modifyUserinfoCode;
+	}
+	public void setModifyUserinfoCode(String modifyUserinfoCode) {
+		this.modifyUserinfoCode = modifyUserinfoCode;
+	}
+	public String getQueryuserinfoCode() {
+		return queryuserinfoCode;
+	}
+	public void setQueryuserinfoCode(String queryuserinfoCode) {
+		this.queryuserinfoCode = queryuserinfoCode;
+	}
+	public String getChangeJFCode() {
+		return changeJFCode;
+	}
+	public void setChangeJFCode(String changeJFCode) {
+		this.changeJFCode = changeJFCode;
+	}
+	public String getQueryJFrecordCode() {
+		return queryJFrecordCode;
+	}
+	public void setQueryJFrecordCode(String queryJFrecordCode) {
+		this.queryJFrecordCode = queryJFrecordCode;
+	}
+	public String getRegisterCode() {
+		return registerCode;
+	}
+	public void setRegisterCode(String registerCode) {
+		this.registerCode = registerCode;
+	}
+	public String getQueryHouseCode() {
+		return queryHouseCode;
+	}
+	public void setQueryHouseCode(String queryHouseCode) {
+		this.queryHouseCode = queryHouseCode;
+	}
+	public String getQueryBalanceCode() {
+		return queryBalanceCode;
+	}
+	public void setQueryBalanceCode(String queryBalanceCode) {
+		this.queryBalanceCode = queryBalanceCode;
+	}
+	public String getQueryBalancedetailCode() {
+		return queryBalancedetailCode;
+	}
+	public void setQueryBalancedetailCode(String queryBalancedetailCode) {
+		this.queryBalancedetailCode = queryBalancedetailCode;
+	}
+	public String getConsumeBalanceCode() {
+		return consumeBalanceCode;
+	}
+	public void setConsumeBalanceCode(String consumeBalanceCode) {
+		this.consumeBalanceCode = consumeBalanceCode;
+	}
+	public String getQueryBalanceRecordCode() {
+		return queryBalanceRecordCode;
+	}
+	public void setQueryBalanceRecordCode(String queryBalanceRecordCode) {
+		this.queryBalanceRecordCode = queryBalanceRecordCode;
+	}
+
+	public String getFullServiceurl(String interfaceCode, String accessToken){
+		return this.getServiceUrl().replace("*interfaceCode*", interfaceCode).replace("*accessToken*", accessToken);
+	}
+	
+	
+}

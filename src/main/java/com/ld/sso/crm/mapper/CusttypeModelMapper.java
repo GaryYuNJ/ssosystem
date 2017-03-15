@@ -11,7 +11,7 @@ public interface CusttypeModelMapper {
 
     CusttypeModel selectByPrimaryKey(String ctcode);
 
-    //int updateByPrimaryKeySelective(CusttypeModel record);
+    int updateByPrimaryKeySelective(CusttypeModel record);
 
     //int updateByPrimaryKey(CusttypeModel record);
 }
