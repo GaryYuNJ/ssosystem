@@ -150,6 +150,43 @@
     <result column="CMCZZ" property="cmczz" jdbcType="DECIMAL" />
     <result column="CMREFEREE" property="cmreferee" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="FullInfoResultMap" type="com.ld.sso.crm.domain.CRMCustmemberModel" >
+    <id column="CMMEMID" property="cmmemid" jdbcType="VARCHAR" />
+    <result column="CMCUSTID" property="cmcustid" jdbcType="VARCHAR" />
+    <result column="CMRELATION" property="cmrelation" jdbcType="CHAR" />
+    <result column="CMTOTJF" property="cmtotjf" jdbcType="DECIMAL" />
+    <result column="CMNAME" property="cmname" jdbcType="VARCHAR" />
+    <result column="CMBIRTHDAY" property="cmbirthday" jdbcType="DATE" />
+    <result column="CMSEX" property="cmsex" jdbcType="CHAR" />
+    <result column="CMADDR" property="cmaddr" jdbcType="VARCHAR" />
+    <result column="CMIDTYPE" property="cmidtype" jdbcType="CHAR" />
+    <result column="CMIDNO" property="cmidno" jdbcType="VARCHAR" />
+    <result column="CMMOBILE1" property="cmmobile1" jdbcType="VARCHAR" />
+    <result column="CMEMAIL" property="cmemail" jdbcType="VARCHAR" />
+    <result column="CMCOMPANY" property="cmcompany" jdbcType="VARCHAR" />
+    <result column="CMMKT" property="cmmkt" jdbcType="VARCHAR" />
+    <result column="CMPTNAME" property="cmptname" jdbcType="VARCHAR" />
+    <result column="CMCZZ" property="cmczz" jdbcType="DECIMAL" />
+    <result column="CMREFEREE" property="cmreferee" jdbcType="VARCHAR" />
+    <result column="CMLCZHYE" property="cmlczhye" jdbcType="DECIMAL" />
+    
+    <association property="cardmainModel" javaType="com.ld.sso.crm.domain.CardmainModel">
+        <id column="CDMNO" property="cdmno" />
+        <result column="CDMMAXDATE" property="cdmmaxdate" />
+        <result column="CDMMINDATE" property="cdmmindate" />
+        <result column="CDMTYPE" property="cdmtype" />
+        <result column="CDMSTATUS" property="cdmstatus" />
+    </association>
+    <association property="custypeModel" javaType="com.ld.sso.crm.domain.CusttypeModel">
+        <id column="CTCODE" property="ctcode" />
+        <result column="CTNAME" property="ctname" />
+    </association>
+  </resultMap>
+  <resultMap id="BasicInfoResultMap" type="com.ld.sso.crm.domain.CRMCustmemberModel" >
+    <id column="CMMEMID" property="cmmemid" jdbcType="VARCHAR" />
+    <result column="CMCUSTID" property="cmcustid" jdbcType="VARCHAR" />
+    <result column="CMMOBILE1" property="cmmobile1" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     CMMEMID, CMCUSTID, CMISOWNER, CMRELATION, CMGRADE, CMFLAG1, CMFLAG2, CMFLAG3, CMLMYKJF, 
     CMJFXFXE, CMLCZHYE, CMN1, CMN2, CMN3, CMN4, CMN5, CMN6, CMN7, CMN8, CMN9, CMJFA, 
@@ -168,6 +205,16 @@
     CMJJDATE, CMASTRO, CMFSTDATE, CMTOKEN, CMTOKEN2, CMTOKENDATE, CMPWD, CMSSQY, CMQYJS, 
     CMJTJS, CMPTNAME, CMCZZ, CMREFEREE
   </sql>
+  <sql id="BasicInfo_Column_List" >
+    CMMEMID,CMCUSTID,CMMOBILE1
+  </sql>
+  <sql id="FullInfo_Column_List" >
+    CUS.CMMEMID,CUS.CMCUSTID,CUS.CUS.CMRELATION,CUS.CMTOTJF,CUS.CMNAME,
+	CUS.CMBIRTHDAY,CUS.CMSEX,CUS.CMADDR,CUS.CMIDTYPE,CUS.CMIDNO,CUS.CMMOBILE1,
+	CUS.CMEMAIL,CUS.CMCOMPANY,CUS.CMMKT,CUS.CMPTNAME,CUS.CMCZZ,CUS.CMREFEREE,CUS.CMLCZHYE,
+	Cardmain.CDMNO,Cardmain.CDMMAXDATE,Cardmain.CDMMINDATE,Cardmain.CDMTYPE,Cardmain.CDMSTATUS,
+	Custtype.CTCODE,Custtype.CTNAME 
+  </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -180,6 +227,29 @@
     from CUSTMEMBER
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </select>
+   <select id="selectFullInfoByPrimaryKey" resultMap="FullInfoResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="FullInfo_Column_List" />
+    from CUSTMEMBER CUS, CARDMAIN Cardmain, CUSTTYPE Custtype
+    where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
+    and CUS.CMMEMID = Cardmain.CDMOWNER
+    and Cardmain.CDMTYPE = Custtype.CTCODE
+  </select>
+  <select id="selectBasicInfoByMobileAndEnPasswd" resultMap="BasicInfoResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="BasicInfo_Column_List" />
+    from CUSTMEMBER
+    where CMMOBILE1 = #{mobile,jdbcType=VARCHAR}
+	and CMPWD = #{enPasswd,jdbcType=VARCHAR}
+  </select>
+    
+    <select id="getEncryptedPasswd" statementType="CALLABLE" parameterType="java.util.Map">
+        {#{enPasswd,mode=OUT,jdbcType=VARCHAR} = call FGENPWD_HY(#{passwd,mode=IN,jdbcType=VARCHAR})}
+	</select>
+	<select id="getDecryptedPasswd" statementType="CALLABLE" parameterType="java.util.Map">
+        {#{passwd,mode=OUT,jdbcType=VARCHAR} = call FGETPWD_HY(#{enPasswd,mode=IN,jdbcType=VARCHAR})}
+	</select>
+	
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from CUSTMEMBER
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
@@ -1773,4 +1843,7 @@
       CMTOKENDATE = #{cmtokendate,jdbcType=DATE}
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </update>
+  
+
+	
 </mapper>

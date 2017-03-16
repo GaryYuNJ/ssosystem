@@ -20,11 +20,11 @@ public class CRMCustmemberFullInfo implements Serializable  {
     private String cmemail;
     private String cmmemid;
     private String cmaddr;
-    private String cmczz;
+    private int cmczz;
     private String cmname; 
     private String cmbirthday; //2017-02-10
     private String cmsex;
-    private BigDecimal cmlczhye; //余额
+    private String cmlczhye; //余额
     
     private String cdmmaxdate; //2099-12-31" ？？ cardmain
     private String cdmmindate;//2017-02-10 ？？ cardmain
@@ -32,6 +32,19 @@ public class CRMCustmemberFullInfo implements Serializable  {
     private String cdmstatus; // 表cardmain
     private String ctname; //表 custtype 
     
+    
+	public String getCmlczhye() {
+		return cmlczhye;
+	}
+	public void setCmlczhye(String cmlczhye) {
+		this.cmlczhye = cmlczhye;
+	}
+	public int getCmczz() {
+		return cmczz;
+	}
+	public void setCmczz(int cmczz) {
+		this.cmczz = cmczz;
+	}
 	public String getCmreferee() {
 		return cmreferee;
 	}
@@ -116,12 +129,6 @@ public class CRMCustmemberFullInfo implements Serializable  {
 	public void setCdmtype(String cdmtype) {
 		this.cdmtype = cdmtype;
 	}
-	public String getCmczz() {
-		return cmczz;
-	}
-	public void setCmczz(String cmczz) {
-		this.cmczz = cmczz;
-	}
 	public String getCmname() {
 		return cmname;
 	}
@@ -140,12 +147,6 @@ public class CRMCustmemberFullInfo implements Serializable  {
 	public void setCmsex(String cmsex) {
 		this.cmsex = cmsex;
 	}
-	public BigDecimal getCmlczhye() {
-		return cmlczhye;
-	}
-	public void setCmlczhye(BigDecimal cmlczhye) {
-		this.cmlczhye = cmlczhye;
-	}
 	public String getCdmmaxdate() {
 		return cdmmaxdate;
 	}
@@ -158,8 +159,5 @@ public class CRMCustmemberFullInfo implements Serializable  {
 	public void setCdmmindate(String cdmmindate) {
 		this.cdmmindate = cdmmindate;
 	}
-    
-    
-    
     
 }

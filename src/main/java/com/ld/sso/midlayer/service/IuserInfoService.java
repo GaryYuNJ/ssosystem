@@ -1,30 +1,38 @@
 package com.ld.sso.midlayer.service;
 
+import com.ld.sso.crm.databean.ResponseFromCRMData;
+import com.ld.sso.crm.domain.CRMCustmemberModel;
+import com.ld.sso.frontlayer.databean.CommonRequestParam;
+import com.ld.sso.frontlayer.databean.CommonResponseInfo;
 import com.ld.sso.midlayer.databean.CRMCustmemberBasicInfo;
 
 public interface IuserInfoService {
 
-	CRMCustmemberBasicInfo queryUserInfoByTicket(String ticket);
+	CommonResponseInfo queryUserBasicInfoByTicket(String ticket);
 
-	CRMCustmemberBasicInfo loginWithPwd(String mobile,
-			String password);
+	CommonResponseInfo loginWithPwd(String mobile,
+			String password, String source);
 
-	int logoutByTicket(String ticket);
+	CommonResponseInfo modifyPassword(String ticket, String oldPassword, String newPassword);
 	
-	int modifyPassword(String ticket, String oldPassword, String newPassword);
-	
-	CRMCustmemberBasicInfo registerNewUser(String mobile, String password, String name, String sex, String mkt, String referee);
-	
-	int modifyUserInfo(String ticket);
+//	CommonResponseInfo registerNewUser(String mobile, String password, String name, String sex, String mkt, String referee);
 	
 	String getValidCRMAccessToken();
 	
-	String getValidCRMCustmemberTokenByTicket(String cmmemid);
-	
-	String getValidCRMCustmemberTokenByMemId(String cmmemid);
-	
-	
-	
-	
+//	String getValidCRMCustmemberTokenByTicket(String ticket);
+//	
+//	String getValidCRMCustmemberTokenByMemId(String cmmemid);
+
+	String getNewSSOTicket(String cmmemId, String source,
+			CRMCustmemberBasicInfo basicInfo);
+
+	CommonResponseInfo queryUserFullInfoByTicket(String ticket);
+
+	CommonResponseInfo logoutByTicket(String ticket, String source);
+
+	CommonResponseInfo modifyUserInfo(String ticket, CRMCustmemberModel cusModel);
+
+	CommonResponseInfo sendCommonRequestToCRM(String crmInterfaceCode,
+			CommonRequestParam requestparam);
 	
 }

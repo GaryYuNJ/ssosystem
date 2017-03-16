@@ -1,5 +1,7 @@
 package com.ld.sso.crm.mapper;
 
+import java.util.Map;
+
 import com.ld.sso.crm.domain.CRMCustmemberModel;
 
 
@@ -17,4 +19,12 @@ public interface CRMCustmemberModelMapper  {
     int updateByPrimaryKeySelective(CRMCustmemberModel record);
     int updateTokenByPrimaryKey(CRMCustmemberModel record);
     //int updateByPrimaryKey(CRMCustmemberModel record);
+    
+    void getEncryptedPasswd(Map params);
+
+	void getDecryptedPasswd(Map params);
+	
+	CRMCustmemberModel selectBasicInfoByMobileAndEnPasswd(Map params);
+	
+	CRMCustmemberModel selectFullInfoByPrimaryKey(String cmmemid);
 }

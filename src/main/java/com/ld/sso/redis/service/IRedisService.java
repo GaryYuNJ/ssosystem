@@ -9,7 +9,7 @@ public interface IRedisService {
     /*请像下面的代码一样定义*/
     //void textfun();
 
-	CRMCustmemberBasicInfo searchUserInfoByTicket(String ticket);
+	CRMCustmemberBasicInfo getUserInfoByTicket(String ticket);
 
 	CRMCustmemberBasicInfo saveUserInfoInCache(String ticket,
 			CRMCustmemberBasicInfo userinfo);
@@ -20,7 +20,13 @@ public interface IRedisService {
 	
 	CRMAccessTokenInfo getCRMAccessToken();
 	
-	String saveCRMUserToken(String ticket, String userToken);
+//	String saveCRMUserToken(String ticket, String userToken);
+//	
+//	String getCRMUserToken(String ticket);
 	
-	String getCRMUserToken(String ticket);
+	String deleteMemIdToTicketCache(String cmmemId_source);
+
+	String getMemIdToTicketCache(String cmmemId_source);
+
+	String saveMemIdToTicketCache(String cmmemId_source, String ticket);
 }

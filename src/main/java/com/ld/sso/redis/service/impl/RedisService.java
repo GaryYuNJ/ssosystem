@@ -50,8 +50,8 @@ public class RedisService implements IRedisService {
 	//@Cacheable(value="test1122", key="#id+'test1'")    
 	@Override
 	@Cacheable(value="userbasicinfo", key="#ticket")
-	public CRMCustmemberBasicInfo searchUserInfoByTicket(String ticket) {
-		logger.info("--searchUserInfoByTicket()---ticket: {} --- related userinfo in redis is null", ticket);
+	public CRMCustmemberBasicInfo getUserInfoByTicket(String ticket) {
+		logger.info("--getUserInfoByTicket()---ticket: {} --- related userinfo in redis is null", ticket);
 		//无缓存的时候调用这里
 		return null;
 	}
@@ -73,7 +73,7 @@ public class RedisService implements IRedisService {
 
 	//不管存不存在都会更新key对于的内容
 	@Override
-	@CachePut (value="CRMAccessToken", key="accessToken")   
+	@CachePut (value="CRMAccessToken", key="'accessToken'")   
 	public CRMAccessTokenInfo saveCRMAccessToken(CRMAccessTokenInfo accessTokenInfo) {
 		logger.info("--saveCRMAccessToken（）--accessTokenInfo.getAccessToken(): {}", accessTokenInfo.getAccessToken());
 		return accessTokenInfo;
@@ -81,27 +81,45 @@ public class RedisService implements IRedisService {
 
 	//获取缓存中的accessToken，不存在就走方法取值并保存
 	@Override
-	@Cacheable(value="CRMAccessToken", key="accessToken")  
+	@Cacheable(value="CRMAccessToken", key="'accessToken'")  
 	public CRMAccessTokenInfo getCRMAccessToken() {
 		//如果缓存不存在走这里，
-		//调用CRM interface service获取最新的access token并保存到缓存中；
-		//
-		//
 		return null;
 	}
+//
+//	@Override
+//	@CachePut(value="CRMUserToken", key="#cmmemId")  
+//	public String saveCRMUserToken(String cmmemId, String userToken) {
+//		logger.info("--saveCRMUserToken()--cmmemId: {} --userToken: {}", cmmemId, userToken);
+//		return userToken;
+//	}
+//
+//	@Override
+//	@Cacheable(value="CRMUserToken", key="#cmmemId")  
+//	public String getCRMUserToken(String cmmemId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
-	@CachePut(value="CRMUserToken", key="#cmmemId")  
-	public String saveCRMUserToken(String cmmemId, String userToken) {
-		logger.info("--saveCRMUserToken()--cmmemId: {} --userToken: {}", cmmemId, userToken);
-		return userToken;
+	@CachePut(value="memIdToTicketCache", key="#cmmemId_source")  
+	public String saveMemIdToTicketCache(String cmmemId_source, String ticket) {
+		logger.info("--saveMemIdTicketCache()--cmmemId_source: {} --ticket: {}", cmmemId_source, ticket);
+		return ticket;
 	}
 
 	@Override
-	@Cacheable(value="CRMUserToken", key="#cmmemId")  
-	public String getCRMUserToken(String cmmemId) {
+	@Cacheable(value="memIdToTicketCache", key="#cmmemId_source")  
+	public String getMemIdToTicketCache(String cmmemId_source) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	@Override
+	@CacheEvict(value="memIdToTicketCache", key="#cmmemId_source")  
+	public String deleteMemIdToTicketCache(String cmmemId_source) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

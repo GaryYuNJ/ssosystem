@@ -10,6 +10,16 @@ public class CRMCustmemberModel implements Serializable  {
 	 */
 	private static final long serialVersionUID = 1L;
 
+//	//extend info
+//    private String cdmmaxdate; //2099-12-31"  表cardmain
+//    private String cdmmindate;//2017-02-10  表cardmain
+//    private String cdmtype; //表cardmain
+//    private String cdmstatus; // 表cardmain
+//    private String ctname; //表 custtype 
+    private CardmainModel cardmainModel;//Cardmain.CDMOWNER - CRMCustmember.CMMEMID;   Cardmain.CDMCID - CRMCustmember.CMCUSTID
+    private CusttypeModel custypeModel; //Custtype.ctcode   Cardmain.cdmtype   
+	
+	//original table info
 	private String cmmemid;
 
     private String cmcustid;
@@ -1479,4 +1489,21 @@ public class CRMCustmemberModel implements Serializable  {
     public void setCmreferee(String cmreferee) {
         this.cmreferee = cmreferee == null ? null : cmreferee.trim();
     }
+
+	public CardmainModel getCardmainModel() {
+		return cardmainModel;
+	}
+
+	public void setCardmainModel(CardmainModel cardmainModel) {
+		this.cardmainModel = cardmainModel;
+	}
+
+	public CusttypeModel getCustypeModel() {
+		return custypeModel;
+	}
+
+	public void setCustypeModel(CusttypeModel custypeModel) {
+		this.custypeModel = custypeModel;
+	}
+    
 }

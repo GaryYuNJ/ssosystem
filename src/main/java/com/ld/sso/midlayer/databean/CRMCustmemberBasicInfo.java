@@ -9,7 +9,7 @@ public class CRMCustmemberBasicInfo implements Serializable  {
 	private static final long serialVersionUID = 1L;
 
     private String cmcustid; 
-    private String cmmobile1;
+    private String cmmobile;
     private String cmmemid;
     
 	public String getCmcustid() {
@@ -18,11 +18,12 @@ public class CRMCustmemberBasicInfo implements Serializable  {
 	public void setCmcustid(String cmcustid) {
 		this.cmcustid = cmcustid;
 	}
-	public String getCmmobile1() {
-		return cmmobile1;
+	
+	public String getCmmobile() {
+		return cmmobile;
 	}
-	public void setCmmobile1(String cmmobile1) {
-		this.cmmobile1 = cmmobile1;
+	public void setCmmobile(String cmmobile) {
+		this.cmmobile = cmmobile;
 	}
 	public String getCmmemid() {
 		return cmmemid;

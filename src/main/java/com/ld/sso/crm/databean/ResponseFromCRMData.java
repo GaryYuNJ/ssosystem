@@ -1,9 +1,10 @@
 package com.ld.sso.crm.databean;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
-public class ResponseFromCRMDataBean  implements Serializable{
+public class ResponseFromCRMData  implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
@@ -42,7 +43,8 @@ public class ResponseFromCRMDataBean  implements Serializable{
 }	
 	
 */	
-	Map<String, Object> data;
+	List <Map> data;
+	//Map<String, Object> data;
 	String appId;
 	String code;
 	String msg;
@@ -63,10 +65,11 @@ public class ResponseFromCRMDataBean  implements Serializable{
 	public void setExpires_in(String expires_in) {
 		this.expires_in = expires_in;
 	}
-	public Map<String, Object> getData() {
+	
+	public List<Map> getData() {
 		return data;
 	}
-	public void setData(Map<String, Object> data) {
+	public void setData(List<Map> data) {
 		this.data = data;
 	}
 	public String getAppId() {
