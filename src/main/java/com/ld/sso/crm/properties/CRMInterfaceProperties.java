@@ -48,8 +48,29 @@ public class CRMInterfaceProperties {
 	private String queryBalancedetailCode;
 	private String consumeBalanceCode;
 	private String queryBalanceRecordCode;
+	private String queryuserBasicinfoCode;
+	private String signKey;
+	private String logoutCode;
 	
 	
+	public String getLogoutCode() {
+		return logoutCode;
+	}
+	public void setLogoutCode(String logoutCode) {
+		this.logoutCode = logoutCode;
+	}
+	public String getSignKey() {
+		return signKey;
+	}
+	public void setSignKey(String signKey) {
+		this.signKey = signKey;
+	}
+	public String getQueryuserBasicinfoCode() {
+		return queryuserBasicinfoCode;
+	}
+	public void setQueryuserBasicinfoCode(String queryuserBasicinfoCode) {
+		this.queryuserBasicinfoCode = queryuserBasicinfoCode;
+	}
 	public String getServiceUrl() {
 		return serviceUrl;
 	}

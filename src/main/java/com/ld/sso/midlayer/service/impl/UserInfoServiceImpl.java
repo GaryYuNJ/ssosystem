@@ -316,17 +316,53 @@ public class UserInfoServiceImpl implements IuserInfoService {
 			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
 			
 			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmemid())){
-				String userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
+				
+				//从缓存中读取用户对应的userToken，不保证在CRM有没有过期
+				String userToken = redisService.getCRMUserToken(basicInfo.getCmmemid());
+				
+				//获取可用的usertoken并存入缓存
+				if(StringUtil.isEmpty(userToken)){
+					userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
+					redisService.saveCRMUserToken(basicInfo.getCmmemid(), userToken);
+				}
+				
 				params.put("token", userToken);
 				params.put("p_token", userToken);
 				
 				requestparam.setParams(params);
-				//此处可做容错处理
-				//如果CRM返回accessToken错误或者usertoken错误，可以处理后，重新再发送请求
-				//
-				//
 				ResponseFromCRMData crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
 				logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+				
+				//usertoken过期容错处理
+				//code =0 ,data 为空 表示 user token 过期
+				if("0".equals(crmResponse.getCode())
+						&& (null == crmResponse.getData() ||crmResponse.getData().size() == 0)){
+					//获取可用的usertoken并存入缓存
+					logger.info("~~~"+methodName+"~~~usertoken expired. get the new one from DB~~");
+					userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
+					logger.info("~~~"+methodName+"~~~new userToken:{}~~", userToken);
+					redisService.saveCRMUserToken(basicInfo.getCmmemid(), userToken);
+					
+					//重新发送请求
+					params.put("token", userToken);
+					params.put("p_token", userToken);
+					requestparam.setParams(params);
+					crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
+					logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+				
+				//access token容错处理
+				//如果CRM返回accessToken 错误，可以重新获取后，再发送请求
+				}else if("9003".equals(crmResponse.getCode())//access token 无效
+						//access token已过期
+						&&"9005".equals(crmResponse.getCode())){
+					
+					//直接删除缓存的accesstoken
+					redisService.deleteCRMAccessToken();
+					
+					crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
+					logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+				}
+				
 				
 				response.setCode(crmResponse.getCode());
 				response.setMsg(crmResponse.getMsg());

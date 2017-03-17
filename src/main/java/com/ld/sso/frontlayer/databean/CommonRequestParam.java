@@ -36,7 +36,15 @@ params:
 	
 	private String timestamp;
 
+	private String source;
+	
+	public String getSource() {
+		return source;
+	}
 
+	public void setSource(String source) {
+		this.source = source;
+	}
 
 	public Map<String, Object> getParams() {
 		return params;

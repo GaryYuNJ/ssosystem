@@ -86,20 +86,14 @@ public class RedisService implements IRedisService {
 		//如果缓存不存在走这里，
 		return null;
 	}
-//
-//	@Override
-//	@CachePut(value="CRMUserToken", key="#cmmemId")  
-//	public String saveCRMUserToken(String cmmemId, String userToken) {
-//		logger.info("--saveCRMUserToken()--cmmemId: {} --userToken: {}", cmmemId, userToken);
-//		return userToken;
-//	}
-//
-//	@Override
-//	@Cacheable(value="CRMUserToken", key="#cmmemId")  
-//	public String getCRMUserToken(String cmmemId) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	//获取缓存中的accessToken，不存在就走方法取值并保存
+	@Override
+	@CacheEvict(value="CRMAccessToken", key="'accessToken'")  
+	public void deleteCRMAccessToken() {
+		//如果缓存不存在走这里，
+		logger.info("--deleteCRMAccessToken（）--");
+		//return null;
+	}
 
 	@Override
 	@CachePut(value="memIdToTicketCache", key="#cmmemId_source")  
@@ -119,7 +113,30 @@ public class RedisService implements IRedisService {
 	@CacheEvict(value="memIdToTicketCache", key="#cmmemId_source")  
 	public String deleteMemIdToTicketCache(String cmmemId_source) {
 		// TODO Auto-generated method stub
+		logger.info("--deleteMemIdToTicketCache()--cmmemId_source: {} ", cmmemId_source);
 		return null;
+	}
+
+	@Override
+	@CachePut(value="CRMUserToken", key="#cmmemId")  
+	public String saveCRMUserToken(String cmmemId, String userToken) {
+		logger.info("--saveCRMUserToken()--cmmemId: {} --userToken: {}", cmmemId, userToken);
+		return userToken;
+	}
+
+	@Override
+	@Cacheable(value="CRMUserToken", key="#cmmemId")  
+	public String getCRMUserToken(String cmmemId) {
+		// TODO Auto-generated method stub
+		logger.info("--getCRMUserToken()--cmmemId: {} --userToken: {}", cmmemId);
+		return null;
+	}
+
+	@Override
+	@CacheEvict(value="CRMUserToken", key="#cmmemId")  
+	public void deleteCRMUserToken(String cmmemId) {
+		// TODO Auto-generated method stub
+		logger.info("--deleteCRMUserToken()--cmmemId: {} ", cmmemId);
 	}
 
 }

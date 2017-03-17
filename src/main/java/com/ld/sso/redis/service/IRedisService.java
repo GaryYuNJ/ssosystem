@@ -20,13 +20,19 @@ public interface IRedisService {
 	
 	CRMAccessTokenInfo getCRMAccessToken();
 	
-//	String saveCRMUserToken(String ticket, String userToken);
-//	
-//	String getCRMUserToken(String ticket);
+	void deleteCRMAccessToken();
+	
+	String saveCRMUserToken(String cmmemId, String userToken);
+	
+	String getCRMUserToken(String cmmemId);
+	
+	void deleteCRMUserToken(String cmmemId);
 	
 	String deleteMemIdToTicketCache(String cmmemId_source);
 
 	String getMemIdToTicketCache(String cmmemId_source);
 
 	String saveMemIdToTicketCache(String cmmemId_source, String ticket);
+
+
 }
