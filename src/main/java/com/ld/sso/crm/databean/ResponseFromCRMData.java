@@ -43,7 +43,8 @@ public class ResponseFromCRMData  implements Serializable{
 }	
 	
 */	
-	List <Map> data;
+	//List <Map> data;
+	Object data;
 	//Map<String, Object> data;
 	String appId;
 	String code;
@@ -66,10 +67,10 @@ public class ResponseFromCRMData  implements Serializable{
 		this.expires_in = expires_in;
 	}
 	
-	public List<Map> getData() {
+	public Object getData() {
 		return data;
 	}
-	public void setData(List<Map> data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 	public String getAppId() {

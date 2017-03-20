@@ -13,14 +13,14 @@ public class CRMCustmemberFullInfo implements Serializable  {
     private String cmrelation; 
     private String cmidno; 
     private String cmidtype; 
-    private int cmtotjf; 
+    private Integer cmtotjf; 
     private String cmptname; 
     private String cmcustid; 
-    private String cmmobile1;
+    private String cmmobile;
     private String cmemail;
     private String cmmemid;
     private String cmaddr;
-    private int cmczz;
+    private Integer cmczz;
     private String cmname; 
     private String cmbirthday; //2017-02-10
     private String cmsex;
@@ -33,17 +33,23 @@ public class CRMCustmemberFullInfo implements Serializable  {
     private String ctname; //表 custtype 
     
     
+	public Integer getCmtotjf() {
+		return cmtotjf;
+	}
+	public void setCmtotjf(Integer cmtotjf) {
+		this.cmtotjf = cmtotjf;
+	}
+	public Integer getCmczz() {
+		return cmczz;
+	}
+	public void setCmczz(Integer cmczz) {
+		this.cmczz = cmczz;
+	}
 	public String getCmlczhye() {
 		return cmlczhye;
 	}
 	public void setCmlczhye(String cmlczhye) {
 		this.cmlczhye = cmlczhye;
-	}
-	public int getCmczz() {
-		return cmczz;
-	}
-	public void setCmczz(int cmczz) {
-		this.cmczz = cmczz;
 	}
 	public String getCmreferee() {
 		return cmreferee;
@@ -75,12 +81,6 @@ public class CRMCustmemberFullInfo implements Serializable  {
 	public void setCdmstatus(String cdmstatus) {
 		this.cdmstatus = cdmstatus;
 	}
-	public int getCmtotjf() {
-		return cmtotjf;
-	}
-	public void setCmtotjf(int cmtotjf) {
-		this.cmtotjf = cmtotjf;
-	}
 	public String getCmptname() {
 		return cmptname;
 	}
@@ -93,11 +93,12 @@ public class CRMCustmemberFullInfo implements Serializable  {
 	public void setCmcustid(String cmcustid) {
 		this.cmcustid = cmcustid;
 	}
-	public String getCmmobile1() {
-		return cmmobile1;
+	
+	public String getCmmobile() {
+		return cmmobile;
 	}
-	public void setCmmobile1(String cmmobile1) {
-		this.cmmobile1 = cmmobile1;
+	public void setCmmobile(String cmmobile) {
+		this.cmmobile = cmmobile;
 	}
 	public String getCtname() {
 		return ctname;

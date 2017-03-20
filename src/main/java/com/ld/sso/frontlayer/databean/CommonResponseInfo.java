@@ -3,9 +3,6 @@ package com.ld.sso.frontlayer.databean;
 import java.util.List;
 import java.util.Map;
 
-import com.ld.sso.midlayer.databean.CRMCustmemberBasicInfo;
-import com.ld.sso.midlayer.databean.CRMCustmemberFullInfo;
-
 public class CommonResponseInfo {
 
 	/*
@@ -44,30 +41,12 @@ public class CommonResponseInfo {
 	*/	
 	
 	//Map<String, Object> data;
-	List <Map> data;
+	Object data;
 	String code;
 	String msg;
-		
-	CRMCustmemberBasicInfo custmemberBasicInfo;
-	CRMCustmemberFullInfo custmemberFullInfo;
 	
 	String ticket;
 	
-	public CRMCustmemberFullInfo getCustmemberFullInfo() {
-		return custmemberFullInfo;
-	}
-
-	public void setCustmemberFullInfo(CRMCustmemberFullInfo custmemberFullInfo) {
-		this.custmemberFullInfo = custmemberFullInfo;
-	}
-
-	public CRMCustmemberBasicInfo getCustmemberBasicInfo() {
-		return custmemberBasicInfo;
-	}
-
-	public void setCustmemberBasicInfo(CRMCustmemberBasicInfo custmemberBasicInfo) {
-		this.custmemberBasicInfo = custmemberBasicInfo;
-	}
 
 	public String getTicket() {
 		return ticket;
@@ -77,12 +56,11 @@ public class CommonResponseInfo {
 		this.ticket = ticket;
 	}
 
-
-	public List<Map> getData() {
+	public Object getData() {
 		return data;
 	}
 
-	public void setData(List<Map> data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 

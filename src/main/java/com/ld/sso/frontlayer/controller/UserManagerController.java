@@ -39,7 +39,7 @@ public class UserManagerController {
 			produces = "application/json; charset=utf-8")
 	//sno 设备识别号
 	public CommonResponseInfo userInfoManager(@PathVariable String interfaceCode, 
-			@RequestBody CommonRequestParam param, @RequestParam String sno) {
+			@RequestBody CommonRequestParam param, String sno) {
 		
 		logger.info("~~~userInfoManager()~~~~sno:{}", sno);
 		logger.info("~~~userInfoManager()~~~~interfaceCode:{}", interfaceCode);
@@ -177,7 +177,7 @@ public class UserManagerController {
 			cusModel.setCmsex(null != param.getParams().get("p_sex")?param.getParams().get("p_sex").toString():null);
 			cusModel.setCmaddr(null != param.getParams().get("p_cmaddr")?param.getParams().get("p_cmaddr").toString():null);
 			cusModel.setCmemail(null != param.getParams().get("p_cmemail")?param.getParams().get("p_cmemail").toString():null);
-			cusModel.setCmcompany(null != param.getParams().get("p_cmptname")?param.getParams().get("p_cmptname").toString():null);
+			cusModel.setCmptname(null != param.getParams().get("p_cmptname")?param.getParams().get("p_cmptname").toString():null);
 			
 			if(null != param.getParams().get("p_birth") && StringUtil.isNotEmpty(param.getParams().get("p_birth").toString())){
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

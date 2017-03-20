@@ -51,8 +51,14 @@ public class CRMInterfaceProperties {
 	private String queryuserBasicinfoCode;
 	private String signKey;
 	private String logoutCode;
+	private String userTokenNoNeedCodes;
 	
-	
+	public String getUserTokenNoNeedCodes() {
+		return userTokenNoNeedCodes;
+	}
+	public void setUserTokenNoNeedCodes(String userTokenNoNeedCodes) {
+		this.userTokenNoNeedCodes = userTokenNoNeedCodes;
+	}
 	public String getLogoutCode() {
 		return logoutCode;
 	}

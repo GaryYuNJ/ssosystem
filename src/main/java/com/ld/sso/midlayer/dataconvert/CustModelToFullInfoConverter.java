@@ -29,9 +29,15 @@ public class CustModelToFullInfoConverter {
 		destination.setCmemail(source.getCmemail());
 		destination.setCmidno(source.getCmidno());
 		destination.setCmidtype(source.getCmidtype());
-		destination.setCmlczhye(source.getCmlczhye().setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+		if(null != source.getCmlczhye()){
+			if(source.getCmlczhye().doubleValue() == 0){
+				destination.setCmlczhye("0");
+			}else{
+				destination.setCmlczhye(source.getCmlczhye().setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+			}
+		}
 		destination.setCmmemid(source.getCmmemid());
-		destination.setCmmobile1(source.getCmmobile1());
+		destination.setCmmobile(source.getCmmobile1());
 		destination.setCmname(source.getCmname());
 		destination.setCmptname(source.getCmptname());
 		destination.setCmreferee(source.getCmreferee());

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tk.mybatis.mapper.util.StringUtil;
@@ -15,6 +16,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.ld.sso.crm.databean.CRMAccessTokenInfo;
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
+import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.crm.service.ICRMInterfaceService;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
 import com.ld.sso.frontlayer.databean.CommonResponseInfo;
@@ -37,6 +39,8 @@ public class UserInfoServiceImpl implements IuserInfoService {
 	@Resource
 	private CustModelToFullInfoConverter custModelToFullInfoConverter;
 	
+	@Autowired 
+	private CRMInterfaceProperties crmInterfaceProperties; 
 
 	@Override
 	public CommonResponseInfo loginWithPwd(String mobile, String password, String source) {
@@ -52,17 +56,17 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				basicInfo.setCmmemid(cusModel.getCmmemid());
 				basicInfo.setCmmobile(cusModel.getCmmobile1());
 				
-				responseInfo.setCustmemberBasicInfo(basicInfo);
+				responseInfo.setData(basicInfo);
 				responseInfo.setCode("0");
 				responseInfo.setMsg("");
 				responseInfo.setTicket(this.getNewSSOTicket(cusModel.getCmmemid(), source, basicInfo));
 			}else{
-				responseInfo.setCode("2");
+				responseInfo.setCode("9904");
 				responseInfo.setMsg("用户不存在或者密码错误");
 			}
 			
 		}catch(Exception e){
-			responseInfo.setCode("1");
+			responseInfo.setCode("9901");
 			responseInfo.setMsg("系统异常");
 			logger.error("~~~loginWithPwd()~~~exception~~",e);
 		}
@@ -107,14 +111,14 @@ public class UserInfoServiceImpl implements IuserInfoService {
 			
 			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
 			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmemid())){
-				response.setCustmemberBasicInfo(basicInfo);
+				response.setData(basicInfo);
 				response.setCode("0");
 			}else{
-				response.setCode("9");
+				response.setCode("9909");
 				response.setMsg("ticket 不存在");
 			}
 		}catch(Exception e){
-			response.setCode("1");
+			response.setCode("9901");
 			response.setMsg("系统异常");
 			logger.error("~~~"+methodName+"~~~exception~~",e);
 		}
@@ -140,20 +144,20 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				if(null != cusModel && StringUtil.isNotEmpty(cusModel.getCmmemid())){
 					custModelToFullInfoConverter.convert(cusModel, fullInfo);
 					response.setCode("0");
-					response.setCustmemberFullInfo(fullInfo);
+					response.setData(fullInfo);
 				}else{
-					response.setCode("2");
-					response.setMsg("数据库获取用户全量信息失败");
+					response.setCode("9903");
+					response.setMsg("数据库获取用户信息失败");
+					response.setData(basicInfo);
 					logger.error("~~~"+methodName+"~~~get fullInfo failed~~");
 				}
-				response.setCustmemberBasicInfo(basicInfo);
 				
 			}else{
-				response.setCode("9");
+				response.setCode("9909");
 				response.setMsg("ticket 不存在");
 			}
 		}catch(Exception e){
-			response.setCode("1");
+			response.setCode("9901");
 			response.setMsg("系统异常");
 			logger.error("~~~"+methodName+"~~~exception~~",e);
 		}
@@ -180,7 +184,7 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				response.setCode("0");
 			}
 		}catch(Exception e){
-			response.setCode("1");
+			response.setCode("9901");
 			response.setMsg("系统异常");
 			logger.error("~~~"+methodName+"~~~exception~~",e);
 		}
@@ -206,20 +210,20 @@ public class UserInfoServiceImpl implements IuserInfoService {
 					if(cRMInterfaceService.modifyPassword(basicInfo.getCmmemid(), newPassword) > 0 ){
 						response.setCode("0");
 					}else{
-						response.setCode("3");
+						response.setCode("9903");
 						response.setMsg("密码修改失败");
 					}
 					
 				}else{
-					response.setCode("2");
+					response.setCode("9902");
 					response.setMsg("原始密码不对");
 				}
 			}else{
-				response.setCode("9");
+				response.setCode("9909");
 				response.setMsg("ticket 不存在");
 			}
 		}catch(Exception e){
-			response.setCode("1");
+			response.setCode("9901");
 			response.setMsg("系统异常");
 			logger.error("~~~"+methodName+"~~~exception~~",e);
 		}
@@ -242,15 +246,15 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				if(cRMInterfaceService.modifyUserInfoByPrimaryKey(cusModel) > 0){
 					response.setCode("0");
 				}else{
-					response.setCode("2");
+					response.setCode("9903");
 					response.setMsg("修改失败");
 				}
 			}else{
-				response.setCode("9");
+				response.setCode("9909");
 				response.setMsg("ticket 不存在");
 			}
 		}catch(Exception e){
-			response.setCode("1");
+			response.setCode("9901");
 			response.setMsg("系统异常");
 			logger.error("~~~"+methodName+"~~~exception~~",e);
 		}
@@ -311,69 +315,86 @@ public class UserInfoServiceImpl implements IuserInfoService {
 			//获取ticket
 			String ticket = (null != params && null != params.get("ticket")) ?
 					requestparam.getParams().get("ticket").toString():null;
-					
-			//填充CRM要求的usertoken
-			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
 			
-			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmemid())){
+			//ticket为空时不需要usertoken
+			//填充CRM要求的usertoken，有些接口不需要usertoken，只要直接转发就可以。比如 注册接口
+			CRMCustmemberBasicInfo basicInfo = null;
+			String userToken = null;
+			
+			//如果不需要usertoken，那么也不需要ticket
+			if(!crmInterfaceProperties.getUserTokenNoNeedCodes().contains(crmInterfaceCode)){
 				
-				//从缓存中读取用户对应的userToken，不保证在CRM有没有过期
-				String userToken = redisService.getCRMUserToken(basicInfo.getCmmemid());
-				
-				//获取可用的usertoken并存入缓存
-				if(StringUtil.isEmpty(userToken)){
-					userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
-					redisService.saveCRMUserToken(basicInfo.getCmmemid(), userToken);
+				if(StringUtil.isNotEmpty(ticket)){
+					basicInfo = redisService.getUserInfoByTicket(ticket);
 				}
 				
-				params.put("token", userToken);
-				params.put("p_token", userToken);
-				
-				requestparam.setParams(params);
-				ResponseFromCRMData crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
-				logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
-				
-				//usertoken过期容错处理
-				//code =0 ,data 为空 表示 user token 过期
-				if("0".equals(crmResponse.getCode())
-						&& (null == crmResponse.getData() ||crmResponse.getData().size() == 0)){
-					//获取可用的usertoken并存入缓存
-					logger.info("~~~"+methodName+"~~~usertoken expired. get the new one from DB~~");
-					userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
-					logger.info("~~~"+methodName+"~~~new userToken:{}~~", userToken);
-					redisService.saveCRMUserToken(basicInfo.getCmmemid(), userToken);
+				if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmemid())){
 					
-					//重新发送请求
+//					//从缓存中读取用户对应的userToken，不保证在CRM有没有过期
+//					userToken = redisService.getCRMUserToken(basicInfo.getCmmemid());
+//					
+//					//如果user token不存在缓存，获取可用的usertoken并存入缓存
+//					if(StringUtil.isEmpty(userToken)){
+//						userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
+//						redisService.saveCRMUserToken(basicInfo.getCmmemid(), userToken);
+//					}
+					//为防止意外，直接俄从数据库获取可用token
+					userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
+					
 					params.put("token", userToken);
 					params.put("p_token", userToken);
-					requestparam.setParams(params);
-					crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
-					logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
-				
-				//access token容错处理
-				//如果CRM返回accessToken 错误，可以重新获取后，再发送请求
-				}else if("9003".equals(crmResponse.getCode())//access token 无效
-						//access token已过期
-						&&"9005".equals(crmResponse.getCode())){
 					
-					//直接删除缓存的accesstoken
-					redisService.deleteCRMAccessToken();
-					
-					crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
-					logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+				}else{
+					response.setCode("9909");
+					response.setMsg("ticket已过期或者不存在");
+					return response;
 				}
-				
-				
-				response.setCode(crmResponse.getCode());
-				response.setMsg(crmResponse.getMsg());
-				response.setData(crmResponse.getData());
-				logger.info("~~~"+methodName+"~~~JSONArray.toJSON(response):{}", JSONArray.toJSON(response));
-			}else{
-				response.setCode("9");
-				response.setMsg("ticket 不存在");
 			}
+			
+			//发送请求
+			requestparam.setParams(params);
+			ResponseFromCRMData crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
+			logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+					
+			//usertoken过期容错处理(上面直接从数据库中获取，这里不再做容错处理)
+			//code = 0 ,data 为空 表示 user token 过期????
+			//if(!crmInterfaceProperties.getUserTokenNoNeedCodes().contains(crmInterfaceCode)
+//					&& "0".equals(crmResponse.getCode())
+//					&& (null == crmResponse.getData() ||crmResponse.getData().size() == 0)){
+//				//获取可用的usertoken并存入缓存
+//				logger.info("~~~"+methodName+"~~~usertoken expired. get the new one from DB~~");
+//				userToken = cRMInterfaceService.getValidUserTokenFromDB(basicInfo.getCmmemid());
+//				logger.info("~~~"+methodName+"~~~new userToken:{}~~", userToken);
+//				redisService.saveCRMUserToken(basicInfo.getCmmemid(), userToken);
+//				
+//				//重新发送请求
+//				params.put("token", userToken);
+//				params.put("p_token", userToken);
+//				requestparam.setParams(params);
+//				crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
+//				logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+			
+			//access token容错处理
+			//如果CRM返回accessToken 错误，可以重新获取后，再发送请求
+			//}else 
+				if("9003".equals(crmResponse.getCode())//access token 无效
+					//access token已过期
+					&&"9005".equals(crmResponse.getCode())){
+				
+				//直接删除缓存的accesstoken
+				redisService.deleteCRMAccessToken();
+				
+				crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
+				logger.info("~~~"+methodName+"~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+			}
+					
+			response.setCode(crmResponse.getCode());
+			response.setMsg(crmResponse.getMsg());
+			response.setData(crmResponse.getData());
+			logger.info("~~~"+methodName+"~~~JSONArray.toJSON(response):{}", JSONArray.toJSON(response));
+			
 		}catch(Exception e){
-			response.setCode("1");
+			response.setCode("9901");
 			response.setMsg("系统异常");
 			logger.error("~~~"+methodName+"~~~exception~~",e);
 		}
