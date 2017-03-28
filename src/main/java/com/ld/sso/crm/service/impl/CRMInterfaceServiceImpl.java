@@ -1,5 +1,6 @@
 package com.ld.sso.crm.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,9 @@ import tk.mybatis.mapper.util.StringUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
+import com.ld.sso.crm.domain.CardJFLogModel;
 import com.ld.sso.crm.mapper.CRMCustmemberModelMapper;
+import com.ld.sso.crm.mapper.CardJFLogModelMapper;
 import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.crm.service.ICRMInterfaceService;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
@@ -28,6 +31,8 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	
 	@Autowired
 	private CRMCustmemberModelMapper custmemberMapper;
+	@Autowired
+	private CardJFLogModelMapper cardJFLogModelMapper;
 	@Autowired 
 	private CRMInterfaceProperties crmInterfaceProperties; 
 	@Autowired 
@@ -110,6 +115,13 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	public CRMCustmemberModel getFullInfoByPrimaryKey(String cmmemid) {
 		return custmemberMapper.selectFullInfoByPrimaryKey(cmmemid);
 	}
+	
+	@Override
+	public BigDecimal getCurJFYEByCustId(String cmcustid) {
+		CardJFLogModel jfModel = cardJFLogModelMapper.selectCurJFYEByCustId(cmcustid);
+		return jfModel.getCdlcurjfye();
+	}
+	
 	
 	@Override
 	public String generateNewAccessToken() {

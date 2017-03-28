@@ -1,5 +1,7 @@
 package com.ld.sso.crm.service;
 
+import java.math.BigDecimal;
+
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
@@ -20,5 +22,7 @@ public interface ICRMInterfaceService {
 	int modifyUserInfoByPrimaryKey(CRMCustmemberModel cusModel);
 
 	ResponseFromCRMData sendCommonRequestToCRM(String crmInterfaceCode, CommonRequestParam requestparam);
+
+	BigDecimal getCurJFYEByCustId(String cmcustid);
 	
 }

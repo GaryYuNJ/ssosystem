@@ -223,7 +223,7 @@
   </select>
   <select id="selectTokenInfoByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
-    CMTOKEN,CMTOKEN2,CMTOKENDATE
+    CMMEMID,CMCUSTID,CMTOKEN,CMTOKEN2,CMTOKENDATE
     from CUSTMEMBER
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </select>
@@ -236,11 +236,16 @@
     and Cardmain.CDMTYPE = Custtype.CTCODE
   </select>
   <select id="selectBasicInfoByMobileAndEnPasswd" resultMap="BasicInfoResultMap" parameterType="java.util.Map" >
-    select 
-    <include refid="BasicInfo_Column_List" />
-    from CUSTMEMBER
-    where CMMOBILE1 = #{mobile,jdbcType=VARCHAR}
-	and CMPWD = #{enPasswd,jdbcType=VARCHAR}
+  	select <include refid="BasicInfo_Column_List" /> from 
+  	(
+    	select 
+    	<include refid="BasicInfo_Column_List" />
+    	from CUSTMEMBER
+    	where CMMOBILE1 = #{mobile,jdbcType=VARCHAR}
+		and CMPWD = #{enPasswd,jdbcType=VARCHAR}
+		order by CMMEMID desc 
+	)
+	where rownum=1
   </select>
     
     <select id="getEncryptedPasswd" statementType="CALLABLE" parameterType="java.util.Map">

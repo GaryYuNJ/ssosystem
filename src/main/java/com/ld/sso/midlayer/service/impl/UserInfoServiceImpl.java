@@ -1,6 +1,8 @@
 package com.ld.sso.midlayer.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -151,6 +153,43 @@ public class UserInfoServiceImpl implements IuserInfoService {
 					response.setData(basicInfo);
 					logger.error("~~~"+methodName+"~~~get fullInfo failed~~");
 				}
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		logger.info("~~~"+methodName+"~~~end~~");
+		// TODO Auto-generated method stub
+		return response;
+	}
+	
+	//查询用户积分余额
+	@Override
+	public CommonResponseInfo queryJFBalance(String ticket) {
+		final String methodName = "queryJFBalance()";
+		
+		logger.info("~~~"+methodName+"~~~start~~ticket:{}",ticket);
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			
+			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
+			
+			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmcustid())){
+				
+				BigDecimal jfBalance = cRMInterfaceService.getCurJFYEByCustId(basicInfo.getCmcustid());
+				
+				Map<String,Integer> map = new HashMap<String,Integer>();
+				map.put("jfBalance", 0);
+				if(null != jfBalance){
+					map.put("jfBalance", jfBalance.intValue());
+				}
+				response.setCode("0");
+				response.setData(map);
 				
 			}else{
 				response.setCode("9909");

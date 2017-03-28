@@ -51,8 +51,16 @@ public class CRMInterfaceProperties {
 	private String queryuserBasicinfoCode;
 	private String signKey;
 	private String logoutCode;
+	private String queryJFBalanceCode;
 	private String userTokenNoNeedCodes;
 	
+	
+	public String getQueryJFBalanceCode() {
+		return queryJFBalanceCode;
+	}
+	public void setQueryJFBalanceCode(String queryJFBalanceCode) {
+		this.queryJFBalanceCode = queryJFBalanceCode;
+	}
 	public String getUserTokenNoNeedCodes() {
 		return userTokenNoNeedCodes;
 	}

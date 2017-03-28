@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tk.mybatis.mapper.util.StringUtil;
@@ -76,6 +75,8 @@ public class UserManagerController {
 			return this.queryUserFullInfoByTicket(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getLogoutCode())){
 			return this.loginOut(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getQueryJFBalanceCode())){
+			return this.queryJFBalanceCode(param);
 		}else{
 			return userInfoService.sendCommonRequestToCRM(interfaceCode, param);
 		}
@@ -109,6 +110,20 @@ public class UserManagerController {
 		response.setMsg("无效参数或不符合JSON格式规范");
 		return response;
 		
+	}
+	
+	public CommonResponseInfo queryJFBalanceCode(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){
+		
+			return userInfoService.queryJFBalance(param.getParams().get("ticket").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
 	}
 	
 	public CommonResponseInfo queryUserBasicInfoByTicket(CommonRequestParam param){

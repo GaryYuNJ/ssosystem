@@ -34,5 +34,7 @@ public interface IuserInfoService {
 
 	CommonResponseInfo sendCommonRequestToCRM(String crmInterfaceCode,
 			CommonRequestParam requestparam);
+
+	CommonResponseInfo queryJFBalance(String ticket);
 	
 }
