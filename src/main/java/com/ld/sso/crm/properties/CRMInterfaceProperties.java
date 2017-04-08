@@ -53,8 +53,15 @@ public class CRMInterfaceProperties {
 	private String logoutCode;
 	private String queryJFBalanceCode;
 	private String userTokenNoNeedCodes;
+	private String newPasswordCode;
 	
 	
+	public String getNewPasswordCode() {
+		return newPasswordCode;
+	}
+	public void setNewPasswordCode(String newPasswordCode) {
+		this.newPasswordCode = newPasswordCode;
+	}
 	public String getQueryJFBalanceCode() {
 		return queryJFBalanceCode;
 	}

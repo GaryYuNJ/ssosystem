@@ -67,6 +67,8 @@ public class UserManagerController {
 			return this.loginWithPwd(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getModifyPasswdCode())){
 			return this.modifyPassword(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getNewPasswordCode())){
+			return this.setNewPassword(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getModifyUserinfoCode())){
 			return this.modifyUserInfo(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getQueryuserBasicinfoCode())){
@@ -172,6 +174,24 @@ public class UserManagerController {
 		return response;
 		
 	}
+	
+	public CommonResponseInfo setNewPassword(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("mobile") && StringUtil.isNotEmpty(param.getParams().get("mobile").toString())
+				&& null != param.getParams().get("p_newpwd") && StringUtil.isNotEmpty(param.getParams().get("p_newpwd").toString())){
+		
+			return userInfoService.setNewPassword(param.getParams().get("mobile").toString(), 
+					param.getParams().get("p_newpwd").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+		
+	}
+	
 	
 	public CommonResponseInfo modifyUserInfo(CommonRequestParam param){
 		

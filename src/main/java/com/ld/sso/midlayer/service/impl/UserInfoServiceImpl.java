@@ -232,6 +232,30 @@ public class UserInfoServiceImpl implements IuserInfoService {
 	}
 
 	@Override
+	public CommonResponseInfo setNewPassword(String mobile, String newPassword) {
+		final String methodName = "setNewPassword()";
+		
+		logger.info("~~~"+methodName+"~~~start~~mobile:{}",mobile);
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			
+			if(cRMInterfaceService.modifyPasswordByMobile(mobile, newPassword) > 0 ){
+				response.setCode("0");
+			}else{
+				response.setCode("9903");
+				response.setMsg("密码修改失败");
+			}
+					
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		logger.info("~~~"+methodName+"~~~end~~");
+		
+		return response;
+	}
+	@Override
 	public CommonResponseInfo modifyPassword(String ticket, String oldPassword,
 			String newPassword) {
 		final String methodName = "modifyPassword()";

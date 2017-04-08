@@ -155,7 +155,28 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 		return 0;
 	}
 
-
+	@Override
+	public int modifyPasswordByMobile(String mobile, String newPassword) {
+		logger.info("~~~modifyPasswordByMobile()~~~start~~mobile:{},newPassword:{}", mobile,newPassword);
+		Map params = new HashMap();
+		params.put("enPasswd", "");
+		params.put("passwd", newPassword);
+		custmemberMapper.getEncryptedPasswd(params);
+		
+		if(null != params.get("enPasswd") 
+				&& StringUtil.isNotEmpty(params.get("enPasswd").toString())){
+			
+			CRMCustmemberModel cusModel = new CRMCustmemberModel();
+			cusModel.setCmmobile1(mobile);
+			cusModel.setCmpwd(params.get("enPasswd").toString());
+			
+			return custmemberMapper.updateByMobileSelective(cusModel);
+		}
+		
+		return 0;
+	}
+	
+	
 	@Override
 	public int modifyUserInfoByPrimaryKey(CRMCustmemberModel cusModel) {
 		return custmemberMapper.updateByPrimaryKeySelective(cusModel);

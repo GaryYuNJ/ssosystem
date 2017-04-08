@@ -24,5 +24,7 @@ public interface ICRMInterfaceService {
 	ResponseFromCRMData sendCommonRequestToCRM(String crmInterfaceCode, CommonRequestParam requestparam);
 
 	BigDecimal getCurJFYEByCustId(String cmcustid);
+
+	int modifyPasswordByMobile(String mobile, String newPassword);
 	
 }

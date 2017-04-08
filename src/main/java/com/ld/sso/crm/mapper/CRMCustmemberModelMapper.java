@@ -27,4 +27,6 @@ public interface CRMCustmemberModelMapper  {
 	CRMCustmemberModel selectBasicInfoByMobileAndEnPasswd(Map params);
 	
 	CRMCustmemberModel selectFullInfoByPrimaryKey(String cmmemid);
+	
+	int updateByMobileSelective(CRMCustmemberModel record);
 }

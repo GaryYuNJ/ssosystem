@@ -36,5 +36,7 @@ public interface IuserInfoService {
 			CommonRequestParam requestparam);
 
 	CommonResponseInfo queryJFBalance(String ticket);
+
+	CommonResponseInfo setNewPassword(String mobile, String newPassword);
 	
 }
