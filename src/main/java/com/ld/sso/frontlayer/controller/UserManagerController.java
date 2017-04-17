@@ -78,11 +78,38 @@ public class UserManagerController {
 		}else if(interfaceCode.equals(crmInterfaceProperties.getLogoutCode())){
 			return this.loginOut(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getQueryJFBalanceCode())){
-			return this.queryJFBalanceCode(param);
+			return this.queryJFBalance(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getChangeJFCode())){
+			return this.changeCusJF(interfaceCode,param);
 		}else{
 			return userInfoService.sendCommonRequestToCRM(interfaceCode, param);
 		}
 	}
+	
+	
+	//扣减积分，两种方式。1. 用户登录，有ticket; 2. pop后台job调用，只有cmmemberId
+	public CommonResponseInfo changeCusJF(String interfaceCode, CommonRequestParam param){
+		logger.warn("~~~changeCusJF~~~JSONArray.toJSON(param):{}", JSONArray.toJSON(param));
+		
+		if(null != param && null != param.getParams()
+				&& ((null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString()))
+						|| (null != param.getParams().get("cmmemberId") && StringUtil.isNotEmpty(param.getParams().get("cmmemberId").toString())))){
+			//有ticket, 走通用接口
+			if(null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){
+				return userInfoService.sendCommonRequestToCRM(interfaceCode, param);
+			//只有cmmemberId，
+			}else{
+				return userInfoService.changeCusJFByMemId(interfaceCode, param);
+			}
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+		
+	}
+	
 	
 	public CommonResponseInfo loginOut(CommonRequestParam param){
 		
@@ -114,7 +141,7 @@ public class UserManagerController {
 		
 	}
 	
-	public CommonResponseInfo queryJFBalanceCode(CommonRequestParam param){
+	public CommonResponseInfo queryJFBalance(CommonRequestParam param){
 		
 		if(null != param && null != param.getParams()
 				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){

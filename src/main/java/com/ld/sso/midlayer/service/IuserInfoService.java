@@ -1,6 +1,5 @@
 package com.ld.sso.midlayer.service;
 
-import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
 import com.ld.sso.frontlayer.databean.CommonResponseInfo;
@@ -38,5 +37,8 @@ public interface IuserInfoService {
 	CommonResponseInfo queryJFBalance(String ticket);
 
 	CommonResponseInfo setNewPassword(String mobile, String newPassword);
+
+	CommonResponseInfo changeCusJFByMemId(String crmInterfaceCode,
+			CommonRequestParam requestparam);
 	
 }

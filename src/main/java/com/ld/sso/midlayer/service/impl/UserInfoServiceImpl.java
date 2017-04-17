@@ -464,4 +464,31 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		logger.info("~~~"+methodName+"~~~end~~");
 		return response;
 	}
+
+	@Override
+	public CommonResponseInfo changeCusJFByMemId(String crmInterfaceCode,
+			CommonRequestParam requestparam) {
+		final String methodName = "changeCusJFByMemId()";
+		logger.info("~~~"+methodName+"~~~start~~");
+		logger.warn("~~~"+methodName+"~~~JSONArray.toJSON(requestparam):{}", JSONArray.toJSON(requestparam));
+		
+		Map<String, Object> paramTmp = requestparam.getParams();
+		
+		CommonResponseInfo response =  new CommonResponseInfo();
+		String userToken = cRMInterfaceService.getValidUserTokenFromDB(requestparam.getParams().get("cmmemberId").toString());
+		
+		paramTmp.put("token", userToken);
+		paramTmp.put("p_token", userToken);
+		//发送请求
+		requestparam.setParams(paramTmp);
+		ResponseFromCRMData crmResponse =  cRMInterfaceService.sendCommonRequestToCRM(crmInterfaceCode, requestparam);
+		logger.info("~~~changeCusJFByMemId()~~~JSONArray.toJSON(crmResponse):{}",null != crmResponse?JSONArray.toJSON(crmResponse):null);
+		
+		response.setCode(crmResponse.getCode());
+		response.setMsg(crmResponse.getMsg());
+		response.setData(crmResponse.getData());
+		logger.info("~~~changeCusJFByMemId()~~~JSONArray.toJSON(response):{}", JSONArray.toJSON(response));
+		return response;
+		
+	}
 }
