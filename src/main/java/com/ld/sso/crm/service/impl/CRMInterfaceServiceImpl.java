@@ -17,10 +17,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
 import com.ld.sso.crm.domain.CardJFLogModel;
+import com.ld.sso.crm.domain.CusttypeModel;
 import com.ld.sso.crm.mapper.CRMCustmemberModelMapper;
 import com.ld.sso.crm.mapper.CardJFLogModelMapper;
 import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.crm.service.ICRMInterfaceService;
+import com.ld.sso.crm.util.CRMCharacterConverter;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
 import com.ld.sso.midlayer.service.IuserInfoService;
 
@@ -113,7 +115,20 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	
 	@Override
 	public CRMCustmemberModel getFullInfoByPrimaryKey(String cmmemid) {
-		return custmemberMapper.selectFullInfoByPrimaryKey(cmmemid);
+		
+		CRMCustmemberModel cusModel = custmemberMapper.selectFullInfoByPrimaryKey(cmmemid);
+		if(null == cusModel){
+			return null;
+		}
+		
+		if(null != cusModel.getCustypeModel()){
+			CusttypeModel cusType = cusModel.getCustypeModel();
+			cusType.setCtname(null != cusType.getCtname() ? CRMCharacterConverter.convert8859P1ToGBK(cusType.getCtname()):null);
+			cusModel.setCustypeModel(cusType);
+		}
+		
+		cusModel.setCmname(null != cusModel.getCmname() ? CRMCharacterConverter.convert8859P1ToGBK(cusModel.getCmname()):null);
+		return cusModel;
 	}
 	
 	@Override
@@ -179,6 +194,9 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	
 	@Override
 	public int modifyUserInfoByPrimaryKey(CRMCustmemberModel cusModel) {
+		
+		cusModel.setCmname(null != cusModel.getCmname() ? CRMCharacterConverter.convertGBKTo8859P1(cusModel.getCmname()):null);
+		
 		return custmemberMapper.updateByPrimaryKeySelective(cusModel);
 		
 	}
