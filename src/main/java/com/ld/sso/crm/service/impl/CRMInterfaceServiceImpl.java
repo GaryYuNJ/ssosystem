@@ -134,7 +134,10 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	@Override
 	public BigDecimal getCurJFYEByCustId(String cmcustid) {
 		CardJFLogModel jfModel = cardJFLogModelMapper.selectCurJFYEByCustId(cmcustid);
-		return jfModel.getCdlcurjfye();
+		if(null == jfModel){
+			return new BigDecimal(0);
+		}else
+			return jfModel.getCdlcurjfye();
 	}
 	
 	

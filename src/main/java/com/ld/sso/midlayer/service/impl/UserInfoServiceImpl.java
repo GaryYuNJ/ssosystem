@@ -143,6 +143,9 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				//查询数据库，获取fullInfo
 				CRMCustmemberFullInfo fullInfo = new CRMCustmemberFullInfo();
 				CRMCustmemberModel cusModel = cRMInterfaceService.getFullInfoByPrimaryKey(basicInfo.getCmmemid());
+				//替换真正的积分余额
+				cusModel.setCmtotjf(cRMInterfaceService.getCurJFYEByCustId(basicInfo.getCmcustid()));
+				
 				if(null != cusModel && StringUtil.isNotEmpty(cusModel.getCmmemid())){
 					custModelToFullInfoConverter.convert(cusModel, fullInfo);
 					response.setCode("0");
@@ -442,8 +445,9 @@ public class UserInfoServiceImpl implements IuserInfoService {
 			//}else 
 				if("9003".equals(crmResponse.getCode())//access token 无效
 					//access token已过期
-					&&"9005".equals(crmResponse.getCode())){
-				
+					|| "9005".equals(crmResponse.getCode())){
+					logger.warn("~~~"+methodName+"~~~access token invalid~~crm~return code:{}",crmResponse.getCode());
+					logger.warn("~~~"+methodName+"~~~get new access code and resend request to crm~~ ");
 				//直接删除缓存的accesstoken
 				redisService.deleteCRMAccessToken();
 				
