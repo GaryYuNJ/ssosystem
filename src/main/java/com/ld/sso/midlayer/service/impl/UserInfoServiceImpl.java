@@ -246,7 +246,7 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				response.setCode("0");
 			}else{
 				response.setCode("9903");
-				response.setMsg("密码修改失败");
+				response.setMsg("该手机号未注册");
 			}
 					
 		}catch(Exception e){
