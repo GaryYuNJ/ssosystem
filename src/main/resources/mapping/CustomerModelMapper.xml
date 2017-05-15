@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.sso.crm.mapper.CustomerModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.sso.crm.domain.CustomerModel" >
+    <id column="CID" property="cid" jdbcType="VARCHAR" />
+    <result column="CTYPE" property="ctype" jdbcType="VARCHAR" />
+    <result column="CSTATUS" property="cstatus" jdbcType="CHAR" />
+    <result column="CCURJFYE" property="ccurjfye" jdbcType="DECIMAL" />
+    <result column="CHISJFYE" property="chisjfye" jdbcType="DECIMAL" />
+    <result column="CTOTJFYE" property="ctotjfye" jdbcType="DECIMAL" />
+    <result column="CCURXFJE" property="ccurxfje" jdbcType="DECIMAL" />
+    <result column="CHISXFJE" property="chisxfje" jdbcType="DECIMAL" />
+    <result column="CTOTXFJE" property="ctotxfje" jdbcType="DECIMAL" />
+    <result column="CVIPNO" property="cvipno" jdbcType="VARCHAR" />
+    <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+    <result column="CCREATOR" property="ccreator" jdbcType="VARCHAR" />
+    <result column="CCREATDATE" property="ccreatdate" jdbcType="DATE" />
+    <result column="CMAINTOR" property="cmaintor" jdbcType="VARCHAR" />
+    <result column="CMAINTDATE" property="cmaintdate" jdbcType="DATE" />
+    <result column="CDATE1" property="cdate1" jdbcType="DATE" />
+    <result column="CDATE2" property="cdate2" jdbcType="DATE" />
+    <result column="CDATE3" property="cdate3" jdbcType="DATE" />
+    <result column="CDATE4" property="cdate4" jdbcType="DATE" />
+    <result column="CDATE5" property="cdate5" jdbcType="DATE" />
+    <result column="CNUM1" property="cnum1" jdbcType="DECIMAL" />
+    <result column="CNUM2" property="cnum2" jdbcType="DECIMAL" />
+    <result column="CNUM3" property="cnum3" jdbcType="DECIMAL" />
+    <result column="CNUM4" property="cnum4" jdbcType="DECIMAL" />
+    <result column="CNUM5" property="cnum5" jdbcType="DECIMAL" />
+    <result column="CNUM6" property="cnum6" jdbcType="DECIMAL" />
+    <result column="CNUM7" property="cnum7" jdbcType="DECIMAL" />
+    <result column="CNUM8" property="cnum8" jdbcType="DECIMAL" />
+    <result column="CNUM9" property="cnum9" jdbcType="DECIMAL" />
+    <result column="CNUM10" property="cnum10" jdbcType="DECIMAL" />
+    <result column="CVC1" property="cvc1" jdbcType="VARCHAR" />
+    <result column="CVC2" property="cvc2" jdbcType="VARCHAR" />
+    <result column="CVC3" property="cvc3" jdbcType="VARCHAR" />
+    <result column="CVC4" property="cvc4" jdbcType="VARCHAR" />
+    <result column="CVC5" property="cvc5" jdbcType="VARCHAR" />
+    <result column="CVC6" property="cvc6" jdbcType="VARCHAR" />
+    <result column="CVC7" property="cvc7" jdbcType="VARCHAR" />
+    <result column="CVC8" property="cvc8" jdbcType="VARCHAR" />
+    <result column="CCHR1" property="cchr1" jdbcType="CHAR" />
+    <result column="CCHR2" property="cchr2" jdbcType="CHAR" />
+    <result column="CCHR3" property="cchr3" jdbcType="CHAR" />
+    <result column="CCHR4" property="cchr4" jdbcType="CHAR" />
+    <result column="CCHR5" property="cchr5" jdbcType="CHAR" />
+    <result column="CCHR6" property="cchr6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CID, CTYPE, CSTATUS, CCURJFYE, CHISJFYE, CTOTJFYE, CCURXFJE, CHISXFJE, CTOTXFJE, 
+    CVIPNO, CNAME, CCREATOR, CCREATDATE, CMAINTOR, CMAINTDATE, CDATE1, CDATE2, CDATE3, 
+    CDATE4, CDATE5, CNUM1, CNUM2, CNUM3, CNUM4, CNUM5, CNUM6, CNUM7, CNUM8, CNUM9, CNUM10, 
+    CVC1, CVC2, CVC3, CVC4, CVC5, CVC6, CVC7, CVC8, CCHR1, CCHR2, CCHR3, CCHR4, CCHR5, 
+    CCHR6
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CUSTOMER
+    where CID = #{cid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CUSTOMER
+    where CID = #{cid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ld.sso.crm.domain.CustomerModel" >
+    insert into CUSTOMER (CID, CTYPE, CSTATUS, 
+      CCURJFYE, CHISJFYE, CTOTJFYE, 
+      CCURXFJE, CHISXFJE, CTOTXFJE, 
+      CVIPNO, CNAME, CCREATOR, 
+      CCREATDATE, CMAINTOR, CMAINTDATE, 
+      CDATE1, CDATE2, CDATE3, CDATE4, 
+      CDATE5, CNUM1, CNUM2, 
+      CNUM3, CNUM4, CNUM5, 
+      CNUM6, CNUM7, CNUM8, 
+      CNUM9, CNUM10, CVC1, 
+      CVC2, CVC3, CVC4, CVC5, 
+      CVC6, CVC7, CVC8, CCHR1, 
+      CCHR2, CCHR3, CCHR4, CCHR5, 
+      CCHR6)
+    values (#{cid,jdbcType=VARCHAR}, #{ctype,jdbcType=VARCHAR}, #{cstatus,jdbcType=CHAR}, 
+      #{ccurjfye,jdbcType=DECIMAL}, #{chisjfye,jdbcType=DECIMAL}, #{ctotjfye,jdbcType=DECIMAL}, 
+      #{ccurxfje,jdbcType=DECIMAL}, #{chisxfje,jdbcType=DECIMAL}, #{ctotxfje,jdbcType=DECIMAL}, 
+      #{cvipno,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, #{ccreator,jdbcType=VARCHAR}, 
+      #{ccreatdate,jdbcType=DATE}, #{cmaintor,jdbcType=VARCHAR}, #{cmaintdate,jdbcType=DATE}, 
+      #{cdate1,jdbcType=DATE}, #{cdate2,jdbcType=DATE}, #{cdate3,jdbcType=DATE}, #{cdate4,jdbcType=DATE}, 
+      #{cdate5,jdbcType=DATE}, #{cnum1,jdbcType=DECIMAL}, #{cnum2,jdbcType=DECIMAL}, 
+      #{cnum3,jdbcType=DECIMAL}, #{cnum4,jdbcType=DECIMAL}, #{cnum5,jdbcType=DECIMAL}, 
+      #{cnum6,jdbcType=DECIMAL}, #{cnum7,jdbcType=DECIMAL}, #{cnum8,jdbcType=DECIMAL}, 
+      #{cnum9,jdbcType=DECIMAL}, #{cnum10,jdbcType=DECIMAL}, #{cvc1,jdbcType=VARCHAR}, 
+      #{cvc2,jdbcType=VARCHAR}, #{cvc3,jdbcType=VARCHAR}, #{cvc4,jdbcType=VARCHAR}, #{cvc5,jdbcType=VARCHAR}, 
+      #{cvc6,jdbcType=VARCHAR}, #{cvc7,jdbcType=VARCHAR}, #{cvc8,jdbcType=VARCHAR}, #{cchr1,jdbcType=CHAR}, 
+      #{cchr2,jdbcType=CHAR}, #{cchr3,jdbcType=CHAR}, #{cchr4,jdbcType=CHAR}, #{cchr5,jdbcType=CHAR}, 
+      #{cchr6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.sso.crm.domain.CustomerModel" >
+    insert into CUSTOMER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="ctype != null" >
+        CTYPE,
+      </if>
+      <if test="cstatus != null" >
+        CSTATUS,
+      </if>
+      <if test="ccurjfye != null" >
+        CCURJFYE,
+      </if>
+      <if test="chisjfye != null" >
+        CHISJFYE,
+      </if>
+      <if test="ctotjfye != null" >
+        CTOTJFYE,
+      </if>
+      <if test="ccurxfje != null" >
+        CCURXFJE,
+      </if>
+      <if test="chisxfje != null" >
+        CHISXFJE,
+      </if>
+      <if test="ctotxfje != null" >
+        CTOTXFJE,
+      </if>
+      <if test="cvipno != null" >
+        CVIPNO,
+      </if>
+      <if test="cname != null" >
+        CNAME,
+      </if>
+      <if test="ccreator != null" >
+        CCREATOR,
+      </if>
+      <if test="ccreatdate != null" >
+        CCREATDATE,
+      </if>
+      <if test="cmaintor != null" >
+        CMAINTOR,
+      </if>
+      <if test="cmaintdate != null" >
+        CMAINTDATE,
+      </if>
+      <if test="cdate1 != null" >
+        CDATE1,
+      </if>
+      <if test="cdate2 != null" >
+        CDATE2,
+      </if>
+      <if test="cdate3 != null" >
+        CDATE3,
+      </if>
+      <if test="cdate4 != null" >
+        CDATE4,
+      </if>
+      <if test="cdate5 != null" >
+        CDATE5,
+      </if>
+      <if test="cnum1 != null" >
+        CNUM1,
+      </if>
+      <if test="cnum2 != null" >
+        CNUM2,
+      </if>
+      <if test="cnum3 != null" >
+        CNUM3,
+      </if>
+      <if test="cnum4 != null" >
+        CNUM4,
+      </if>
+      <if test="cnum5 != null" >
+        CNUM5,
+      </if>
+      <if test="cnum6 != null" >
+        CNUM6,
+      </if>
+      <if test="cnum7 != null" >
+        CNUM7,
+      </if>
+      <if test="cnum8 != null" >
+        CNUM8,
+      </if>
+      <if test="cnum9 != null" >
+        CNUM9,
+      </if>
+      <if test="cnum10 != null" >
+        CNUM10,
+      </if>
+      <if test="cvc1 != null" >
+        CVC1,
+      </if>
+      <if test="cvc2 != null" >
+        CVC2,
+      </if>
+      <if test="cvc3 != null" >
+        CVC3,
+      </if>
+      <if test="cvc4 != null" >
+        CVC4,
+      </if>
+      <if test="cvc5 != null" >
+        CVC5,
+      </if>
+      <if test="cvc6 != null" >
+        CVC6,
+      </if>
+      <if test="cvc7 != null" >
+        CVC7,
+      </if>
+      <if test="cvc8 != null" >
+        CVC8,
+      </if>
+      <if test="cchr1 != null" >
+        CCHR1,
+      </if>
+      <if test="cchr2 != null" >
+        CCHR2,
+      </if>
+      <if test="cchr3 != null" >
+        CCHR3,
+      </if>
+      <if test="cchr4 != null" >
+        CCHR4,
+      </if>
+      <if test="cchr5 != null" >
+        CCHR5,
+      </if>
+      <if test="cchr6 != null" >
+        CCHR6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null" >
+        #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="cstatus != null" >
+        #{cstatus,jdbcType=CHAR},
+      </if>
+      <if test="ccurjfye != null" >
+        #{ccurjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="chisjfye != null" >
+        #{chisjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="ctotjfye != null" >
+        #{ctotjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="ccurxfje != null" >
+        #{ccurxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="chisxfje != null" >
+        #{chisxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="ctotxfje != null" >
+        #{ctotxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cvipno != null" >
+        #{cvipno,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ccreator != null" >
+        #{ccreator,jdbcType=VARCHAR},
+      </if>
+      <if test="ccreatdate != null" >
+        #{ccreatdate,jdbcType=DATE},
+      </if>
+      <if test="cmaintor != null" >
+        #{cmaintor,jdbcType=VARCHAR},
+      </if>
+      <if test="cmaintdate != null" >
+        #{cmaintdate,jdbcType=DATE},
+      </if>
+      <if test="cdate1 != null" >
+        #{cdate1,jdbcType=DATE},
+      </if>
+      <if test="cdate2 != null" >
+        #{cdate2,jdbcType=DATE},
+      </if>
+      <if test="cdate3 != null" >
+        #{cdate3,jdbcType=DATE},
+      </if>
+      <if test="cdate4 != null" >
+        #{cdate4,jdbcType=DATE},
+      </if>
+      <if test="cdate5 != null" >
+        #{cdate5,jdbcType=DATE},
+      </if>
+      <if test="cnum1 != null" >
+        #{cnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum2 != null" >
+        #{cnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum3 != null" >
+        #{cnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum4 != null" >
+        #{cnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum5 != null" >
+        #{cnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum6 != null" >
+        #{cnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum7 != null" >
+        #{cnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum8 != null" >
+        #{cnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum9 != null" >
+        #{cnum9,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum10 != null" >
+        #{cnum10,jdbcType=DECIMAL},
+      </if>
+      <if test="cvc1 != null" >
+        #{cvc1,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc2 != null" >
+        #{cvc2,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc3 != null" >
+        #{cvc3,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc4 != null" >
+        #{cvc4,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc5 != null" >
+        #{cvc5,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc6 != null" >
+        #{cvc6,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc7 != null" >
+        #{cvc7,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc8 != null" >
+        #{cvc8,jdbcType=VARCHAR},
+      </if>
+      <if test="cchr1 != null" >
+        #{cchr1,jdbcType=CHAR},
+      </if>
+      <if test="cchr2 != null" >
+        #{cchr2,jdbcType=CHAR},
+      </if>
+      <if test="cchr3 != null" >
+        #{cchr3,jdbcType=CHAR},
+      </if>
+      <if test="cchr4 != null" >
+        #{cchr4,jdbcType=CHAR},
+      </if>
+      <if test="cchr5 != null" >
+        #{cchr5,jdbcType=CHAR},
+      </if>
+      <if test="cchr6 != null" >
+        #{cchr6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.sso.crm.domain.CustomerModel" >
+    update CUSTOMER
+    <set >
+      <if test="ctype != null" >
+        CTYPE = #{ctype,jdbcType=VARCHAR},
+      </if>
+      <if test="cstatus != null" >
+        CSTATUS = #{cstatus,jdbcType=CHAR},
+      </if>
+      <if test="ccurjfye != null" >
+        CCURJFYE = #{ccurjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="chisjfye != null" >
+        CHISJFYE = #{chisjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="ctotjfye != null" >
+        CTOTJFYE = #{ctotjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="ccurxfje != null" >
+        CCURXFJE = #{ccurxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="chisxfje != null" >
+        CHISXFJE = #{chisxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="ctotxfje != null" >
+        CTOTXFJE = #{ctotxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cvipno != null" >
+        CVIPNO = #{cvipno,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        CNAME = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ccreator != null" >
+        CCREATOR = #{ccreator,jdbcType=VARCHAR},
+      </if>
+      <if test="ccreatdate != null" >
+        CCREATDATE = #{ccreatdate,jdbcType=DATE},
+      </if>
+      <if test="cmaintor != null" >
+        CMAINTOR = #{cmaintor,jdbcType=VARCHAR},
+      </if>
+      <if test="cmaintdate != null" >
+        CMAINTDATE = #{cmaintdate,jdbcType=DATE},
+      </if>
+      <if test="cdate1 != null" >
+        CDATE1 = #{cdate1,jdbcType=DATE},
+      </if>
+      <if test="cdate2 != null" >
+        CDATE2 = #{cdate2,jdbcType=DATE},
+      </if>
+      <if test="cdate3 != null" >
+        CDATE3 = #{cdate3,jdbcType=DATE},
+      </if>
+      <if test="cdate4 != null" >
+        CDATE4 = #{cdate4,jdbcType=DATE},
+      </if>
+      <if test="cdate5 != null" >
+        CDATE5 = #{cdate5,jdbcType=DATE},
+      </if>
+      <if test="cnum1 != null" >
+        CNUM1 = #{cnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum2 != null" >
+        CNUM2 = #{cnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum3 != null" >
+        CNUM3 = #{cnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum4 != null" >
+        CNUM4 = #{cnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum5 != null" >
+        CNUM5 = #{cnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum6 != null" >
+        CNUM6 = #{cnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum7 != null" >
+        CNUM7 = #{cnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum8 != null" >
+        CNUM8 = #{cnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum9 != null" >
+        CNUM9 = #{cnum9,jdbcType=DECIMAL},
+      </if>
+      <if test="cnum10 != null" >
+        CNUM10 = #{cnum10,jdbcType=DECIMAL},
+      </if>
+      <if test="cvc1 != null" >
+        CVC1 = #{cvc1,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc2 != null" >
+        CVC2 = #{cvc2,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc3 != null" >
+        CVC3 = #{cvc3,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc4 != null" >
+        CVC4 = #{cvc4,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc5 != null" >
+        CVC5 = #{cvc5,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc6 != null" >
+        CVC6 = #{cvc6,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc7 != null" >
+        CVC7 = #{cvc7,jdbcType=VARCHAR},
+      </if>
+      <if test="cvc8 != null" >
+        CVC8 = #{cvc8,jdbcType=VARCHAR},
+      </if>
+      <if test="cchr1 != null" >
+        CCHR1 = #{cchr1,jdbcType=CHAR},
+      </if>
+      <if test="cchr2 != null" >
+        CCHR2 = #{cchr2,jdbcType=CHAR},
+      </if>
+      <if test="cchr3 != null" >
+        CCHR3 = #{cchr3,jdbcType=CHAR},
+      </if>
+      <if test="cchr4 != null" >
+        CCHR4 = #{cchr4,jdbcType=CHAR},
+      </if>
+      <if test="cchr5 != null" >
+        CCHR5 = #{cchr5,jdbcType=CHAR},
+      </if>
+      <if test="cchr6 != null" >
+        CCHR6 = #{cchr6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CID = #{cid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.sso.crm.domain.CustomerModel" >
+    update CUSTOMER
+    set CTYPE = #{ctype,jdbcType=VARCHAR},
+      CSTATUS = #{cstatus,jdbcType=CHAR},
+      CCURJFYE = #{ccurjfye,jdbcType=DECIMAL},
+      CHISJFYE = #{chisjfye,jdbcType=DECIMAL},
+      CTOTJFYE = #{ctotjfye,jdbcType=DECIMAL},
+      CCURXFJE = #{ccurxfje,jdbcType=DECIMAL},
+      CHISXFJE = #{chisxfje,jdbcType=DECIMAL},
+      CTOTXFJE = #{ctotxfje,jdbcType=DECIMAL},
+      CVIPNO = #{cvipno,jdbcType=VARCHAR},
+      CNAME = #{cname,jdbcType=VARCHAR},
+      CCREATOR = #{ccreator,jdbcType=VARCHAR},
+      CCREATDATE = #{ccreatdate,jdbcType=DATE},
+      CMAINTOR = #{cmaintor,jdbcType=VARCHAR},
+      CMAINTDATE = #{cmaintdate,jdbcType=DATE},
+      CDATE1 = #{cdate1,jdbcType=DATE},
+      CDATE2 = #{cdate2,jdbcType=DATE},
+      CDATE3 = #{cdate3,jdbcType=DATE},
+      CDATE4 = #{cdate4,jdbcType=DATE},
+      CDATE5 = #{cdate5,jdbcType=DATE},
+      CNUM1 = #{cnum1,jdbcType=DECIMAL},
+      CNUM2 = #{cnum2,jdbcType=DECIMAL},
+      CNUM3 = #{cnum3,jdbcType=DECIMAL},
+      CNUM4 = #{cnum4,jdbcType=DECIMAL},
+      CNUM5 = #{cnum5,jdbcType=DECIMAL},
+      CNUM6 = #{cnum6,jdbcType=DECIMAL},
+      CNUM7 = #{cnum7,jdbcType=DECIMAL},
+      CNUM8 = #{cnum8,jdbcType=DECIMAL},
+      CNUM9 = #{cnum9,jdbcType=DECIMAL},
+      CNUM10 = #{cnum10,jdbcType=DECIMAL},
+      CVC1 = #{cvc1,jdbcType=VARCHAR},
+      CVC2 = #{cvc2,jdbcType=VARCHAR},
+      CVC3 = #{cvc3,jdbcType=VARCHAR},
+      CVC4 = #{cvc4,jdbcType=VARCHAR},
+      CVC5 = #{cvc5,jdbcType=VARCHAR},
+      CVC6 = #{cvc6,jdbcType=VARCHAR},
+      CVC7 = #{cvc7,jdbcType=VARCHAR},
+      CVC8 = #{cvc8,jdbcType=VARCHAR},
+      CCHR1 = #{cchr1,jdbcType=CHAR},
+      CCHR2 = #{cchr2,jdbcType=CHAR},
+      CCHR3 = #{cchr3,jdbcType=CHAR},
+      CCHR4 = #{cchr4,jdbcType=CHAR},
+      CCHR5 = #{cchr5,jdbcType=CHAR},
+      CCHR6 = #{cchr6,jdbcType=VARCHAR}
+    where CID = #{cid,jdbcType=VARCHAR}
+  </update>
+</mapper>

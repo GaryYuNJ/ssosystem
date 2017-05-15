@@ -26,5 +26,7 @@ public interface ICRMInterfaceService {
 	BigDecimal getCurJFYEByCustId(String cmcustid);
 
 	int modifyPasswordByMobile(String mobile, String newPassword);
+
+	BigDecimal getCmczzByCustId(String cmcustid);
 	
 }

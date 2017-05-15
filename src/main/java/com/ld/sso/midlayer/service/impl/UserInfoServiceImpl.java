@@ -145,6 +145,8 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				CRMCustmemberModel cusModel = cRMInterfaceService.getFullInfoByPrimaryKey(basicInfo.getCmmemid());
 				//替换真正的积分余额
 				cusModel.setCmtotjf(cRMInterfaceService.getCurJFYEByCustId(basicInfo.getCmcustid()));
+				//替换真正的成长值CUSTOMER。CNUM10，关联 CMCUSTID
+				cusModel.setCmczz(cRMInterfaceService.getCmczzByCustId(basicInfo.getCmcustid()));
 				
 				if(null != cusModel && StringUtil.isNotEmpty(cusModel.getCmmemid())){
 					custModelToFullInfoConverter.convert(cusModel, fullInfo);

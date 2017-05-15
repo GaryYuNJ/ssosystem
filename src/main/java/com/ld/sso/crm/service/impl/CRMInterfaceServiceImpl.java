@@ -17,9 +17,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
 import com.ld.sso.crm.domain.CardJFLogModel;
+import com.ld.sso.crm.domain.CustomerModel;
 import com.ld.sso.crm.domain.CusttypeModel;
 import com.ld.sso.crm.mapper.CRMCustmemberModelMapper;
 import com.ld.sso.crm.mapper.CardJFLogModelMapper;
+import com.ld.sso.crm.mapper.CustomerModelMapper;
 import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.crm.service.ICRMInterfaceService;
 import com.ld.sso.crm.util.CRMCharacterConverter;
@@ -39,6 +41,9 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	private CRMInterfaceProperties crmInterfaceProperties; 
 	@Autowired 
 	IuserInfoService userInfoService;
+	@Autowired 
+	CustomerModelMapper customerModelMapper;
+	
 	
 	@Override
 	public CRMCustmemberModel authUserLogin(String mobile, String password) {
@@ -138,6 +143,18 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 			return new BigDecimal(0);
 		}else
 			return jfModel.getCdlcurjfye();
+	}
+	
+	//获取成长值//替换真正的成长值CUSTOMER。CNUM10，关联 CMCUSTID
+	@Override
+	public BigDecimal getCmczzByCustId(String cmcustid) {
+		
+		CustomerModel cModel = customerModelMapper.selectByPrimaryKey(cmcustid);
+		
+		if(null == cModel){
+			return new BigDecimal(0);
+		}else
+			return cModel.getCnum10();
 	}
 	
 	
