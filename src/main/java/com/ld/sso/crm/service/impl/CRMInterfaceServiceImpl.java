@@ -183,6 +183,7 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 			CRMCustmemberModel cusModel = new CRMCustmemberModel();
 			cusModel.setCmmemid(cmmemid);
 			cusModel.setCmpwd(params.get("enPasswd").toString());
+			cusModel.setCmmaintdate(new Date());
 			
 			return custmemberMapper.updateByPrimaryKeySelective(cusModel);
 		}
@@ -204,6 +205,7 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 			CRMCustmemberModel cusModel = new CRMCustmemberModel();
 			cusModel.setCmmobile1(mobile);
 			cusModel.setCmpwd(params.get("enPasswd").toString());
+			cusModel.setCmmaintdate(new Date());
 			
 			return custmemberMapper.updateByMobileSelective(cusModel);
 		}
@@ -216,6 +218,7 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	public int modifyUserInfoByPrimaryKey(CRMCustmemberModel cusModel) {
 		
 		cusModel.setCmname(null != cusModel.getCmname() ? CRMCharacterConverter.convertGBKTo8859P1(cusModel.getCmname()):null);
+		cusModel.setCmmaintdate(new Date());
 		
 		return custmemberMapper.updateByPrimaryKeySelective(cusModel);
 		

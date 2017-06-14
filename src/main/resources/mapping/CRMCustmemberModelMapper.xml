@@ -32,9 +32,9 @@
     <result column="CMTOTJF" property="cmtotjf" jdbcType="DECIMAL" />
     <result column="CMXFJE" property="cmxfje" jdbcType="DECIMAL" />
     <result column="CMMAINTOR" property="cmmaintor" jdbcType="VARCHAR" />
-    <result column="CMMAINTDATE" property="cmmaintdate" jdbcType="DATE" />
+    <result column="CMMAINTDATE" property="cmmaintdate" jdbcType="TIMESTAMP" />
     <result column="CMNAME" property="cmname" jdbcType="VARCHAR" />
-    <result column="CMBIRTHDAY" property="cmbirthday" jdbcType="DATE" />
+    <result column="CMBIRTHDAY" property="cmbirthday" jdbcType="TIMESTAMP" />
     <result column="CMBIRTHTYPE" property="cmbirthtype" jdbcType="CHAR" />
     <result column="CMSEX" property="cmsex" jdbcType="CHAR" />
     <result column="CMADDR" property="cmaddr" jdbcType="VARCHAR" />
@@ -133,15 +133,15 @@
     <result column="CMNUM19" property="cmnum19" jdbcType="DECIMAL" />
     <result column="CMNUM20" property="cmnum20" jdbcType="DECIMAL" />
     <result column="CMMKT" property="cmmkt" jdbcType="VARCHAR" />
-    <result column="CMKHDATE" property="cmkhdate" jdbcType="DATE" />
-    <result column="CMXFDATE" property="cmxfdate" jdbcType="DATE" />
-    <result column="CMSJDATE" property="cmsjdate" jdbcType="DATE" />
-    <result column="CMJJDATE" property="cmjjdate" jdbcType="DATE" />
+    <result column="CMKHDATE" property="cmkhdate" jdbcType="TIMESTAMP" />
+    <result column="CMXFDATE" property="cmxfdate" jdbcType="TIMESTAMP" />
+    <result column="CMSJDATE" property="cmsjdate" jdbcType="TIMESTAMP" />
+    <result column="CMJJDATE" property="cmjjdate" jdbcType="TIMESTAMP" />
     <result column="CMASTRO" property="cmastro" jdbcType="VARCHAR" />
-    <result column="CMFSTDATE" property="cmfstdate" jdbcType="DATE" />
+    <result column="CMFSTDATE" property="cmfstdate" jdbcType="TIMESTAMP" />
     <result column="CMTOKEN" property="cmtoken" jdbcType="VARCHAR" />
     <result column="CMTOKEN2" property="cmtoken2" jdbcType="VARCHAR" />
-    <result column="CMTOKENDATE" property="cmtokendate" jdbcType="DATE" />
+    <result column="CMTOKENDATE" property="cmtokendate" jdbcType="TIMESTAMP" />
     <result column="CMPWD" property="cmpwd" jdbcType="VARCHAR" />
     <result column="CMSSQY" property="cmssqy" jdbcType="VARCHAR" />
     <result column="CMQYJS" property="cmqyjs" jdbcType="VARCHAR" />
@@ -156,7 +156,7 @@
     <result column="CMRELATION" property="cmrelation" jdbcType="CHAR" />
     <result column="CMTOTJF" property="cmtotjf" jdbcType="DECIMAL" />
     <result column="CMNAME" property="cmname" jdbcType="VARCHAR" />
-    <result column="CMBIRTHDAY" property="cmbirthday" jdbcType="DATE" />
+    <result column="CMBIRTHDAY" property="cmbirthday" jdbcType="TIMESTAMP" />
     <result column="CMSEX" property="cmsex" jdbcType="CHAR" />
     <result column="CMADDR" property="cmaddr" jdbcType="VARCHAR" />
     <result column="CMIDTYPE" property="cmidtype" jdbcType="CHAR" />
@@ -318,8 +318,8 @@
       #{cmjfa,jdbcType=DECIMAL}, #{cmjfb,jdbcType=DECIMAL}, #{cmjfc,jdbcType=DECIMAL}, 
       #{cmjfd,jdbcType=DECIMAL}, #{cmjfe,jdbcType=DECIMAL}, #{cmjff,jdbcType=DECIMAL}, 
       #{cmdecjf,jdbcType=DECIMAL}, #{cmtotjf,jdbcType=DECIMAL}, #{cmxfje,jdbcType=DECIMAL}, 
-      #{cmmaintor,jdbcType=VARCHAR}, #{cmmaintdate,jdbcType=DATE}, #{cmname,jdbcType=VARCHAR}, 
-      #{cmbirthday,jdbcType=DATE}, #{cmbirthtype,jdbcType=CHAR}, #{cmsex,jdbcType=CHAR}, 
+      #{cmmaintor,jdbcType=VARCHAR}, #{cmmaintdate,jdbcType=TIMESTAMP}, #{cmname,jdbcType=VARCHAR}, 
+      #{cmbirthday,jdbcType=TIMESTAMP}, #{cmbirthtype,jdbcType=CHAR}, #{cmsex,jdbcType=CHAR}, 
       #{cmaddr,jdbcType=VARCHAR}, #{cmadd1,jdbcType=VARCHAR}, #{cmadd2,jdbcType=VARCHAR}, 
       #{cmadd3,jdbcType=VARCHAR}, #{cmadd4,jdbcType=VARCHAR}, #{cmzip,jdbcType=CHAR}, 
       #{cmidtype,jdbcType=CHAR}, #{cmidno,jdbcType=VARCHAR}, #{cmlxtype1,jdbcType=CHAR}, 
@@ -352,9 +352,9 @@
       #{cmnum13,jdbcType=DECIMAL}, #{cmnum14,jdbcType=DECIMAL}, #{cmnum15,jdbcType=DECIMAL}, 
       #{cmnum16,jdbcType=DECIMAL}, #{cmnum17,jdbcType=DECIMAL}, #{cmnum18,jdbcType=DECIMAL}, 
       #{cmnum19,jdbcType=DECIMAL}, #{cmnum20,jdbcType=DECIMAL}, #{cmmkt,jdbcType=VARCHAR}, 
-      #{cmkhdate,jdbcType=DATE}, #{cmxfdate,jdbcType=DATE}, #{cmsjdate,jdbcType=DATE}, 
-      #{cmjjdate,jdbcType=DATE}, #{cmastro,jdbcType=VARCHAR}, #{cmfstdate,jdbcType=DATE}, 
-      #{cmtoken,jdbcType=VARCHAR}, #{cmtoken2,jdbcType=VARCHAR}, #{cmtokendate,jdbcType=DATE}, 
+      #{cmkhdate,jdbcType=TIMESTAMP}, #{cmxfdate,jdbcType=TIMESTAMP}, #{cmsjdate,jdbcType=TIMESTAMP}, 
+      #{cmjjdate,jdbcType=TIMESTAMP}, #{cmastro,jdbcType=VARCHAR}, #{cmfstdate,jdbcType=TIMESTAMP}, 
+      #{cmtoken,jdbcType=VARCHAR}, #{cmtoken2,jdbcType=VARCHAR}, #{cmtokendate,jdbcType=TIMESTAMP}, 
       #{cmpwd,jdbcType=VARCHAR}, #{cmssqy,jdbcType=VARCHAR}, #{cmqyjs,jdbcType=VARCHAR}, 
       #{cmjtjs,jdbcType=VARCHAR}, #{cmptname,jdbcType=VARCHAR}, #{cmczz,jdbcType=DECIMAL}, 
       #{cmreferee,jdbcType=VARCHAR})
@@ -896,13 +896,13 @@
         #{cmmaintor,jdbcType=VARCHAR},
       </if>
       <if test="cmmaintdate != null" >
-        #{cmmaintdate,jdbcType=DATE},
+        #{cmmaintdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmname != null" >
         #{cmname,jdbcType=VARCHAR},
       </if>
       <if test="cmbirthday != null" >
-        #{cmbirthday,jdbcType=DATE},
+        #{cmbirthday,jdbcType=TIMESTAMP},
       </if>
       <if test="cmbirthtype != null" >
         #{cmbirthtype,jdbcType=CHAR},
@@ -1199,22 +1199,22 @@
         #{cmmkt,jdbcType=VARCHAR},
       </if>
       <if test="cmkhdate != null" >
-        #{cmkhdate,jdbcType=DATE},
+        #{cmkhdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmxfdate != null" >
-        #{cmxfdate,jdbcType=DATE},
+        #{cmxfdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmsjdate != null" >
-        #{cmsjdate,jdbcType=DATE},
+        #{cmsjdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmjjdate != null" >
-        #{cmjjdate,jdbcType=DATE},
+        #{cmjjdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmastro != null" >
         #{cmastro,jdbcType=VARCHAR},
       </if>
       <if test="cmfstdate != null" >
-        #{cmfstdate,jdbcType=DATE},
+        #{cmfstdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmtoken != null" >
         #{cmtoken,jdbcType=VARCHAR},
@@ -1223,7 +1223,7 @@
         #{cmtoken2,jdbcType=VARCHAR},
       </if>
       <if test="cmtokendate != null" >
-        #{cmtokendate,jdbcType=DATE},
+        #{cmtokendate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmpwd != null" >
         #{cmpwd,jdbcType=VARCHAR},
@@ -1339,13 +1339,13 @@
         CMMAINTOR = #{cmmaintor,jdbcType=VARCHAR},
       </if>
       <if test="cmmaintdate != null" >
-        CMMAINTDATE = #{cmmaintdate,jdbcType=DATE},
+        CMMAINTDATE = SYSDATE,
       </if>
       <if test="cmname != null" >
         CMNAME = #{cmname,jdbcType=VARCHAR},
       </if>
       <if test="cmbirthday != null" >
-        CMBIRTHDAY = #{cmbirthday,jdbcType=DATE},
+        CMBIRTHDAY = #{cmbirthday,jdbcType=TIMESTAMP},
       </if>
       <if test="cmbirthtype != null" >
         CMBIRTHTYPE = #{cmbirthtype,jdbcType=CHAR},
@@ -1642,22 +1642,22 @@
         CMMKT = #{cmmkt,jdbcType=VARCHAR},
       </if>
       <if test="cmkhdate != null" >
-        CMKHDATE = #{cmkhdate,jdbcType=DATE},
+        CMKHDATE = #{cmkhdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmxfdate != null" >
-        CMXFDATE = #{cmxfdate,jdbcType=DATE},
+        CMXFDATE = #{cmxfdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmsjdate != null" >
-        CMSJDATE = #{cmsjdate,jdbcType=DATE},
+        CMSJDATE = #{cmsjdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmjjdate != null" >
-        CMJJDATE = #{cmjjdate,jdbcType=DATE},
+        CMJJDATE = #{cmjjdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmastro != null" >
         CMASTRO = #{cmastro,jdbcType=VARCHAR},
       </if>
       <if test="cmfstdate != null" >
-        CMFSTDATE = #{cmfstdate,jdbcType=DATE},
+        CMFSTDATE = #{cmfstdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmtoken != null" >
         CMTOKEN = #{cmtoken,jdbcType=VARCHAR},
@@ -1666,7 +1666,7 @@
         CMTOKEN2 = #{cmtoken2,jdbcType=VARCHAR},
       </if>
       <if test="cmtokendate != null" >
-        CMTOKENDATE = #{cmtokendate,jdbcType=DATE},
+        CMTOKENDATE = #{cmtokendate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmpwd != null" >
         CMPWD = #{cmpwd,jdbcType=VARCHAR},
@@ -1784,13 +1784,13 @@
         CMMAINTOR = #{cmmaintor,jdbcType=VARCHAR},
       </if>
       <if test="cmmaintdate != null" >
-        CMMAINTDATE = #{cmmaintdate,jdbcType=DATE},
+        CMMAINTDATE = SYSDATE,
       </if>
       <if test="cmname != null" >
         CMNAME = #{cmname,jdbcType=VARCHAR},
       </if>
       <if test="cmbirthday != null" >
-        CMBIRTHDAY = #{cmbirthday,jdbcType=DATE},
+        CMBIRTHDAY = #{cmbirthday,jdbcType=TIMESTAMP},
       </if>
       <if test="cmbirthtype != null" >
         CMBIRTHTYPE = #{cmbirthtype,jdbcType=CHAR},
@@ -2087,22 +2087,22 @@
         CMMKT = #{cmmkt,jdbcType=VARCHAR},
       </if>
       <if test="cmkhdate != null" >
-        CMKHDATE = #{cmkhdate,jdbcType=DATE},
+        CMKHDATE = #{cmkhdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmxfdate != null" >
-        CMXFDATE = #{cmxfdate,jdbcType=DATE},
+        CMXFDATE = #{cmxfdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmsjdate != null" >
-        CMSJDATE = #{cmsjdate,jdbcType=DATE},
+        CMSJDATE = #{cmsjdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmjjdate != null" >
-        CMJJDATE = #{cmjjdate,jdbcType=DATE},
+        CMJJDATE = #{cmjjdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmastro != null" >
         CMASTRO = #{cmastro,jdbcType=VARCHAR},
       </if>
       <if test="cmfstdate != null" >
-        CMFSTDATE = #{cmfstdate,jdbcType=DATE},
+        CMFSTDATE = #{cmfstdate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmtoken != null" >
         CMTOKEN = #{cmtoken,jdbcType=VARCHAR},
@@ -2111,7 +2111,7 @@
         CMTOKEN2 = #{cmtoken2,jdbcType=VARCHAR},
       </if>
       <if test="cmtokendate != null" >
-        CMTOKENDATE = #{cmtokendate,jdbcType=DATE},
+        CMTOKENDATE = #{cmtokendate,jdbcType=TIMESTAMP},
       </if>
       <if test="cmpwd != null" >
         CMPWD = #{cmpwd,jdbcType=VARCHAR},
@@ -2169,9 +2169,9 @@
       CMTOTJF = #{cmtotjf,jdbcType=DECIMAL},
       CMXFJE = #{cmxfje,jdbcType=DECIMAL},
       CMMAINTOR = #{cmmaintor,jdbcType=VARCHAR},
-      CMMAINTDATE = #{cmmaintdate,jdbcType=DATE},
+      CMMAINTDATE = #{cmmaintdate,jdbcType=TIMESTAMP},
       CMNAME = #{cmname,jdbcType=VARCHAR},
-      CMBIRTHDAY = #{cmbirthday,jdbcType=DATE},
+      CMBIRTHDAY = #{cmbirthday,jdbcType=TIMESTAMP},
       CMBIRTHTYPE = #{cmbirthtype,jdbcType=CHAR},
       CMSEX = #{cmsex,jdbcType=CHAR},
       CMADDR = #{cmaddr,jdbcType=VARCHAR},
@@ -2270,15 +2270,15 @@
       CMNUM19 = #{cmnum19,jdbcType=DECIMAL},
       CMNUM20 = #{cmnum20,jdbcType=DECIMAL},
       CMMKT = #{cmmkt,jdbcType=VARCHAR},
-      CMKHDATE = #{cmkhdate,jdbcType=DATE},
-      CMXFDATE = #{cmxfdate,jdbcType=DATE},
-      CMSJDATE = #{cmsjdate,jdbcType=DATE},
-      CMJJDATE = #{cmjjdate,jdbcType=DATE},
+      CMKHDATE = #{cmkhdate,jdbcType=TIMESTAMP},
+      CMXFDATE = #{cmxfdate,jdbcType=TIMESTAMP},
+      CMSJDATE = #{cmsjdate,jdbcType=TIMESTAMP},
+      CMJJDATE = #{cmjjdate,jdbcType=TIMESTAMP},
       CMASTRO = #{cmastro,jdbcType=VARCHAR},
-      CMFSTDATE = #{cmfstdate,jdbcType=DATE},
+      CMFSTDATE = #{cmfstdate,jdbcType=TIMESTAMP},
       CMTOKEN = #{cmtoken,jdbcType=VARCHAR},
       CMTOKEN2 = #{cmtoken2,jdbcType=VARCHAR},
-      CMTOKENDATE = #{cmtokendate,jdbcType=DATE},
+      CMTOKENDATE = #{cmtokendate,jdbcType=TIMESTAMP},
       CMPWD = #{cmpwd,jdbcType=VARCHAR},
       CMSSQY = #{cmssqy,jdbcType=VARCHAR},
       CMQYJS = #{cmqyjs,jdbcType=VARCHAR},
@@ -2291,7 +2291,7 @@
   <update id="updateTokenByPrimaryKey" parameterType="com.ld.sso.crm.domain.CRMCustmemberModel" >
     update CUSTMEMBER
     set CMTOKEN = #{cmtoken,jdbcType=VARCHAR},
-      CMTOKENDATE = #{cmtokendate,jdbcType=DATE}
+      CMTOKENDATE = #{cmtokendate,jdbcType=TIMESTAMP}
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </update>
   
