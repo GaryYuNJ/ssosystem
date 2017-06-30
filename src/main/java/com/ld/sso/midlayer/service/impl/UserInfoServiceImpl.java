@@ -104,6 +104,21 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		return newTicket;
 	}
 	
+	
+	@Override
+	public CRMCustmemberBasicInfo queryUserBasicInfoForEvcard(String ticket) {
+		final String methodName = "queryUserBasicInfoForEvcard()";
+		logger.info("~~~"+methodName+"~~~start~~ticket:{}",ticket);
+		try{
+			
+			return redisService.getUserInfoByTicket(ticket);
+		}catch(Exception e){
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+			return null;
+		}
+		// TODO Auto-generated method stub
+	}
+	
 	@Override
 	public CommonResponseInfo queryUserBasicInfoByTicket(String ticket) {
 		final String methodName = "queryUserBasicInfoByTicket()";

@@ -40,5 +40,7 @@ public interface IuserInfoService {
 
 	CommonResponseInfo changeCusJFByMemId(String crmInterfaceCode,
 			CommonRequestParam requestparam);
+
+	CRMCustmemberBasicInfo queryUserBasicInfoForEvcard(String ticket);
 	
 }

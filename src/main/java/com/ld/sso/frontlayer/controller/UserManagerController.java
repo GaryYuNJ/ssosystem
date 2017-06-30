@@ -2,6 +2,8 @@ package com.ld.sso.frontlayer.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tk.mybatis.mapper.util.StringUtil;
@@ -22,6 +25,7 @@ import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
 import com.ld.sso.frontlayer.databean.CommonResponseInfo;
 import com.ld.sso.frontlayer.util.SignVerification;
+import com.ld.sso.midlayer.databean.CRMCustmemberBasicInfo;
 import com.ld.sso.midlayer.service.IuserInfoService;
 
 @RestController
@@ -257,6 +261,35 @@ public class UserManagerController {
 		CommonResponseInfo response = new CommonResponseInfo();
 		response.setCode("9004");
 		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+	
+	
+	@RequestMapping(value = "/queryUserInfoForEvcard", method = { RequestMethod.GET, RequestMethod.POST }, 
+			produces = "application/json; charset=utf-8")
+	public Map<String,String> queryUserInfoForEvcard(@RequestParam String token) {
+		Map<String,String> response = new HashMap<String,String>();
+		
+		logger.info("~~~evcardUserInfo()~~~~token:{}", token);
+		if(StringUtil.isNotEmpty(token)){
+			CRMCustmemberBasicInfo userInfo =  userInfoService.queryUserBasicInfoForEvcard(token);
+			
+			if(null != userInfo){
+				response.put("mobileNo", userInfo.getCmmobile());
+				response.put("message","OK");
+				response.put("status","0");
+				logger.info("~~~evcardUserInfo()~~~~mobileNo:{}", userInfo.getCmmobile());
+			}else{
+				response.put("message","token is not available.");
+				response.put("status","-1");
+				logger.info("~~~evcardUserInfo()~~~~warning: token is not available");
+			}
+		}else{
+			response.put("message","token is not available.");
+			response.put("status","-1");
+			logger.info("~~~evcardUserInfo()~~~~warning: token is not available");
+		}
+		
 		return response;
 	}
 	
