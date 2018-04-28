@@ -53,15 +53,24 @@ public class UserInfoServiceImpl implements IuserInfoService {
 			CRMCustmemberModel cusModel = cRMInterfaceService.authUserLogin(mobile, password);
 			
 			if(null != cusModel && StringUtil.isNotEmpty(cusModel.getCmmemid())){
-				CRMCustmemberBasicInfo basicInfo = new CRMCustmemberBasicInfo();
-				basicInfo.setCmcustid(cusModel.getCmcustid());
-				basicInfo.setCmmemid(cusModel.getCmmemid());
-				basicInfo.setCmmobile(cusModel.getCmmobile1());
 				
-				responseInfo.setData(basicInfo);
-				responseInfo.setCode("0");
-				responseInfo.setMsg("");
-				responseInfo.setTicket(this.getNewSSOTicket(cusModel.getCmmemid(), source, basicInfo));
+				//密码是手机号码后6位禁止登陆，要求用户走忘记密码流程修改密码
+				//新密码不能是手机后六位
+				if(password.equals(mobile.substring(5))){
+					responseInfo.setCode("9905");
+					responseInfo.setMsg("密码与手机号后六位相同，请点击忘记密码重置");
+					
+				}else{
+					CRMCustmemberBasicInfo basicInfo = new CRMCustmemberBasicInfo();
+					basicInfo.setCmcustid(cusModel.getCmcustid());
+					basicInfo.setCmmemid(cusModel.getCmmemid());
+					basicInfo.setCmmobile(cusModel.getCmmobile1());
+					
+					responseInfo.setData(basicInfo);
+					responseInfo.setCode("0");
+					responseInfo.setMsg("");
+					responseInfo.setTicket(this.getNewSSOTicket(cusModel.getCmmemid(), source, basicInfo));
+				}
 			}else{
 				responseInfo.setCode("9904");
 				responseInfo.setMsg("用户不存在或者密码错误");
@@ -258,8 +267,12 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		logger.info("~~~"+methodName+"~~~start~~mobile:{}",mobile);
 		CommonResponseInfo response = new CommonResponseInfo();
 		try{
-			
-			if(cRMInterfaceService.modifyPasswordByMobile(mobile, newPassword) > 0 ){
+			//新密码不能是手机后六位
+			if(newPassword.equals(mobile.substring(5))){
+				response.setCode("9905");
+				response.setMsg("密码不能是手机号后六位");
+				
+			}else if(cRMInterfaceService.modifyPasswordByMobile(mobile, newPassword) > 0 ){
 				response.setCode("0");
 			}else{
 				response.setCode("9903");
@@ -290,8 +303,14 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				CRMCustmemberModel cusModel = cRMInterfaceService.authUserLogin(basicInfo.getCmmobile(), oldPassword);
 				
 				if(null != cusModel && StringUtil.isNotEmpty(cusModel.getCmmemid())){
-					if(cRMInterfaceService.modifyPassword(basicInfo.getCmmemid(), newPassword) > 0 ){
+					//新密码不能是手机后六位
+					if(newPassword.equals(basicInfo.getCmmobile().substring(5))){
+						response.setCode("9905");
+						response.setMsg("密码不能是手机号后六位");
+						
+					}else if(cRMInterfaceService.modifyPassword(basicInfo.getCmmemid(), newPassword) > 0 ){
 						response.setCode("0");
+						
 					}else{
 						response.setCode("9903");
 						response.setMsg("密码修改失败");
@@ -392,6 +411,20 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		logger.info("~~~"+methodName+"~~~start~~");
 		
 		CommonResponseInfo response =  new CommonResponseInfo();
+		
+		//如果是注册时，不允许密码是手机后六位
+		try{
+			if(crmInterfaceProperties.getRegisterCode().equals(crmInterfaceCode)){
+				if((requestparam.getParams().get(("p_mobile").substring(5))).equals(requestparam.getParams().get(("p_pwd")))){
+					response.setCode("9905");
+					response.setMsg("密码不能是手机号后六位");
+					return response;
+				}
+			}
+		}catch(Exception e){
+			logger.error("", e);
+		}
+		
 		try{
 			//解析请求入参
 			Map<String, Object> params = requestparam.getParams();
