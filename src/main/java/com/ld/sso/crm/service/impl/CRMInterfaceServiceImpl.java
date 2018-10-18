@@ -97,7 +97,7 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 				}
 			//重新生成token和date
 			}else{
-				logger.info("~~~getValidUserToken()~~~generate new token and date~~");
+				logger.warn("~~~getValidUserToken()~~~generate new token and date~~");
 				//生成四位随机数
 				int random = (int)(Math.random()*(9999-1000+1))+1000;
 				cusModel.setCmtoken(cmmemId+random);
@@ -164,7 +164,7 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 		
 		ResponseFromCRMData response = restTemplate.getForObject(crmInterfaceProperties.getAccessTokenUrl(), 
 				ResponseFromCRMData.class); 
-		logger.info("~~~generateNewAccessToken()~~~response:{}", JSONArray.toJSON(response));
+		logger.warn("~~~generateNewAccessToken()~~~response:{}", JSONArray.toJSON(response));
 
 		return response.getAccess_token();
 	}
@@ -228,11 +228,11 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	@Override
 	public ResponseFromCRMData sendCommonRequestToCRM(String crmInterfaceCode,
 			CommonRequestParam requestparam) {
-		logger.info("~~~commonRequestToCRM()~~~start~~crmInterfaceCode:{},requestparam:{}", crmInterfaceCode, JSONArray.toJSON(requestparam));
+		logger.warn("~~~commonRequestToCRM()~~~start~~crmInterfaceCode:{},requestparam:{}", crmInterfaceCode, JSONArray.toJSON(requestparam));
 		RestTemplate restTemplate = new RestTemplate();
 		
 		String requestUrl = crmInterfaceProperties.getFullServiceurl(crmInterfaceCode, userInfoService.getValidCRMAccessToken());
-		logger.info("~~~commonRequestToCRM()~~~start~~requestUrl:{}", requestUrl);
+		logger.warn("~~~commonRequestToCRM()~~~start~~requestUrl:{}", requestUrl);
 		
 		return restTemplate.postForObject(requestUrl, requestparam, ResponseFromCRMData.class); 
 	}

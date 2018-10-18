@@ -44,9 +44,9 @@ public class UserManagerController {
 	public CommonResponseInfo userInfoManager(@PathVariable String interfaceCode, 
 			@RequestBody CommonRequestParam param, String sno) {
 		
-		logger.info("~~~userInfoManager()~~~~sno:{}", sno);
-		logger.info("~~~userInfoManager()~~~~interfaceCode:{}", interfaceCode);
-		logger.info("~~~userInfoManager()~~~~param:{}", JSONArray.toJSON(param));
+		logger.warn("~~~userInfoManager()~~~~sno:{}", sno);
+		logger.warn("~~~userInfoManager()~~~~interfaceCode:{}", interfaceCode);
+		logger.warn("~~~userInfoManager()~~~~param:{}", JSONArray.toJSON(param));
 		//验证签名
 		if(this.signVerification(param)){
 			return this.processByInterfaceCode(interfaceCode, param);
@@ -54,6 +54,7 @@ public class UserManagerController {
 			CommonResponseInfo response = new CommonResponseInfo();
 			response.setCode("9007");
 			response.setMsg("数据的签名信息错误,属于非法访问");
+			logger.warn("~~~userInfoManager()~~~~数据的签名信息错误,属于非法访问");
 			return response;
 		}
 	}

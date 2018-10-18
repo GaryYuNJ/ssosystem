@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 
@@ -373,28 +374,33 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		logger.info("~~~"+methodName+"~~~start~~");
 		String accessToken = "";
 		
-		//Access_token默认7天有效期，为了系统可用性，这里只要超过1天就重新获取
+		//Access_token默认7天有效期，为了系统可用性，这里只要超过2天就重新获取
 		//access_token供整个SSO平台使用，频繁获取新token对整个用户群没影响
-		Date validDate=new Date((new Date()).getTime() - 1*24*3600000);
+		//CRM限制一个sno每天获取Access_token次数不能超过2000次
+		Date validDate=new Date((new Date()).getTime() - 2*24*3600000);
 				
 		CRMAccessTokenInfo accessTokenInfo = redisService.getCRMAccessToken();
 		//判断是否过期
 		if(null != accessTokenInfo 
 				&& null != accessTokenInfo.getCreateDate()
-				&& accessTokenInfo.getCreateDate().after(validDate)){
+				&& accessTokenInfo.getCreateDate().after(validDate)
+				&& !StringUtil.isEmpty(accessTokenInfo.getAccessToken())){
 			accessToken = accessTokenInfo.getAccessToken();
 		}else{
 			accessToken = cRMInterfaceService.generateNewAccessToken();
-			//允许一次容错
+			//允许一次容错，换一个sno
 			if(StringUtil.isEmpty(accessToken) ){
-				logger.info("~~~"+methodName+"~~get accessToken again");
+				logger.warn("~~~"+methodName+"~~get accessToken again");
 				accessToken = cRMInterfaceService.generateNewAccessToken();
 			}
-			//保存到cache
-			accessTokenInfo = new CRMAccessTokenInfo();
-			accessTokenInfo.setAccessToken(accessToken);
-			accessTokenInfo.setCreateDate(new Date());
-			redisService.saveCRMAccessToken(accessTokenInfo);
+
+			//不为null,保存到cache
+			if( !StringUtil.isEmpty(accessToken)){
+				accessTokenInfo = new CRMAccessTokenInfo();
+				accessTokenInfo.setAccessToken(accessToken);
+				accessTokenInfo.setCreateDate(new Date());
+				redisService.saveCRMAccessToken(accessTokenInfo);
+			}
 		}
 		// TODO Auto-generated method stub
 		logger.info("~~~"+methodName+"~~~end~~accessToken:{}",accessToken);
