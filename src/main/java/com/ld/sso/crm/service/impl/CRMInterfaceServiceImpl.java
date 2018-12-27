@@ -3,6 +3,7 @@ package com.ld.sso.crm.service.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -143,6 +144,28 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 			return new BigDecimal(0);
 		}else
 			return jfModel.getCdlcurjfye();
+	}
+	//获取历史增加积分总额度
+	@Override
+	public BigDecimal getJFAddTotalByCustId(String cmcustid) {
+		return cardJFLogModelMapper.selectJFAddTotalByCustId(cmcustid);
+	}
+	//获取历史消费积分总额度
+	@Override
+	public BigDecimal getJFSubTotalByCustId(String cmcustid) {
+		return cardJFLogModelMapper.selectJFSubTotalByCustId(cmcustid);
+	}
+	@Override
+	public List<CardJFLogModel> getJFHistoryListByCustId(String cmcustid, int startRow, int pageSize) {
+		return cardJFLogModelMapper.selectJFHistoryListByCustId(cmcustid, startRow, pageSize);
+	}
+	@Override
+	public List<CardJFLogModel> getJFAddListByCustId(String cmcustid, int startRow, int pageSize) {
+		return cardJFLogModelMapper.selectJFAddListByCustId(cmcustid, startRow, pageSize);
+	}
+	@Override
+	public List<CardJFLogModel> getJFSubListByCustId(String cmcustid, int startRow, int pageSize) {
+		return cardJFLogModelMapper.selectJFSubListByCustId(cmcustid, startRow, pageSize);
 	}
 	
 	//获取成长值//替换真正的成长值CUSTOMER。CNUM10，关联 CMCUSTID

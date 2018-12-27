@@ -42,5 +42,11 @@ public interface IuserInfoService {
 			CommonRequestParam requestparam);
 
 	CRMCustmemberBasicInfo queryUserBasicInfoForEvcard(String ticket);
+
+	CommonResponseInfo queryJFSummary(String ticket);
+
+
+	CommonResponseInfo queryJFHistoryList(String ticket, int startRow,
+			int pageSize, int type);
 	
 }

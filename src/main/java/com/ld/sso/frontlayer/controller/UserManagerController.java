@@ -86,6 +86,10 @@ public class UserManagerController {
 			return this.queryJFBalance(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getChangeJFCode())){
 			return this.changeCusJF(interfaceCode,param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getQueryJFSummaryCode())){
+			return this.queryJFSummary(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getQueryJFHistoryCode())){
+			return this.queryJFHistoryList(param);
 		}else{
 			return userInfoService.sendCommonRequestToCRM(interfaceCode, param);
 		}
@@ -159,6 +163,90 @@ public class UserManagerController {
 		response.setMsg("无效参数或不符合JSON格式规范");
 		return response;
 	}
+
+	//查询用户概要。包含积分余额，总历史消费积分，总历史获取积分
+	public CommonResponseInfo queryJFSummary(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){
+		
+			return userInfoService.queryJFSummary(param.getParams().get("ticket").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+	
+	//根据条件查询积分记录
+	public CommonResponseInfo queryJFHistoryList(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){
+		
+			int pageSize = 10;
+			int startRow = 1;
+			int type = 0;//所有的
+			if(null != param.getParams().get("pageSize") && StringUtil.isNotEmpty(param.getParams().get("pageSize").toString())){
+				pageSize = Integer.parseInt(param.getParams().get("pageSize").toString());
+			}
+			if(null != param.getParams().get("pageNo") && StringUtil.isNotEmpty(param.getParams().get("pageNo").toString())){
+				int pageNo = Integer.parseInt(param.getParams().get("pageNo").toString());
+				startRow = (pageNo-1)*pageSize+1;
+			}
+			if(null != param.getParams().get("type") && StringUtil.isNotEmpty(param.getParams().get("type").toString())){
+				type = Integer.parseInt(param.getParams().get("type").toString());
+			}
+			return userInfoService.queryJFHistoryList(param.getParams().get("ticket").toString(), startRow, pageSize, type);
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+	
+	//查询积分增加记录
+	public CommonResponseInfo queryJFAddList(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){
+		
+			int pageSize = 10;
+			int startRow = 1;
+			if(null != param.getParams().get("startRow") && StringUtil.isNotEmpty(param.getParams().get("startRow").toString())){
+				startRow = Integer.parseInt(param.getParams().get("startRow").toString());
+			}
+			return userInfoService.queryJFHistoryList(param.getParams().get("ticket").toString(), startRow, pageSize, 1);
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+	
+	//查询积分扣减记录
+	public CommonResponseInfo queryJFSubList(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){
+		
+			int pageSize = 10;
+			int startRow = 1;
+			if(null != param.getParams().get("startRow") && StringUtil.isNotEmpty(param.getParams().get("startRow").toString())){
+				startRow = Integer.parseInt(param.getParams().get("startRow").toString());
+			}
+			return userInfoService.queryJFHistoryList(param.getParams().get("ticket").toString(), startRow, pageSize, -1);
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+	
 	
 	public CommonResponseInfo queryUserBasicInfoByTicket(CommonRequestParam param){
 		

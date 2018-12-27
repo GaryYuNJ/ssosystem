@@ -3,6 +3,7 @@ package com.ld.sso.midlayer.service.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -19,6 +20,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.ld.sso.crm.databean.CRMAccessTokenInfo;
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
+import com.ld.sso.crm.domain.CardJFLogModel;
 import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.crm.service.ICRMInterfaceService;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
@@ -235,6 +237,96 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		return response;
 	}
 
+	//查询用户概要。包含积分余额，总历史消费积分，总历史获取积分
+	@Override
+	public CommonResponseInfo queryJFSummary(String ticket) {
+		final String methodName = "queryJFBalance()";
+		
+		logger.info("~~~"+methodName+"~~~start~~ticket:{}",ticket);
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			
+			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
+			
+			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmcustid())){
+				
+				BigDecimal jfBalance = cRMInterfaceService.getCurJFYEByCustId(basicInfo.getCmcustid());
+				BigDecimal jfAddTotal = cRMInterfaceService.getJFAddTotalByCustId(basicInfo.getCmcustid());
+				BigDecimal jfSubTotal = cRMInterfaceService.getJFSubTotalByCustId(basicInfo.getCmcustid());
+				
+				Map<String,Integer> map = new HashMap<String,Integer>();
+				map.put("jfBalance", 0);
+				map.put("jfAddTotal", 0);
+				map.put("jfSubTotal", 0);
+				if(null != jfBalance){
+					map.put("jfBalance", jfBalance.intValue());
+				}
+				if(null != jfAddTotal){
+					map.put("jfAddTotal", jfAddTotal.intValue());
+				}
+				if(null != jfSubTotal){
+					map.put("jfSubTotal", jfSubTotal.intValue());
+				}
+				response.setCode("0");
+				response.setData(map);
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		logger.info("~~~"+methodName+"~~~end~~");
+		// TODO Auto-generated method stub
+		return response;
+	}
+
+
+	//查询历史获取积分列表
+	@Override
+	public CommonResponseInfo queryJFHistoryList(String ticket, int startRow, int pageSize, int type) {
+		final String methodName = "queryJFBalance()";
+		
+		logger.info("~~~"+methodName+"~~~start~~ticket:{}",ticket);
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			
+			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
+			
+			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmcustid())){
+				List<CardJFLogModel> jfHistoryList = null;
+				//查询消费历史记录
+				if(type == -1){
+					jfHistoryList = cRMInterfaceService.getJFSubListByCustId(basicInfo.getCmcustid(), startRow, pageSize);
+				}else if(type == 1){
+					jfHistoryList = cRMInterfaceService.getJFAddListByCustId(basicInfo.getCmcustid(), startRow, pageSize);
+				}else{
+					jfHistoryList = cRMInterfaceService.getJFHistoryListByCustId(basicInfo.getCmcustid(), startRow, pageSize);
+				}
+				
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("jfHistoryList", jfHistoryList);
+				response.setCode("0");
+				response.setData(map);
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		logger.info("~~~"+methodName+"~~~end~~");
+		// TODO Auto-generated method stub
+		return response;
+	}
+	
+		
 	@Override
 	public CommonResponseInfo logoutByTicket(String ticket, String source) {
 		final String methodName = "logoutByTicket()";

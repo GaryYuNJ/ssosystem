@@ -63,6 +63,19 @@
     <result column="CDLJFHK" property="cdljfhk" jdbcType="DECIMAL" />
     <result column="CDLYSEQNO" property="cdlyseqno" jdbcType="DECIMAL" />
   </resultMap>
+  
+  <resultMap id="SimpleResultMap" type="com.ld.sso.crm.domain.CardJFLogModel" >
+  	<id column="CDLDATE" property="cdldate" jdbcType="DATE" />
+    <result column="CDLMKT" property="cdlmkt" jdbcType="VARCHAR" />
+    <result column="CDLCURJFFS" property="cdlcurjffs" jdbcType="DECIMAL" />
+    <result column="CDLCURJFYE" property="cdlcurjfye" jdbcType="DECIMAL" />
+    <result column="CDLMEMO" property="cdlmemo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+    <resultMap id="resultOfInteger" type="java.math.BigDecimal">  
+       <result column="total" property="total" jdbcType="DECIMAL" />  
+  </resultMap> 
+  
   <sql id="Base_Column_List" >
     CDLDATE, CDLSEQNO, CDLTYPE, CDLMKT, CDLCNO, CDLCID, CDLCMKT, CDLMCARD, CDLFLAG, CDLTRANS, 
     CDLBILLNO, CDLBILLID, CDLOPERID, CDLMEMO, CDLSYJID, CDLINVNO, CDLTRACE, CDLXFJE, 
@@ -72,6 +85,11 @@
     CDLCHR2, CDLCHR3, CDLCHR4, CDLCHR5, CDLCHR6, CDLCHR7, CDLCHR8, CDLCHR9, CDLCHR10, 
     CDLMID, CDLJFA, CDLJFB, CDLJFC, CDLJFD, CDLJFE, CDLJFF, CDLJFHK, CDLYSEQNO
   </sql>
+  
+  <sql id="Simple_Column_List" >
+  	CDLMKT,CDLCURJFFS, CDLDATE,CDLCURJFYE,CDLMEMO
+  </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ld.sso.crm.domain.CardJFLogModelKey" >
     select 
     <include refid="Base_Column_List" />
@@ -85,6 +103,71 @@
   	(
 	select  CDLCURJFYE from CARDJFLOG 
 	where CDLCID =  #{cmcustid,jdbcType=VARCHAR} 
+	order by CDLDATE desc
+	)
+	where rownum=1
+  </select>
+  
+  <select id="selectJFSubTotalByCustId" resultMap="resultOfInteger" parameterType="java.lang.String" >
+  	select SUM(CDLCURJFFS) as total from CARDJFLOG where CDLCURJFFS &lt; 0 
+  	AND  CDLCID =  #{cmcustid,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="selectJFAddTotalByCustId" resultMap="resultOfInteger" parameterType="java.lang.String" >
+  	select SUM(CDLCURJFFS) as total from CARDJFLOG where CDLCURJFFS &gt; 0 
+  	AND  CDLCID =  #{cmcustid,jdbcType=VARCHAR} 
+  </select>
+  
+   
+  <select id="selectJFHistoryListByCustId" resultMap="SimpleResultMap"  >
+  	select <include refid="Simple_Column_List" /> from (
+	    select t.*, ROWNUM AS rowno from 
+	        (
+	        select <include refid="Simple_Column_List" /> 
+	        from CARDJFLOG 
+	         where CDLCID = #{cmcustid, jdbcType=VARCHAR} 
+	        order by CDLDATE desc, CDLSEQNO
+	        ) t
+	    )
+	where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER} 
+  </select>
+  
+  
+  
+  <select id="selectJFSubListByCustId" resultMap="SimpleResultMap" >
+	  select 
+	  <include refid="Simple_Column_List" />
+	   from (
+	    select t.*, ROWNUM AS rowno from 
+	        (
+	        select <include refid="Simple_Column_List" /> 
+	        from CARDJFLOG 
+	         where CDLCURJFFS &lt; 0 AND CDLCID = #{cmcustid, jdbcType=VARCHAR} 
+	        order by CDLDATE desc, CDLSEQNO
+	        ) t
+	    )
+	where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER} 
+  </select>
+  
+  <select id="selectJFAddListByCustId" resultMap="SimpleResultMap"  >
+  	select <include refid="Simple_Column_List" /> from (
+	    select t.*, ROWNUM AS rowno from 
+	        (
+	        select <include refid="Simple_Column_List" /> 
+	        from CARDJFLOG 
+	         where CDLCURJFFS &gt; 0 AND CDLCID = #{cmcustid, jdbcType=VARCHAR} 
+	        order by CDLDATE desc, CDLSEQNO
+	        ) t
+	    )
+	where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER} 
+  </select>
+  
+  
+   <select id="selectCurJFYEByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select CDLCURJFYE from 
+  	(
+	select  CDLCURJFYE from CARDJFLOG 
+	where CDLCID = (select CMCUSTID from CUSTMEMBER where CMMOBILE1= #{mobile,jdbcType=VARCHAR} )  
 	order by CDLDATE desc
 	)
 	where rownum=1

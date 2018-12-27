@@ -27,6 +27,10 @@ queryBalancedetailCode=8021
 consumeBalanceCode=8023
 #8025 储值账户记录
 queryBalanceRecordCode=8025
+#80091 会员积分概况查询接口
+queryJFSummaryCode=80091
+#80092 根据类型（增加、扣减、所有）查询会员积分历史列表查询
+queryJFHistoryCode=80092
 
 */
 
@@ -54,8 +58,23 @@ public class CRMInterfaceProperties {
 	private String queryJFBalanceCode;
 	private String userTokenNoNeedCodes;
 	private String newPasswordCode;
+	private String queryJFSummaryCode;
+	private String queryJFHistoryCode;
 	
 	
+	
+	public String getQueryJFHistoryCode() {
+		return queryJFHistoryCode;
+	}
+	public void setQueryJFHistoryCode(String queryJFHistoryCode) {
+		this.queryJFHistoryCode = queryJFHistoryCode;
+	}
+	public String getQueryJFSummaryCode() {
+		return queryJFSummaryCode;
+	}
+	public void setQueryJFSummaryCode(String queryJFSummaryCode) {
+		this.queryJFSummaryCode = queryJFSummaryCode;
+	}
 	public String getNewPasswordCode() {
 		return newPasswordCode;
 	}
