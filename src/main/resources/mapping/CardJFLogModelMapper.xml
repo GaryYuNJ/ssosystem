@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ld.sso.crm.mapper.CardJFLogModelMapper" >
   <resultMap id="BaseResultMap" type="com.ld.sso.crm.domain.CardJFLogModel" >
-    <id column="CDLDATE" property="cdldate" jdbcType="DATE" />
+    <id column="CDLDATE" property="cdldate" jdbcType="TIMESTAMP" />
     <id column="CDLSEQNO" property="cdlseqno" jdbcType="DECIMAL" />
     <result column="CDLTYPE" property="cdltype" jdbcType="VARCHAR" />
     <result column="CDLMKT" property="cdlmkt" jdbcType="VARCHAR" />
@@ -29,10 +29,10 @@
     <result column="CDLCURXFJE" property="cdlcurxfje" jdbcType="DECIMAL" />
     <result column="CDLHISXFJE" property="cdlhisxfje" jdbcType="DECIMAL" />
     <result column="CDLTOTXFJE" property="cdltotxfje" jdbcType="DECIMAL" />
-    <result column="CDLVALIDDATE" property="cdlvaliddate" jdbcType="DATE" />
-    <result column="CDLDATE1" property="cdldate1" jdbcType="DATE" />
-    <result column="CDLDATE2" property="cdldate2" jdbcType="DATE" />
-    <result column="CDLDATE3" property="cdldate3" jdbcType="DATE" />
+    <result column="CDLVALIDDATE" property="cdlvaliddate" jdbcType="TIMESTAMP" />
+    <result column="CDLDATE1" property="cdldate1" jdbcType="TIMESTAMP" />
+    <result column="CDLDATE2" property="cdldate2" jdbcType="TIMESTAMP" />
+    <result column="CDLDATE3" property="cdldate3" jdbcType="TIMESTAMP" />
     <result column="CDLNUM1" property="cdlnum1" jdbcType="DECIMAL" />
     <result column="CDLNUM2" property="cdlnum2" jdbcType="DECIMAL" />
     <result column="CDLNUM3" property="cdlnum3" jdbcType="DECIMAL" />
@@ -65,7 +65,7 @@
   </resultMap>
   
   <resultMap id="SimpleResultMap" type="com.ld.sso.crm.domain.CardJFLogModel" >
-  	<id column="CDLDATE" property="cdldate" jdbcType="DATE" />
+  	<id column="CDLDATE" property="cdldate" jdbcType="TIMESTAMP" />
     <result column="CDLMKT" property="cdlmkt" jdbcType="VARCHAR" />
     <result column="CDLCURJFFS" property="cdlcurjffs" jdbcType="DECIMAL" />
     <result column="CDLCURJFYE" property="cdlcurjfye" jdbcType="DECIMAL" />
@@ -97,12 +97,23 @@
     where CDLDATE = #{cdldate,jdbcType=DATE}
       and CDLSEQNO = #{cdlseqno,jdbcType=DECIMAL}
   </select>
-  
+  <!-- 
   <select id="selectCurJFYEByCustId" resultMap="BaseResultMap" parameterType="java.lang.String" >
   	select CDLCURJFYE from 
   	(
 	select  CDLCURJFYE from CARDJFLOG 
 	where CDLCID =  #{cmcustid,jdbcType=VARCHAR} 
+	order by CDLDATE desc
+	)
+	where rownum=1
+  </select>
+   -->
+  <select id="selectCurJFYEByCustId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select CDLCURJFYE from 
+  	(
+    select  CDLCURJFYE from CARDJFLOG c, 
+        (select CDMCID from CARDMAIN where CDMSTATUS = 'Y' and CDMFLAG != '05' and rownum=1 and CDMCID = #{cmcustid,jdbcType=VARCHAR} ) cdm
+	where c.CDLCID = #{cmcustid,jdbcType=VARCHAR}  and  cdm.CDMCID = c.CDLCID
 	order by CDLDATE desc
 	)
 	where rownum=1

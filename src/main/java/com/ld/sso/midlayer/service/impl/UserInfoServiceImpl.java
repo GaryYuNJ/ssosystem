@@ -1,6 +1,8 @@
 package com.ld.sso.midlayer.service.impl;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +25,12 @@ import com.ld.sso.crm.domain.CRMCustmemberModel;
 import com.ld.sso.crm.domain.CardJFLogModel;
 import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.crm.service.ICRMInterfaceService;
+import com.ld.sso.crm.util.CRMCharacterConverter;
 import com.ld.sso.frontlayer.databean.CommonRequestParam;
 import com.ld.sso.frontlayer.databean.CommonResponseInfo;
 import com.ld.sso.midlayer.databean.CRMCustmemberBasicInfo;
 import com.ld.sso.midlayer.databean.CRMCustmemberFullInfo;
+import com.ld.sso.midlayer.databean.CardJFLogSimpleDataBean;
 import com.ld.sso.midlayer.dataconvert.CustModelToFullInfoConverter;
 import com.ld.sso.midlayer.service.IuserInfoService;
 import com.ld.sso.redis.service.IRedisService;
@@ -307,8 +311,26 @@ public class UserInfoServiceImpl implements IuserInfoService {
 					jfHistoryList = cRMInterfaceService.getJFHistoryListByCustId(basicInfo.getCmcustid(), startRow, pageSize);
 				}
 				
+				CardJFLogSimpleDataBean cardJFLogSimpleDataBean = null;
+				List<CardJFLogSimpleDataBean> cardJFLogSimpleList = new ArrayList<CardJFLogSimpleDataBean>();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				
+				for(CardJFLogModel cardJFLogModel : jfHistoryList){
+					cardJFLogSimpleDataBean = new CardJFLogSimpleDataBean();
+					cardJFLogSimpleDataBean.setCdlcurjffs(cardJFLogModel.getCdlcurjffs());
+					cardJFLogSimpleDataBean.setCdlcurjffsStr(cardJFLogModel.getCdlcurjffs().intValue()>0?("+"+cardJFLogModel.getCdlcurjffs().intValue()):(""+cardJFLogModel.getCdlcurjffs().intValue()));
+					cardJFLogSimpleDataBean.setCdlcurjfye(cardJFLogModel.getCdlcurjfye());
+					cardJFLogSimpleDataBean.setCdldate(cardJFLogModel.getCdldate());
+					
+					cardJFLogSimpleDataBean.setCdldateStr(format.format(cardJFLogModel.getCdldate()));
+					cardJFLogSimpleDataBean.setCdlmemo(null != cardJFLogModel.getCdlmemo() ? CRMCharacterConverter.convert8859P1ToGBK(cardJFLogModel.getCdlmemo()):null);
+					cardJFLogSimpleDataBean.setCdlmkt(cardJFLogModel.getCdlmkt());
+					
+					cardJFLogSimpleList.add(cardJFLogSimpleDataBean);
+				}
+				
 				Map<String,Object> map = new HashMap<String,Object>();
-				map.put("jfHistoryList", jfHistoryList);
+				map.put("jfHistoryList", cardJFLogSimpleList);
 				response.setCode("0");
 				response.setData(map);
 				
