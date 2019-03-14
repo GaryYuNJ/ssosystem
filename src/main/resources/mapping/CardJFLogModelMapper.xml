@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.sso.crm.mapper.CardJFLogModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.sso.crm.domain.CardJFLogModel" >
+    <id column="CDLDATE" property="cdldate" jdbcType="TIMESTAMP" />
+    <id column="CDLSEQNO" property="cdlseqno" jdbcType="DECIMAL" />
+    <result column="CDLTYPE" property="cdltype" jdbcType="VARCHAR" />
+    <result column="CDLMKT" property="cdlmkt" jdbcType="VARCHAR" />
+    <result column="CDLCNO" property="cdlcno" jdbcType="VARCHAR" />
+    <result column="CDLCID" property="cdlcid" jdbcType="VARCHAR" />
+    <result column="CDLCMKT" property="cdlcmkt" jdbcType="VARCHAR" />
+    <result column="CDLMCARD" property="cdlmcard" jdbcType="CHAR" />
+    <result column="CDLFLAG" property="cdlflag" jdbcType="CHAR" />
+    <result column="CDLTRANS" property="cdltrans" jdbcType="CHAR" />
+    <result column="CDLBILLNO" property="cdlbillno" jdbcType="VARCHAR" />
+    <result column="CDLBILLID" property="cdlbillid" jdbcType="CHAR" />
+    <result column="CDLOPERID" property="cdloperid" jdbcType="VARCHAR" />
+    <result column="CDLMEMO" property="cdlmemo" jdbcType="VARCHAR" />
+    <result column="CDLSYJID" property="cdlsyjid" jdbcType="VARCHAR" />
+    <result column="CDLINVNO" property="cdlinvno" jdbcType="VARCHAR" />
+    <result column="CDLTRACE" property="cdltrace" jdbcType="DECIMAL" />
+    <result column="CDLXFJE" property="cdlxfje" jdbcType="DECIMAL" />
+    <result column="CDLZKJE" property="cdlzkje" jdbcType="DECIMAL" />
+    <result column="CDLCURJFFS" property="cdlcurjffs" jdbcType="DECIMAL" />
+    <result column="CDLHISJFFS" property="cdlhisjffs" jdbcType="DECIMAL" />
+    <result column="CDLCURJFYE" property="cdlcurjfye" jdbcType="DECIMAL" />
+    <result column="CDLHISJFYE" property="cdlhisjfye" jdbcType="DECIMAL" />
+    <result column="CDLTOTJFYE" property="cdltotjfye" jdbcType="DECIMAL" />
+    <result column="CDLCURXFJE" property="cdlcurxfje" jdbcType="DECIMAL" />
+    <result column="CDLHISXFJE" property="cdlhisxfje" jdbcType="DECIMAL" />
+    <result column="CDLTOTXFJE" property="cdltotxfje" jdbcType="DECIMAL" />
+    <result column="CDLVALIDDATE" property="cdlvaliddate" jdbcType="TIMESTAMP" />
+    <result column="CDLDATE1" property="cdldate1" jdbcType="TIMESTAMP" />
+    <result column="CDLDATE2" property="cdldate2" jdbcType="TIMESTAMP" />
+    <result column="CDLDATE3" property="cdldate3" jdbcType="TIMESTAMP" />
+    <result column="CDLNUM1" property="cdlnum1" jdbcType="DECIMAL" />
+    <result column="CDLNUM2" property="cdlnum2" jdbcType="DECIMAL" />
+    <result column="CDLNUM3" property="cdlnum3" jdbcType="DECIMAL" />
+    <result column="CDLNUM4" property="cdlnum4" jdbcType="DECIMAL" />
+    <result column="CDLNUM5" property="cdlnum5" jdbcType="DECIMAL" />
+    <result column="CDLNUM6" property="cdlnum6" jdbcType="DECIMAL" />
+    <result column="CDLNUM7" property="cdlnum7" jdbcType="DECIMAL" />
+    <result column="CDLNUM8" property="cdlnum8" jdbcType="DECIMAL" />
+    <result column="CDLNUM9" property="cdlnum9" jdbcType="DECIMAL" />
+    <result column="CDLNUM10" property="cdlnum10" jdbcType="DECIMAL" />
+    <result column="CDLCHR1" property="cdlchr1" jdbcType="VARCHAR" />
+    <result column="CDLCHR2" property="cdlchr2" jdbcType="VARCHAR" />
+    <result column="CDLCHR3" property="cdlchr3" jdbcType="VARCHAR" />
+    <result column="CDLCHR4" property="cdlchr4" jdbcType="VARCHAR" />
+    <result column="CDLCHR5" property="cdlchr5" jdbcType="VARCHAR" />
+    <result column="CDLCHR6" property="cdlchr6" jdbcType="VARCHAR" />
+    <result column="CDLCHR7" property="cdlchr7" jdbcType="VARCHAR" />
+    <result column="CDLCHR8" property="cdlchr8" jdbcType="VARCHAR" />
+    <result column="CDLCHR9" property="cdlchr9" jdbcType="VARCHAR" />
+    <result column="CDLCHR10" property="cdlchr10" jdbcType="VARCHAR" />
+    <result column="CDLMID" property="cdlmid" jdbcType="VARCHAR" />
+    <result column="CDLJFA" property="cdljfa" jdbcType="DECIMAL" />
+    <result column="CDLJFB" property="cdljfb" jdbcType="DECIMAL" />
+    <result column="CDLJFC" property="cdljfc" jdbcType="DECIMAL" />
+    <result column="CDLJFD" property="cdljfd" jdbcType="DECIMAL" />
+    <result column="CDLJFE" property="cdljfe" jdbcType="DECIMAL" />
+    <result column="CDLJFF" property="cdljff" jdbcType="DECIMAL" />
+    <result column="CDLJFHK" property="cdljfhk" jdbcType="DECIMAL" />
+    <result column="CDLYSEQNO" property="cdlyseqno" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <resultMap id="SimpleResultMap" type="com.ld.sso.crm.domain.CardJFLogModel" >
+  	<id column="CDLDATE" property="cdldate" jdbcType="TIMESTAMP" />
+    <result column="CDLMKT" property="cdlmkt" jdbcType="VARCHAR" />
+    <result column="CDLCURJFFS" property="cdlcurjffs" jdbcType="DECIMAL" />
+    <result column="CDLCURJFYE" property="cdlcurjfye" jdbcType="DECIMAL" />
+    <result column="CDLMEMO" property="cdlmemo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+    <resultMap id="resultOfInteger" type="java.math.BigDecimal">  
+       <result column="total" property="total" jdbcType="DECIMAL" />  
+  </resultMap> 
+  
+  <sql id="Base_Column_List" >
+    CDLDATE, CDLSEQNO, CDLTYPE, CDLMKT, CDLCNO, CDLCID, CDLCMKT, CDLMCARD, CDLFLAG, CDLTRANS, 
+    CDLBILLNO, CDLBILLID, CDLOPERID, CDLMEMO, CDLSYJID, CDLINVNO, CDLTRACE, CDLXFJE, 
+    CDLZKJE, CDLCURJFFS, CDLHISJFFS, CDLCURJFYE, CDLHISJFYE, CDLTOTJFYE, CDLCURXFJE, 
+    CDLHISXFJE, CDLTOTXFJE, CDLVALIDDATE, CDLDATE1, CDLDATE2, CDLDATE3, CDLNUM1, CDLNUM2, 
+    CDLNUM3, CDLNUM4, CDLNUM5, CDLNUM6, CDLNUM7, CDLNUM8, CDLNUM9, CDLNUM10, CDLCHR1, 
+    CDLCHR2, CDLCHR3, CDLCHR4, CDLCHR5, CDLCHR6, CDLCHR7, CDLCHR8, CDLCHR9, CDLCHR10, 
+    CDLMID, CDLJFA, CDLJFB, CDLJFC, CDLJFD, CDLJFE, CDLJFF, CDLJFHK, CDLYSEQNO
+  </sql>
+  
+  <sql id="Simple_Column_List" >
+  	CDLMKT,CDLCURJFFS, CDLDATE,CDLCURJFYE,CDLMEMO
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ld.sso.crm.domain.CardJFLogModelKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from CARDJFLOG
+    where CDLDATE = #{cdldate,jdbcType=DATE}
+      and CDLSEQNO = #{cdlseqno,jdbcType=DECIMAL}
+  </select>
+  <!-- 
+  <select id="selectCurJFYEByCustId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select CDLCURJFYE from 
+  	(
+	select  CDLCURJFYE from CARDJFLOG 
+	where CDLCID =  #{cmcustid,jdbcType=VARCHAR} 
+	order by CDLDATE desc
+	)
+	where rownum=1
+  </select>
+   -->
+  <select id="selectCurJFYEByCustId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select CDLCURJFYE from 
+  	(
+    select  CDLCURJFYE from CARDJFLOG c, 
+        (select CDMCID from CARDMAIN where CDMSTATUS = 'Y' and CDMFLAG != '05' and rownum=1 and CDMCID = #{cmcustid,jdbcType=VARCHAR} ) cdm
+	where c.CDLCID = #{cmcustid,jdbcType=VARCHAR}  and  cdm.CDMCID = c.CDLCID
+	order by CDLDATE desc
+	)
+	where rownum=1
+  </select>
+  
+  <select id="selectJFSubTotalByCustId" resultMap="resultOfInteger" parameterType="java.lang.String" >
+  	select SUM(CDLCURJFFS) as total from CARDJFLOG where CDLCURJFFS &lt; 0 
+  	AND  CDLCID =  #{cmcustid,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="selectJFAddTotalByCustId" resultMap="resultOfInteger" parameterType="java.lang.String" >
+  	select SUM(CDLCURJFFS) as total from CARDJFLOG where CDLCURJFFS &gt; 0 
+  	AND  CDLCID =  #{cmcustid,jdbcType=VARCHAR} 
+  </select>
+  
+   
+  <select id="selectJFHistoryListByCustId" resultMap="SimpleResultMap"  >
+  	select <include refid="Simple_Column_List" /> from (
+	    select t.*, ROWNUM AS rowno from 
+	        (
+	        select <include refid="Simple_Column_List" /> 
+	        from CARDJFLOG 
+	         where CDLCID = #{cmcustid, jdbcType=VARCHAR} 
+	        order by CDLDATE desc, CDLSEQNO
+	        ) t
+	    )
+	where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER} 
+  </select>
+  
+  
+  
+  <select id="selectJFSubListByCustId" resultMap="SimpleResultMap" >
+	  select 
+	  <include refid="Simple_Column_List" />
+	   from (
+	    select t.*, ROWNUM AS rowno from 
+	        (
+	        select <include refid="Simple_Column_List" /> 
+	        from CARDJFLOG 
+	         where CDLCURJFFS &lt; 0 AND CDLCID = #{cmcustid, jdbcType=VARCHAR} 
+	        order by CDLDATE desc, CDLSEQNO
+	        ) t
+	    )
+	where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER} 
+  </select>
+  
+  <select id="selectJFAddListByCustId" resultMap="SimpleResultMap"  >
+  	select <include refid="Simple_Column_List" /> from (
+	    select t.*, ROWNUM AS rowno from 
+	        (
+	        select <include refid="Simple_Column_List" /> 
+	        from CARDJFLOG 
+	         where CDLCURJFFS &gt; 0 AND CDLCID = #{cmcustid, jdbcType=VARCHAR} 
+	        order by CDLDATE desc, CDLSEQNO
+	        ) t
+	    )
+	where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER} 
+  </select>
+  
+  
+   <select id="selectCurJFYEByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select CDLCURJFYE from 
+  	(
+	select  CDLCURJFYE from CARDJFLOG 
+	where CDLCID = (select CMCUSTID from CUSTMEMBER where CMMOBILE1= #{mobile,jdbcType=VARCHAR} )  
+	order by CDLDATE desc
+	)
+	where rownum=1
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.ld.sso.crm.domain.CardJFLogModelKey" >
+    delete from CARDJFLOG
+    where CDLDATE = #{cdldate,jdbcType=DATE}
+      and CDLSEQNO = #{cdlseqno,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ld.sso.crm.domain.CardJFLogModel" >
+    insert into CARDJFLOG (CDLDATE, CDLSEQNO, CDLTYPE, 
+      CDLMKT, CDLCNO, CDLCID, 
+      CDLCMKT, CDLMCARD, CDLFLAG, 
+      CDLTRANS, CDLBILLNO, CDLBILLID, 
+      CDLOPERID, CDLMEMO, CDLSYJID, 
+      CDLINVNO, CDLTRACE, CDLXFJE, 
+      CDLZKJE, CDLCURJFFS, CDLHISJFFS, 
+      CDLCURJFYE, CDLHISJFYE, CDLTOTJFYE, 
+      CDLCURXFJE, CDLHISXFJE, CDLTOTXFJE, 
+      CDLVALIDDATE, CDLDATE1, CDLDATE2, 
+      CDLDATE3, CDLNUM1, CDLNUM2, 
+      CDLNUM3, CDLNUM4, CDLNUM5, 
+      CDLNUM6, CDLNUM7, CDLNUM8, 
+      CDLNUM9, CDLNUM10, CDLCHR1, 
+      CDLCHR2, CDLCHR3, CDLCHR4, 
+      CDLCHR5, CDLCHR6, CDLCHR7, 
+      CDLCHR8, CDLCHR9, CDLCHR10, 
+      CDLMID, CDLJFA, CDLJFB, 
+      CDLJFC, CDLJFD, CDLJFE, 
+      CDLJFF, CDLJFHK, CDLYSEQNO
+      )
+    values (#{cdldate,jdbcType=DATE}, #{cdlseqno,jdbcType=DECIMAL}, #{cdltype,jdbcType=VARCHAR}, 
+      #{cdlmkt,jdbcType=VARCHAR}, #{cdlcno,jdbcType=VARCHAR}, #{cdlcid,jdbcType=VARCHAR}, 
+      #{cdlcmkt,jdbcType=VARCHAR}, #{cdlmcard,jdbcType=CHAR}, #{cdlflag,jdbcType=CHAR}, 
+      #{cdltrans,jdbcType=CHAR}, #{cdlbillno,jdbcType=VARCHAR}, #{cdlbillid,jdbcType=CHAR}, 
+      #{cdloperid,jdbcType=VARCHAR}, #{cdlmemo,jdbcType=VARCHAR}, #{cdlsyjid,jdbcType=VARCHAR}, 
+      #{cdlinvno,jdbcType=VARCHAR}, #{cdltrace,jdbcType=DECIMAL}, #{cdlxfje,jdbcType=DECIMAL}, 
+      #{cdlzkje,jdbcType=DECIMAL}, #{cdlcurjffs,jdbcType=DECIMAL}, #{cdlhisjffs,jdbcType=DECIMAL}, 
+      #{cdlcurjfye,jdbcType=DECIMAL}, #{cdlhisjfye,jdbcType=DECIMAL}, #{cdltotjfye,jdbcType=DECIMAL}, 
+      #{cdlcurxfje,jdbcType=DECIMAL}, #{cdlhisxfje,jdbcType=DECIMAL}, #{cdltotxfje,jdbcType=DECIMAL}, 
+      #{cdlvaliddate,jdbcType=DATE}, #{cdldate1,jdbcType=DATE}, #{cdldate2,jdbcType=DATE}, 
+      #{cdldate3,jdbcType=DATE}, #{cdlnum1,jdbcType=DECIMAL}, #{cdlnum2,jdbcType=DECIMAL}, 
+      #{cdlnum3,jdbcType=DECIMAL}, #{cdlnum4,jdbcType=DECIMAL}, #{cdlnum5,jdbcType=DECIMAL}, 
+      #{cdlnum6,jdbcType=DECIMAL}, #{cdlnum7,jdbcType=DECIMAL}, #{cdlnum8,jdbcType=DECIMAL}, 
+      #{cdlnum9,jdbcType=DECIMAL}, #{cdlnum10,jdbcType=DECIMAL}, #{cdlchr1,jdbcType=VARCHAR}, 
+      #{cdlchr2,jdbcType=VARCHAR}, #{cdlchr3,jdbcType=VARCHAR}, #{cdlchr4,jdbcType=VARCHAR}, 
+      #{cdlchr5,jdbcType=VARCHAR}, #{cdlchr6,jdbcType=VARCHAR}, #{cdlchr7,jdbcType=VARCHAR}, 
+      #{cdlchr8,jdbcType=VARCHAR}, #{cdlchr9,jdbcType=VARCHAR}, #{cdlchr10,jdbcType=VARCHAR}, 
+      #{cdlmid,jdbcType=VARCHAR}, #{cdljfa,jdbcType=DECIMAL}, #{cdljfb,jdbcType=DECIMAL}, 
+      #{cdljfc,jdbcType=DECIMAL}, #{cdljfd,jdbcType=DECIMAL}, #{cdljfe,jdbcType=DECIMAL}, 
+      #{cdljff,jdbcType=DECIMAL}, #{cdljfhk,jdbcType=DECIMAL}, #{cdlyseqno,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.sso.crm.domain.CardJFLogModel" >
+    insert into CARDJFLOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cdldate != null" >
+        CDLDATE,
+      </if>
+      <if test="cdlseqno != null" >
+        CDLSEQNO,
+      </if>
+      <if test="cdltype != null" >
+        CDLTYPE,
+      </if>
+      <if test="cdlmkt != null" >
+        CDLMKT,
+      </if>
+      <if test="cdlcno != null" >
+        CDLCNO,
+      </if>
+      <if test="cdlcid != null" >
+        CDLCID,
+      </if>
+      <if test="cdlcmkt != null" >
+        CDLCMKT,
+      </if>
+      <if test="cdlmcard != null" >
+        CDLMCARD,
+      </if>
+      <if test="cdlflag != null" >
+        CDLFLAG,
+      </if>
+      <if test="cdltrans != null" >
+        CDLTRANS,
+      </if>
+      <if test="cdlbillno != null" >
+        CDLBILLNO,
+      </if>
+      <if test="cdlbillid != null" >
+        CDLBILLID,
+      </if>
+      <if test="cdloperid != null" >
+        CDLOPERID,
+      </if>
+      <if test="cdlmemo != null" >
+        CDLMEMO,
+      </if>
+      <if test="cdlsyjid != null" >
+        CDLSYJID,
+      </if>
+      <if test="cdlinvno != null" >
+        CDLINVNO,
+      </if>
+      <if test="cdltrace != null" >
+        CDLTRACE,
+      </if>
+      <if test="cdlxfje != null" >
+        CDLXFJE,
+      </if>
+      <if test="cdlzkje != null" >
+        CDLZKJE,
+      </if>
+      <if test="cdlcurjffs != null" >
+        CDLCURJFFS,
+      </if>
+      <if test="cdlhisjffs != null" >
+        CDLHISJFFS,
+      </if>
+      <if test="cdlcurjfye != null" >
+        CDLCURJFYE,
+      </if>
+      <if test="cdlhisjfye != null" >
+        CDLHISJFYE,
+      </if>
+      <if test="cdltotjfye != null" >
+        CDLTOTJFYE,
+      </if>
+      <if test="cdlcurxfje != null" >
+        CDLCURXFJE,
+      </if>
+      <if test="cdlhisxfje != null" >
+        CDLHISXFJE,
+      </if>
+      <if test="cdltotxfje != null" >
+        CDLTOTXFJE,
+      </if>
+      <if test="cdlvaliddate != null" >
+        CDLVALIDDATE,
+      </if>
+      <if test="cdldate1 != null" >
+        CDLDATE1,
+      </if>
+      <if test="cdldate2 != null" >
+        CDLDATE2,
+      </if>
+      <if test="cdldate3 != null" >
+        CDLDATE3,
+      </if>
+      <if test="cdlnum1 != null" >
+        CDLNUM1,
+      </if>
+      <if test="cdlnum2 != null" >
+        CDLNUM2,
+      </if>
+      <if test="cdlnum3 != null" >
+        CDLNUM3,
+      </if>
+      <if test="cdlnum4 != null" >
+        CDLNUM4,
+      </if>
+      <if test="cdlnum5 != null" >
+        CDLNUM5,
+      </if>
+      <if test="cdlnum6 != null" >
+        CDLNUM6,
+      </if>
+      <if test="cdlnum7 != null" >
+        CDLNUM7,
+      </if>
+      <if test="cdlnum8 != null" >
+        CDLNUM8,
+      </if>
+      <if test="cdlnum9 != null" >
+        CDLNUM9,
+      </if>
+      <if test="cdlnum10 != null" >
+        CDLNUM10,
+      </if>
+      <if test="cdlchr1 != null" >
+        CDLCHR1,
+      </if>
+      <if test="cdlchr2 != null" >
+        CDLCHR2,
+      </if>
+      <if test="cdlchr3 != null" >
+        CDLCHR3,
+      </if>
+      <if test="cdlchr4 != null" >
+        CDLCHR4,
+      </if>
+      <if test="cdlchr5 != null" >
+        CDLCHR5,
+      </if>
+      <if test="cdlchr6 != null" >
+        CDLCHR6,
+      </if>
+      <if test="cdlchr7 != null" >
+        CDLCHR7,
+      </if>
+      <if test="cdlchr8 != null" >
+        CDLCHR8,
+      </if>
+      <if test="cdlchr9 != null" >
+        CDLCHR9,
+      </if>
+      <if test="cdlchr10 != null" >
+        CDLCHR10,
+      </if>
+      <if test="cdlmid != null" >
+        CDLMID,
+      </if>
+      <if test="cdljfa != null" >
+        CDLJFA,
+      </if>
+      <if test="cdljfb != null" >
+        CDLJFB,
+      </if>
+      <if test="cdljfc != null" >
+        CDLJFC,
+      </if>
+      <if test="cdljfd != null" >
+        CDLJFD,
+      </if>
+      <if test="cdljfe != null" >
+        CDLJFE,
+      </if>
+      <if test="cdljff != null" >
+        CDLJFF,
+      </if>
+      <if test="cdljfhk != null" >
+        CDLJFHK,
+      </if>
+      <if test="cdlyseqno != null" >
+        CDLYSEQNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cdldate != null" >
+        #{cdldate,jdbcType=DATE},
+      </if>
+      <if test="cdlseqno != null" >
+        #{cdlseqno,jdbcType=DECIMAL},
+      </if>
+      <if test="cdltype != null" >
+        #{cdltype,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmkt != null" >
+        #{cdlmkt,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlcno != null" >
+        #{cdlcno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlcid != null" >
+        #{cdlcid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlcmkt != null" >
+        #{cdlcmkt,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmcard != null" >
+        #{cdlmcard,jdbcType=CHAR},
+      </if>
+      <if test="cdlflag != null" >
+        #{cdlflag,jdbcType=CHAR},
+      </if>
+      <if test="cdltrans != null" >
+        #{cdltrans,jdbcType=CHAR},
+      </if>
+      <if test="cdlbillno != null" >
+        #{cdlbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlbillid != null" >
+        #{cdlbillid,jdbcType=CHAR},
+      </if>
+      <if test="cdloperid != null" >
+        #{cdloperid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmemo != null" >
+        #{cdlmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlsyjid != null" >
+        #{cdlsyjid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlinvno != null" >
+        #{cdlinvno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdltrace != null" >
+        #{cdltrace,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlxfje != null" >
+        #{cdlxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlzkje != null" >
+        #{cdlzkje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlcurjffs != null" >
+        #{cdlcurjffs,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlhisjffs != null" >
+        #{cdlhisjffs,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlcurjfye != null" >
+        #{cdlcurjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlhisjfye != null" >
+        #{cdlhisjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="cdltotjfye != null" >
+        #{cdltotjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlcurxfje != null" >
+        #{cdlcurxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlhisxfje != null" >
+        #{cdlhisxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdltotxfje != null" >
+        #{cdltotxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlvaliddate != null" >
+        #{cdlvaliddate,jdbcType=DATE},
+      </if>
+      <if test="cdldate1 != null" >
+        #{cdldate1,jdbcType=DATE},
+      </if>
+      <if test="cdldate2 != null" >
+        #{cdldate2,jdbcType=DATE},
+      </if>
+      <if test="cdldate3 != null" >
+        #{cdldate3,jdbcType=DATE},
+      </if>
+      <if test="cdlnum1 != null" >
+        #{cdlnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum2 != null" >
+        #{cdlnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum3 != null" >
+        #{cdlnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum4 != null" >
+        #{cdlnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum5 != null" >
+        #{cdlnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum6 != null" >
+        #{cdlnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum7 != null" >
+        #{cdlnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum8 != null" >
+        #{cdlnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum9 != null" >
+        #{cdlnum9,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum10 != null" >
+        #{cdlnum10,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlchr1 != null" >
+        #{cdlchr1,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr2 != null" >
+        #{cdlchr2,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr3 != null" >
+        #{cdlchr3,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr4 != null" >
+        #{cdlchr4,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr5 != null" >
+        #{cdlchr5,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr6 != null" >
+        #{cdlchr6,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr7 != null" >
+        #{cdlchr7,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr8 != null" >
+        #{cdlchr8,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr9 != null" >
+        #{cdlchr9,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr10 != null" >
+        #{cdlchr10,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmid != null" >
+        #{cdlmid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdljfa != null" >
+        #{cdljfa,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfb != null" >
+        #{cdljfb,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfc != null" >
+        #{cdljfc,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfd != null" >
+        #{cdljfd,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfe != null" >
+        #{cdljfe,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljff != null" >
+        #{cdljff,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfhk != null" >
+        #{cdljfhk,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlyseqno != null" >
+        #{cdlyseqno,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.sso.crm.domain.CardJFLogModel" >
+    update CARDJFLOG
+    <set >
+      <if test="cdltype != null" >
+        CDLTYPE = #{cdltype,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmkt != null" >
+        CDLMKT = #{cdlmkt,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlcno != null" >
+        CDLCNO = #{cdlcno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlcid != null" >
+        CDLCID = #{cdlcid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlcmkt != null" >
+        CDLCMKT = #{cdlcmkt,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmcard != null" >
+        CDLMCARD = #{cdlmcard,jdbcType=CHAR},
+      </if>
+      <if test="cdlflag != null" >
+        CDLFLAG = #{cdlflag,jdbcType=CHAR},
+      </if>
+      <if test="cdltrans != null" >
+        CDLTRANS = #{cdltrans,jdbcType=CHAR},
+      </if>
+      <if test="cdlbillno != null" >
+        CDLBILLNO = #{cdlbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlbillid != null" >
+        CDLBILLID = #{cdlbillid,jdbcType=CHAR},
+      </if>
+      <if test="cdloperid != null" >
+        CDLOPERID = #{cdloperid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmemo != null" >
+        CDLMEMO = #{cdlmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlsyjid != null" >
+        CDLSYJID = #{cdlsyjid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlinvno != null" >
+        CDLINVNO = #{cdlinvno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdltrace != null" >
+        CDLTRACE = #{cdltrace,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlxfje != null" >
+        CDLXFJE = #{cdlxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlzkje != null" >
+        CDLZKJE = #{cdlzkje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlcurjffs != null" >
+        CDLCURJFFS = #{cdlcurjffs,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlhisjffs != null" >
+        CDLHISJFFS = #{cdlhisjffs,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlcurjfye != null" >
+        CDLCURJFYE = #{cdlcurjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlhisjfye != null" >
+        CDLHISJFYE = #{cdlhisjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="cdltotjfye != null" >
+        CDLTOTJFYE = #{cdltotjfye,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlcurxfje != null" >
+        CDLCURXFJE = #{cdlcurxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlhisxfje != null" >
+        CDLHISXFJE = #{cdlhisxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdltotxfje != null" >
+        CDLTOTXFJE = #{cdltotxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlvaliddate != null" >
+        CDLVALIDDATE = #{cdlvaliddate,jdbcType=DATE},
+      </if>
+      <if test="cdldate1 != null" >
+        CDLDATE1 = #{cdldate1,jdbcType=DATE},
+      </if>
+      <if test="cdldate2 != null" >
+        CDLDATE2 = #{cdldate2,jdbcType=DATE},
+      </if>
+      <if test="cdldate3 != null" >
+        CDLDATE3 = #{cdldate3,jdbcType=DATE},
+      </if>
+      <if test="cdlnum1 != null" >
+        CDLNUM1 = #{cdlnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum2 != null" >
+        CDLNUM2 = #{cdlnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum3 != null" >
+        CDLNUM3 = #{cdlnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum4 != null" >
+        CDLNUM4 = #{cdlnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum5 != null" >
+        CDLNUM5 = #{cdlnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum6 != null" >
+        CDLNUM6 = #{cdlnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum7 != null" >
+        CDLNUM7 = #{cdlnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum8 != null" >
+        CDLNUM8 = #{cdlnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum9 != null" >
+        CDLNUM9 = #{cdlnum9,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlnum10 != null" >
+        CDLNUM10 = #{cdlnum10,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlchr1 != null" >
+        CDLCHR1 = #{cdlchr1,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr2 != null" >
+        CDLCHR2 = #{cdlchr2,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr3 != null" >
+        CDLCHR3 = #{cdlchr3,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr4 != null" >
+        CDLCHR4 = #{cdlchr4,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr5 != null" >
+        CDLCHR5 = #{cdlchr5,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr6 != null" >
+        CDLCHR6 = #{cdlchr6,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr7 != null" >
+        CDLCHR7 = #{cdlchr7,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr8 != null" >
+        CDLCHR8 = #{cdlchr8,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr9 != null" >
+        CDLCHR9 = #{cdlchr9,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlchr10 != null" >
+        CDLCHR10 = #{cdlchr10,jdbcType=VARCHAR},
+      </if>
+      <if test="cdlmid != null" >
+        CDLMID = #{cdlmid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdljfa != null" >
+        CDLJFA = #{cdljfa,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfb != null" >
+        CDLJFB = #{cdljfb,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfc != null" >
+        CDLJFC = #{cdljfc,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfd != null" >
+        CDLJFD = #{cdljfd,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfe != null" >
+        CDLJFE = #{cdljfe,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljff != null" >
+        CDLJFF = #{cdljff,jdbcType=DECIMAL},
+      </if>
+      <if test="cdljfhk != null" >
+        CDLJFHK = #{cdljfhk,jdbcType=DECIMAL},
+      </if>
+      <if test="cdlyseqno != null" >
+        CDLYSEQNO = #{cdlyseqno,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CDLDATE = #{cdldate,jdbcType=DATE}
+      and CDLSEQNO = #{cdlseqno,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.sso.crm.domain.CardJFLogModel" >
+    update CARDJFLOG
+    set CDLTYPE = #{cdltype,jdbcType=VARCHAR},
+      CDLMKT = #{cdlmkt,jdbcType=VARCHAR},
+      CDLCNO = #{cdlcno,jdbcType=VARCHAR},
+      CDLCID = #{cdlcid,jdbcType=VARCHAR},
+      CDLCMKT = #{cdlcmkt,jdbcType=VARCHAR},
+      CDLMCARD = #{cdlmcard,jdbcType=CHAR},
+      CDLFLAG = #{cdlflag,jdbcType=CHAR},
+      CDLTRANS = #{cdltrans,jdbcType=CHAR},
+      CDLBILLNO = #{cdlbillno,jdbcType=VARCHAR},
+      CDLBILLID = #{cdlbillid,jdbcType=CHAR},
+      CDLOPERID = #{cdloperid,jdbcType=VARCHAR},
+      CDLMEMO = #{cdlmemo,jdbcType=VARCHAR},
+      CDLSYJID = #{cdlsyjid,jdbcType=VARCHAR},
+      CDLINVNO = #{cdlinvno,jdbcType=VARCHAR},
+      CDLTRACE = #{cdltrace,jdbcType=DECIMAL},
+      CDLXFJE = #{cdlxfje,jdbcType=DECIMAL},
+      CDLZKJE = #{cdlzkje,jdbcType=DECIMAL},
+      CDLCURJFFS = #{cdlcurjffs,jdbcType=DECIMAL},
+      CDLHISJFFS = #{cdlhisjffs,jdbcType=DECIMAL},
+      CDLCURJFYE = #{cdlcurjfye,jdbcType=DECIMAL},
+      CDLHISJFYE = #{cdlhisjfye,jdbcType=DECIMAL},
+      CDLTOTJFYE = #{cdltotjfye,jdbcType=DECIMAL},
+      CDLCURXFJE = #{cdlcurxfje,jdbcType=DECIMAL},
+      CDLHISXFJE = #{cdlhisxfje,jdbcType=DECIMAL},
+      CDLTOTXFJE = #{cdltotxfje,jdbcType=DECIMAL},
+      CDLVALIDDATE = #{cdlvaliddate,jdbcType=DATE},
+      CDLDATE1 = #{cdldate1,jdbcType=DATE},
+      CDLDATE2 = #{cdldate2,jdbcType=DATE},
+      CDLDATE3 = #{cdldate3,jdbcType=DATE},
+      CDLNUM1 = #{cdlnum1,jdbcType=DECIMAL},
+      CDLNUM2 = #{cdlnum2,jdbcType=DECIMAL},
+      CDLNUM3 = #{cdlnum3,jdbcType=DECIMAL},
+      CDLNUM4 = #{cdlnum4,jdbcType=DECIMAL},
+      CDLNUM5 = #{cdlnum5,jdbcType=DECIMAL},
+      CDLNUM6 = #{cdlnum6,jdbcType=DECIMAL},
+      CDLNUM7 = #{cdlnum7,jdbcType=DECIMAL},
+      CDLNUM8 = #{cdlnum8,jdbcType=DECIMAL},
+      CDLNUM9 = #{cdlnum9,jdbcType=DECIMAL},
+      CDLNUM10 = #{cdlnum10,jdbcType=DECIMAL},
+      CDLCHR1 = #{cdlchr1,jdbcType=VARCHAR},
+      CDLCHR2 = #{cdlchr2,jdbcType=VARCHAR},
+      CDLCHR3 = #{cdlchr3,jdbcType=VARCHAR},
+      CDLCHR4 = #{cdlchr4,jdbcType=VARCHAR},
+      CDLCHR5 = #{cdlchr5,jdbcType=VARCHAR},
+      CDLCHR6 = #{cdlchr6,jdbcType=VARCHAR},
+      CDLCHR7 = #{cdlchr7,jdbcType=VARCHAR},
+      CDLCHR8 = #{cdlchr8,jdbcType=VARCHAR},
+      CDLCHR9 = #{cdlchr9,jdbcType=VARCHAR},
+      CDLCHR10 = #{cdlchr10,jdbcType=VARCHAR},
+      CDLMID = #{cdlmid,jdbcType=VARCHAR},
+      CDLJFA = #{cdljfa,jdbcType=DECIMAL},
+      CDLJFB = #{cdljfb,jdbcType=DECIMAL},
+      CDLJFC = #{cdljfc,jdbcType=DECIMAL},
+      CDLJFD = #{cdljfd,jdbcType=DECIMAL},
+      CDLJFE = #{cdljfe,jdbcType=DECIMAL},
+      CDLJFF = #{cdljff,jdbcType=DECIMAL},
+      CDLJFHK = #{cdljfhk,jdbcType=DECIMAL},
+      CDLYSEQNO = #{cdlyseqno,jdbcType=DECIMAL}
+    where CDLDATE = #{cdldate,jdbcType=DATE}
+      and CDLSEQNO = #{cdlseqno,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.sso.crm.mapper.CardmainModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.sso.crm.domain.CardmainModel" >
+    <id column="CDMNO" property="cdmno" jdbcType="VARCHAR" />
+    <result column="CDMMKT" property="cdmmkt" jdbcType="VARCHAR" />
+    <result column="CDMTYPE" property="cdmtype" jdbcType="VARCHAR" />
+    <result column="CDMSTATUS" property="cdmstatus" jdbcType="CHAR" />
+    <result column="CDMFLAG" property="cdmflag" jdbcType="CHAR" />
+    <result column="CDMPWD" property="cdmpwd" jdbcType="VARCHAR" />
+    <result column="CDMCID" property="cdmcid" jdbcType="VARCHAR" />
+    <result column="CDMMCARD" property="cdmmcard" jdbcType="CHAR" />
+    <result column="CDMMINDATE" property="cdmmindate" jdbcType="DATE" />
+    <result column="CDMMAXDATE" property="cdmmaxdate" jdbcType="DATE" />
+    <result column="CDMNAME" property="cdmname" jdbcType="VARCHAR" />
+    <result column="CDMJF" property="cdmjf" jdbcType="DECIMAL" />
+    <result column="CDMXFJE" property="cdmxfje" jdbcType="DECIMAL" />
+    <result column="CDMZHYE1" property="cdmzhye1" jdbcType="DECIMAL" />
+    <result column="CDMZHYE2" property="cdmzhye2" jdbcType="DECIMAL" />
+    <result column="CDMZHYE3" property="cdmzhye3" jdbcType="DECIMAL" />
+    <result column="CDMZHYE4" property="cdmzhye4" jdbcType="DECIMAL" />
+    <result column="CDMZHYE5" property="cdmzhye5" jdbcType="DECIMAL" />
+    <result column="CDMDATE1" property="cdmdate1" jdbcType="DATE" />
+    <result column="CDMDATE2" property="cdmdate2" jdbcType="DATE" />
+    <result column="CDMDATE3" property="cdmdate3" jdbcType="DATE" />
+    <result column="CDMDATE4" property="cdmdate4" jdbcType="DATE" />
+    <result column="CDMDATE5" property="cdmdate5" jdbcType="DATE" />
+    <result column="CDMMAINNO" property="cdmmainno" jdbcType="VARCHAR" />
+    <result column="CDMCHR1" property="cdmchr1" jdbcType="VARCHAR" />
+    <result column="CDMCHR2" property="cdmchr2" jdbcType="VARCHAR" />
+    <result column="CDMCHR3" property="cdmchr3" jdbcType="VARCHAR" />
+    <result column="CDMCHR4" property="cdmchr4" jdbcType="VARCHAR" />
+    <result column="CDMCHR5" property="cdmchr5" jdbcType="VARCHAR" />
+    <result column="CDMCHR6" property="cdmchr6" jdbcType="VARCHAR" />
+    <result column="CDMCHR7" property="cdmchr7" jdbcType="VARCHAR" />
+    <result column="CDMCHR8" property="cdmchr8" jdbcType="VARCHAR" />
+    <result column="CDMNUM1" property="cdmnum1" jdbcType="DECIMAL" />
+    <result column="CDMNUM2" property="cdmnum2" jdbcType="DECIMAL" />
+    <result column="CDMNUM3" property="cdmnum3" jdbcType="DECIMAL" />
+    <result column="CDMNUM4" property="cdmnum4" jdbcType="DECIMAL" />
+    <result column="CDMNUM5" property="cdmnum5" jdbcType="DECIMAL" />
+    <result column="CDMNUM6" property="cdmnum6" jdbcType="DECIMAL" />
+    <result column="CDMNUM7" property="cdmnum7" jdbcType="DECIMAL" />
+    <result column="CDMNUM8" property="cdmnum8" jdbcType="DECIMAL" />
+    <result column="CDMOWNER" property="cdmowner" jdbcType="VARCHAR" />
+    <result column="CDMMODE" property="cdmmode" jdbcType="CHAR" />
+    <result column="CDMISSUER" property="cdmissuer" jdbcType="CHAR" />
+    <result column="CDMBANK" property="cdmbank" jdbcType="VARCHAR" />
+    <result column="CDMBANKGRADE" property="cdmbankgrade" jdbcType="CHAR" />
+    <result column="CDMPREDECJF" property="cdmpredecjf" jdbcType="DECIMAL" />
+    <result column="CDMPARTNER" property="cdmpartner" jdbcType="VARCHAR" />
+    <result column="CDMPARTNERNO" property="cdmpartnerno" jdbcType="VARCHAR" />
+    <result column="CDMMEMO" property="cdmmemo" jdbcType="VARCHAR" />
+    <result column="CDMSEQNO" property="cdmseqno" jdbcType="DECIMAL" />
+    <result column="CDMFLAG1" property="cdmflag1" jdbcType="CHAR" />
+    <result column="CDMFLAG2" property="cdmflag2" jdbcType="CHAR" />
+    <result column="CDMFLAG3" property="cdmflag3" jdbcType="CHAR" />
+    <result column="CDMFLAG4" property="cdmflag4" jdbcType="CHAR" />
+    <result column="CDMFLAG5" property="cdmflag5" jdbcType="CHAR" />
+    <result column="CDMUSE" property="cdmuse" jdbcType="CHAR" />
+    <result column="CDMLINKNO" property="cdmlinkno" jdbcType="VARCHAR" />
+    <result column="CDMTEMPPOINT" property="cdmtemppoint" jdbcType="DECIMAL" />
+    <result column="CDMKEEPER" property="cdmkeeper" jdbcType="VARCHAR" />
+    <result column="CDMTYPE1" property="cdmtype1" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CDMNO, CDMMKT, CDMTYPE, CDMSTATUS, CDMFLAG, CDMPWD, CDMCID, CDMMCARD, CDMMINDATE, 
+    CDMMAXDATE, CDMNAME, CDMJF, CDMXFJE, CDMZHYE1, CDMZHYE2, CDMZHYE3, CDMZHYE4, CDMZHYE5, 
+    CDMDATE1, CDMDATE2, CDMDATE3, CDMDATE4, CDMDATE5, CDMMAINNO, CDMCHR1, CDMCHR2, CDMCHR3, 
+    CDMCHR4, CDMCHR5, CDMCHR6, CDMCHR7, CDMCHR8, CDMNUM1, CDMNUM2, CDMNUM3, CDMNUM4, 
+    CDMNUM5, CDMNUM6, CDMNUM7, CDMNUM8, CDMOWNER, CDMMODE, CDMISSUER, CDMBANK, CDMBANKGRADE, 
+    CDMPREDECJF, CDMPARTNER, CDMPARTNERNO, CDMMEMO, CDMSEQNO, CDMFLAG1, CDMFLAG2, CDMFLAG3, 
+    CDMFLAG4, CDMFLAG5, CDMUSE, CDMLINKNO, CDMTEMPPOINT, CDMKEEPER, CDMTYPE1
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CARDMAIN
+    where CDMNO = #{cdmno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CARDMAIN
+    where CDMNO = #{cdmno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ld.sso.crm.domain.CardmainModel" >
+    insert into CARDMAIN (CDMNO, CDMMKT, CDMTYPE, 
+      CDMSTATUS, CDMFLAG, CDMPWD, 
+      CDMCID, CDMMCARD, CDMMINDATE, 
+      CDMMAXDATE, CDMNAME, CDMJF, 
+      CDMXFJE, CDMZHYE1, CDMZHYE2, 
+      CDMZHYE3, CDMZHYE4, CDMZHYE5, 
+      CDMDATE1, CDMDATE2, CDMDATE3, 
+      CDMDATE4, CDMDATE5, CDMMAINNO, 
+      CDMCHR1, CDMCHR2, CDMCHR3, 
+      CDMCHR4, CDMCHR5, CDMCHR6, 
+      CDMCHR7, CDMCHR8, CDMNUM1, 
+      CDMNUM2, CDMNUM3, CDMNUM4, 
+      CDMNUM5, CDMNUM6, CDMNUM7, 
+      CDMNUM8, CDMOWNER, CDMMODE, 
+      CDMISSUER, CDMBANK, CDMBANKGRADE, 
+      CDMPREDECJF, CDMPARTNER, CDMPARTNERNO, 
+      CDMMEMO, CDMSEQNO, CDMFLAG1, 
+      CDMFLAG2, CDMFLAG3, CDMFLAG4, 
+      CDMFLAG5, CDMUSE, CDMLINKNO, 
+      CDMTEMPPOINT, CDMKEEPER, CDMTYPE1
+      )
+    values (#{cdmno,jdbcType=VARCHAR}, #{cdmmkt,jdbcType=VARCHAR}, #{cdmtype,jdbcType=VARCHAR}, 
+      #{cdmstatus,jdbcType=CHAR}, #{cdmflag,jdbcType=CHAR}, #{cdmpwd,jdbcType=VARCHAR}, 
+      #{cdmcid,jdbcType=VARCHAR}, #{cdmmcard,jdbcType=CHAR}, #{cdmmindate,jdbcType=DATE}, 
+      #{cdmmaxdate,jdbcType=DATE}, #{cdmname,jdbcType=VARCHAR}, #{cdmjf,jdbcType=DECIMAL}, 
+      #{cdmxfje,jdbcType=DECIMAL}, #{cdmzhye1,jdbcType=DECIMAL}, #{cdmzhye2,jdbcType=DECIMAL}, 
+      #{cdmzhye3,jdbcType=DECIMAL}, #{cdmzhye4,jdbcType=DECIMAL}, #{cdmzhye5,jdbcType=DECIMAL}, 
+      #{cdmdate1,jdbcType=DATE}, #{cdmdate2,jdbcType=DATE}, #{cdmdate3,jdbcType=DATE}, 
+      #{cdmdate4,jdbcType=DATE}, #{cdmdate5,jdbcType=DATE}, #{cdmmainno,jdbcType=VARCHAR}, 
+      #{cdmchr1,jdbcType=VARCHAR}, #{cdmchr2,jdbcType=VARCHAR}, #{cdmchr3,jdbcType=VARCHAR}, 
+      #{cdmchr4,jdbcType=VARCHAR}, #{cdmchr5,jdbcType=VARCHAR}, #{cdmchr6,jdbcType=VARCHAR}, 
+      #{cdmchr7,jdbcType=VARCHAR}, #{cdmchr8,jdbcType=VARCHAR}, #{cdmnum1,jdbcType=DECIMAL}, 
+      #{cdmnum2,jdbcType=DECIMAL}, #{cdmnum3,jdbcType=DECIMAL}, #{cdmnum4,jdbcType=DECIMAL}, 
+      #{cdmnum5,jdbcType=DECIMAL}, #{cdmnum6,jdbcType=DECIMAL}, #{cdmnum7,jdbcType=DECIMAL}, 
+      #{cdmnum8,jdbcType=DECIMAL}, #{cdmowner,jdbcType=VARCHAR}, #{cdmmode,jdbcType=CHAR}, 
+      #{cdmissuer,jdbcType=CHAR}, #{cdmbank,jdbcType=VARCHAR}, #{cdmbankgrade,jdbcType=CHAR}, 
+      #{cdmpredecjf,jdbcType=DECIMAL}, #{cdmpartner,jdbcType=VARCHAR}, #{cdmpartnerno,jdbcType=VARCHAR}, 
+      #{cdmmemo,jdbcType=VARCHAR}, #{cdmseqno,jdbcType=DECIMAL}, #{cdmflag1,jdbcType=CHAR}, 
+      #{cdmflag2,jdbcType=CHAR}, #{cdmflag3,jdbcType=CHAR}, #{cdmflag4,jdbcType=CHAR}, 
+      #{cdmflag5,jdbcType=CHAR}, #{cdmuse,jdbcType=CHAR}, #{cdmlinkno,jdbcType=VARCHAR}, 
+      #{cdmtemppoint,jdbcType=DECIMAL}, #{cdmkeeper,jdbcType=VARCHAR}, #{cdmtype1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.sso.crm.domain.CardmainModel" >
+    insert into CARDMAIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cdmno != null" >
+        CDMNO,
+      </if>
+      <if test="cdmmkt != null" >
+        CDMMKT,
+      </if>
+      <if test="cdmtype != null" >
+        CDMTYPE,
+      </if>
+      <if test="cdmstatus != null" >
+        CDMSTATUS,
+      </if>
+      <if test="cdmflag != null" >
+        CDMFLAG,
+      </if>
+      <if test="cdmpwd != null" >
+        CDMPWD,
+      </if>
+      <if test="cdmcid != null" >
+        CDMCID,
+      </if>
+      <if test="cdmmcard != null" >
+        CDMMCARD,
+      </if>
+      <if test="cdmmindate != null" >
+        CDMMINDATE,
+      </if>
+      <if test="cdmmaxdate != null" >
+        CDMMAXDATE,
+      </if>
+      <if test="cdmname != null" >
+        CDMNAME,
+      </if>
+      <if test="cdmjf != null" >
+        CDMJF,
+      </if>
+      <if test="cdmxfje != null" >
+        CDMXFJE,
+      </if>
+      <if test="cdmzhye1 != null" >
+        CDMZHYE1,
+      </if>
+      <if test="cdmzhye2 != null" >
+        CDMZHYE2,
+      </if>
+      <if test="cdmzhye3 != null" >
+        CDMZHYE3,
+      </if>
+      <if test="cdmzhye4 != null" >
+        CDMZHYE4,
+      </if>
+      <if test="cdmzhye5 != null" >
+        CDMZHYE5,
+      </if>
+      <if test="cdmdate1 != null" >
+        CDMDATE1,
+      </if>
+      <if test="cdmdate2 != null" >
+        CDMDATE2,
+      </if>
+      <if test="cdmdate3 != null" >
+        CDMDATE3,
+      </if>
+      <if test="cdmdate4 != null" >
+        CDMDATE4,
+      </if>
+      <if test="cdmdate5 != null" >
+        CDMDATE5,
+      </if>
+      <if test="cdmmainno != null" >
+        CDMMAINNO,
+      </if>
+      <if test="cdmchr1 != null" >
+        CDMCHR1,
+      </if>
+      <if test="cdmchr2 != null" >
+        CDMCHR2,
+      </if>
+      <if test="cdmchr3 != null" >
+        CDMCHR3,
+      </if>
+      <if test="cdmchr4 != null" >
+        CDMCHR4,
+      </if>
+      <if test="cdmchr5 != null" >
+        CDMCHR5,
+      </if>
+      <if test="cdmchr6 != null" >
+        CDMCHR6,
+      </if>
+      <if test="cdmchr7 != null" >
+        CDMCHR7,
+      </if>
+      <if test="cdmchr8 != null" >
+        CDMCHR8,
+      </if>
+      <if test="cdmnum1 != null" >
+        CDMNUM1,
+      </if>
+      <if test="cdmnum2 != null" >
+        CDMNUM2,
+      </if>
+      <if test="cdmnum3 != null" >
+        CDMNUM3,
+      </if>
+      <if test="cdmnum4 != null" >
+        CDMNUM4,
+      </if>
+      <if test="cdmnum5 != null" >
+        CDMNUM5,
+      </if>
+      <if test="cdmnum6 != null" >
+        CDMNUM6,
+      </if>
+      <if test="cdmnum7 != null" >
+        CDMNUM7,
+      </if>
+      <if test="cdmnum8 != null" >
+        CDMNUM8,
+      </if>
+      <if test="cdmowner != null" >
+        CDMOWNER,
+      </if>
+      <if test="cdmmode != null" >
+        CDMMODE,
+      </if>
+      <if test="cdmissuer != null" >
+        CDMISSUER,
+      </if>
+      <if test="cdmbank != null" >
+        CDMBANK,
+      </if>
+      <if test="cdmbankgrade != null" >
+        CDMBANKGRADE,
+      </if>
+      <if test="cdmpredecjf != null" >
+        CDMPREDECJF,
+      </if>
+      <if test="cdmpartner != null" >
+        CDMPARTNER,
+      </if>
+      <if test="cdmpartnerno != null" >
+        CDMPARTNERNO,
+      </if>
+      <if test="cdmmemo != null" >
+        CDMMEMO,
+      </if>
+      <if test="cdmseqno != null" >
+        CDMSEQNO,
+      </if>
+      <if test="cdmflag1 != null" >
+        CDMFLAG1,
+      </if>
+      <if test="cdmflag2 != null" >
+        CDMFLAG2,
+      </if>
+      <if test="cdmflag3 != null" >
+        CDMFLAG3,
+      </if>
+      <if test="cdmflag4 != null" >
+        CDMFLAG4,
+      </if>
+      <if test="cdmflag5 != null" >
+        CDMFLAG5,
+      </if>
+      <if test="cdmuse != null" >
+        CDMUSE,
+      </if>
+      <if test="cdmlinkno != null" >
+        CDMLINKNO,
+      </if>
+      <if test="cdmtemppoint != null" >
+        CDMTEMPPOINT,
+      </if>
+      <if test="cdmkeeper != null" >
+        CDMKEEPER,
+      </if>
+      <if test="cdmtype1 != null" >
+        CDMTYPE1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cdmno != null" >
+        #{cdmno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmmkt != null" >
+        #{cdmmkt,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmtype != null" >
+        #{cdmtype,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmstatus != null" >
+        #{cdmstatus,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag != null" >
+        #{cdmflag,jdbcType=CHAR},
+      </if>
+      <if test="cdmpwd != null" >
+        #{cdmpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmcid != null" >
+        #{cdmcid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmmcard != null" >
+        #{cdmmcard,jdbcType=CHAR},
+      </if>
+      <if test="cdmmindate != null" >
+        #{cdmmindate,jdbcType=DATE},
+      </if>
+      <if test="cdmmaxdate != null" >
+        #{cdmmaxdate,jdbcType=DATE},
+      </if>
+      <if test="cdmname != null" >
+        #{cdmname,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmjf != null" >
+        #{cdmjf,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmxfje != null" >
+        #{cdmxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye1 != null" >
+        #{cdmzhye1,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye2 != null" >
+        #{cdmzhye2,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye3 != null" >
+        #{cdmzhye3,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye4 != null" >
+        #{cdmzhye4,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye5 != null" >
+        #{cdmzhye5,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmdate1 != null" >
+        #{cdmdate1,jdbcType=DATE},
+      </if>
+      <if test="cdmdate2 != null" >
+        #{cdmdate2,jdbcType=DATE},
+      </if>
+      <if test="cdmdate3 != null" >
+        #{cdmdate3,jdbcType=DATE},
+      </if>
+      <if test="cdmdate4 != null" >
+        #{cdmdate4,jdbcType=DATE},
+      </if>
+      <if test="cdmdate5 != null" >
+        #{cdmdate5,jdbcType=DATE},
+      </if>
+      <if test="cdmmainno != null" >
+        #{cdmmainno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr1 != null" >
+        #{cdmchr1,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr2 != null" >
+        #{cdmchr2,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr3 != null" >
+        #{cdmchr3,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr4 != null" >
+        #{cdmchr4,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr5 != null" >
+        #{cdmchr5,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr6 != null" >
+        #{cdmchr6,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr7 != null" >
+        #{cdmchr7,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr8 != null" >
+        #{cdmchr8,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmnum1 != null" >
+        #{cdmnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum2 != null" >
+        #{cdmnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum3 != null" >
+        #{cdmnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum4 != null" >
+        #{cdmnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum5 != null" >
+        #{cdmnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum6 != null" >
+        #{cdmnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum7 != null" >
+        #{cdmnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum8 != null" >
+        #{cdmnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmowner != null" >
+        #{cdmowner,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmmode != null" >
+        #{cdmmode,jdbcType=CHAR},
+      </if>
+      <if test="cdmissuer != null" >
+        #{cdmissuer,jdbcType=CHAR},
+      </if>
+      <if test="cdmbank != null" >
+        #{cdmbank,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmbankgrade != null" >
+        #{cdmbankgrade,jdbcType=CHAR},
+      </if>
+      <if test="cdmpredecjf != null" >
+        #{cdmpredecjf,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmpartner != null" >
+        #{cdmpartner,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmpartnerno != null" >
+        #{cdmpartnerno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmmemo != null" >
+        #{cdmmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmseqno != null" >
+        #{cdmseqno,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmflag1 != null" >
+        #{cdmflag1,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag2 != null" >
+        #{cdmflag2,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag3 != null" >
+        #{cdmflag3,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag4 != null" >
+        #{cdmflag4,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag5 != null" >
+        #{cdmflag5,jdbcType=CHAR},
+      </if>
+      <if test="cdmuse != null" >
+        #{cdmuse,jdbcType=CHAR},
+      </if>
+      <if test="cdmlinkno != null" >
+        #{cdmlinkno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmtemppoint != null" >
+        #{cdmtemppoint,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmkeeper != null" >
+        #{cdmkeeper,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmtype1 != null" >
+        #{cdmtype1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.sso.crm.domain.CardmainModel" >
+    update CARDMAIN
+    <set >
+      <if test="cdmmkt != null" >
+        CDMMKT = #{cdmmkt,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmtype != null" >
+        CDMTYPE = #{cdmtype,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmstatus != null" >
+        CDMSTATUS = #{cdmstatus,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag != null" >
+        CDMFLAG = #{cdmflag,jdbcType=CHAR},
+      </if>
+      <if test="cdmpwd != null" >
+        CDMPWD = #{cdmpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmcid != null" >
+        CDMCID = #{cdmcid,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmmcard != null" >
+        CDMMCARD = #{cdmmcard,jdbcType=CHAR},
+      </if>
+      <if test="cdmmindate != null" >
+        CDMMINDATE = #{cdmmindate,jdbcType=DATE},
+      </if>
+      <if test="cdmmaxdate != null" >
+        CDMMAXDATE = #{cdmmaxdate,jdbcType=DATE},
+      </if>
+      <if test="cdmname != null" >
+        CDMNAME = #{cdmname,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmjf != null" >
+        CDMJF = #{cdmjf,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmxfje != null" >
+        CDMXFJE = #{cdmxfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye1 != null" >
+        CDMZHYE1 = #{cdmzhye1,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye2 != null" >
+        CDMZHYE2 = #{cdmzhye2,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye3 != null" >
+        CDMZHYE3 = #{cdmzhye3,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye4 != null" >
+        CDMZHYE4 = #{cdmzhye4,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmzhye5 != null" >
+        CDMZHYE5 = #{cdmzhye5,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmdate1 != null" >
+        CDMDATE1 = #{cdmdate1,jdbcType=DATE},
+      </if>
+      <if test="cdmdate2 != null" >
+        CDMDATE2 = #{cdmdate2,jdbcType=DATE},
+      </if>
+      <if test="cdmdate3 != null" >
+        CDMDATE3 = #{cdmdate3,jdbcType=DATE},
+      </if>
+      <if test="cdmdate4 != null" >
+        CDMDATE4 = #{cdmdate4,jdbcType=DATE},
+      </if>
+      <if test="cdmdate5 != null" >
+        CDMDATE5 = #{cdmdate5,jdbcType=DATE},
+      </if>
+      <if test="cdmmainno != null" >
+        CDMMAINNO = #{cdmmainno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr1 != null" >
+        CDMCHR1 = #{cdmchr1,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr2 != null" >
+        CDMCHR2 = #{cdmchr2,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr3 != null" >
+        CDMCHR3 = #{cdmchr3,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr4 != null" >
+        CDMCHR4 = #{cdmchr4,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr5 != null" >
+        CDMCHR5 = #{cdmchr5,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr6 != null" >
+        CDMCHR6 = #{cdmchr6,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr7 != null" >
+        CDMCHR7 = #{cdmchr7,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmchr8 != null" >
+        CDMCHR8 = #{cdmchr8,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmnum1 != null" >
+        CDMNUM1 = #{cdmnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum2 != null" >
+        CDMNUM2 = #{cdmnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum3 != null" >
+        CDMNUM3 = #{cdmnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum4 != null" >
+        CDMNUM4 = #{cdmnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum5 != null" >
+        CDMNUM5 = #{cdmnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum6 != null" >
+        CDMNUM6 = #{cdmnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum7 != null" >
+        CDMNUM7 = #{cdmnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmnum8 != null" >
+        CDMNUM8 = #{cdmnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmowner != null" >
+        CDMOWNER = #{cdmowner,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmmode != null" >
+        CDMMODE = #{cdmmode,jdbcType=CHAR},
+      </if>
+      <if test="cdmissuer != null" >
+        CDMISSUER = #{cdmissuer,jdbcType=CHAR},
+      </if>
+      <if test="cdmbank != null" >
+        CDMBANK = #{cdmbank,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmbankgrade != null" >
+        CDMBANKGRADE = #{cdmbankgrade,jdbcType=CHAR},
+      </if>
+      <if test="cdmpredecjf != null" >
+        CDMPREDECJF = #{cdmpredecjf,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmpartner != null" >
+        CDMPARTNER = #{cdmpartner,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmpartnerno != null" >
+        CDMPARTNERNO = #{cdmpartnerno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmmemo != null" >
+        CDMMEMO = #{cdmmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmseqno != null" >
+        CDMSEQNO = #{cdmseqno,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmflag1 != null" >
+        CDMFLAG1 = #{cdmflag1,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag2 != null" >
+        CDMFLAG2 = #{cdmflag2,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag3 != null" >
+        CDMFLAG3 = #{cdmflag3,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag4 != null" >
+        CDMFLAG4 = #{cdmflag4,jdbcType=CHAR},
+      </if>
+      <if test="cdmflag5 != null" >
+        CDMFLAG5 = #{cdmflag5,jdbcType=CHAR},
+      </if>
+      <if test="cdmuse != null" >
+        CDMUSE = #{cdmuse,jdbcType=CHAR},
+      </if>
+      <if test="cdmlinkno != null" >
+        CDMLINKNO = #{cdmlinkno,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmtemppoint != null" >
+        CDMTEMPPOINT = #{cdmtemppoint,jdbcType=DECIMAL},
+      </if>
+      <if test="cdmkeeper != null" >
+        CDMKEEPER = #{cdmkeeper,jdbcType=VARCHAR},
+      </if>
+      <if test="cdmtype1 != null" >
+        CDMTYPE1 = #{cdmtype1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CDMNO = #{cdmno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.sso.crm.domain.CardmainModel" >
+    update CARDMAIN
+    set CDMMKT = #{cdmmkt,jdbcType=VARCHAR},
+      CDMTYPE = #{cdmtype,jdbcType=VARCHAR},
+      CDMSTATUS = #{cdmstatus,jdbcType=CHAR},
+      CDMFLAG = #{cdmflag,jdbcType=CHAR},
+      CDMPWD = #{cdmpwd,jdbcType=VARCHAR},
+      CDMCID = #{cdmcid,jdbcType=VARCHAR},
+      CDMMCARD = #{cdmmcard,jdbcType=CHAR},
+      CDMMINDATE = #{cdmmindate,jdbcType=DATE},
+      CDMMAXDATE = #{cdmmaxdate,jdbcType=DATE},
+      CDMNAME = #{cdmname,jdbcType=VARCHAR},
+      CDMJF = #{cdmjf,jdbcType=DECIMAL},
+      CDMXFJE = #{cdmxfje,jdbcType=DECIMAL},
+      CDMZHYE1 = #{cdmzhye1,jdbcType=DECIMAL},
+      CDMZHYE2 = #{cdmzhye2,jdbcType=DECIMAL},
+      CDMZHYE3 = #{cdmzhye3,jdbcType=DECIMAL},
+      CDMZHYE4 = #{cdmzhye4,jdbcType=DECIMAL},
+      CDMZHYE5 = #{cdmzhye5,jdbcType=DECIMAL},
+      CDMDATE1 = #{cdmdate1,jdbcType=DATE},
+      CDMDATE2 = #{cdmdate2,jdbcType=DATE},
+      CDMDATE3 = #{cdmdate3,jdbcType=DATE},
+      CDMDATE4 = #{cdmdate4,jdbcType=DATE},
+      CDMDATE5 = #{cdmdate5,jdbcType=DATE},
+      CDMMAINNO = #{cdmmainno,jdbcType=VARCHAR},
+      CDMCHR1 = #{cdmchr1,jdbcType=VARCHAR},
+      CDMCHR2 = #{cdmchr2,jdbcType=VARCHAR},
+      CDMCHR3 = #{cdmchr3,jdbcType=VARCHAR},
+      CDMCHR4 = #{cdmchr4,jdbcType=VARCHAR},
+      CDMCHR5 = #{cdmchr5,jdbcType=VARCHAR},
+      CDMCHR6 = #{cdmchr6,jdbcType=VARCHAR},
+      CDMCHR7 = #{cdmchr7,jdbcType=VARCHAR},
+      CDMCHR8 = #{cdmchr8,jdbcType=VARCHAR},
+      CDMNUM1 = #{cdmnum1,jdbcType=DECIMAL},
+      CDMNUM2 = #{cdmnum2,jdbcType=DECIMAL},
+      CDMNUM3 = #{cdmnum3,jdbcType=DECIMAL},
+      CDMNUM4 = #{cdmnum4,jdbcType=DECIMAL},
+      CDMNUM5 = #{cdmnum5,jdbcType=DECIMAL},
+      CDMNUM6 = #{cdmnum6,jdbcType=DECIMAL},
+      CDMNUM7 = #{cdmnum7,jdbcType=DECIMAL},
+      CDMNUM8 = #{cdmnum8,jdbcType=DECIMAL},
+      CDMOWNER = #{cdmowner,jdbcType=VARCHAR},
+      CDMMODE = #{cdmmode,jdbcType=CHAR},
+      CDMISSUER = #{cdmissuer,jdbcType=CHAR},
+      CDMBANK = #{cdmbank,jdbcType=VARCHAR},
+      CDMBANKGRADE = #{cdmbankgrade,jdbcType=CHAR},
+      CDMPREDECJF = #{cdmpredecjf,jdbcType=DECIMAL},
+      CDMPARTNER = #{cdmpartner,jdbcType=VARCHAR},
+      CDMPARTNERNO = #{cdmpartnerno,jdbcType=VARCHAR},
+      CDMMEMO = #{cdmmemo,jdbcType=VARCHAR},
+      CDMSEQNO = #{cdmseqno,jdbcType=DECIMAL},
+      CDMFLAG1 = #{cdmflag1,jdbcType=CHAR},
+      CDMFLAG2 = #{cdmflag2,jdbcType=CHAR},
+      CDMFLAG3 = #{cdmflag3,jdbcType=CHAR},
+      CDMFLAG4 = #{cdmflag4,jdbcType=CHAR},
+      CDMFLAG5 = #{cdmflag5,jdbcType=CHAR},
+      CDMUSE = #{cdmuse,jdbcType=CHAR},
+      CDMLINKNO = #{cdmlinkno,jdbcType=VARCHAR},
+      CDMTEMPPOINT = #{cdmtemppoint,jdbcType=DECIMAL},
+      CDMKEEPER = #{cdmkeeper,jdbcType=VARCHAR},
+      CDMTYPE1 = #{cdmtype1,jdbcType=VARCHAR}
+    where CDMNO = #{cdmno,jdbcType=VARCHAR}
+  </update>
+</mapper>

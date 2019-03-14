@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.sso.crm.mapper.CusttypeModelMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.sso.crm.domain.CusttypeModel" >
+    <id column="CTCODE" property="ctcode" jdbcType="VARCHAR" />
+    <result column="CTNAME" property="ctname" jdbcType="VARCHAR" />
+    <result column="CTPRESTR" property="ctprestr" jdbcType="VARCHAR" />
+    <result column="CTLASTSTR" property="ctlaststr" jdbcType="VARCHAR" />
+    <result column="CTSTARTNO" property="ctstartno" jdbcType="VARCHAR" />
+    <result column="CTENDNO" property="ctendno" jdbcType="VARCHAR" />
+    <result column="CTCHKLEN" property="ctchklen" jdbcType="DECIMAL" />
+    <result column="CTISPWD" property="ctispwd" jdbcType="CHAR" />
+    <result column="CTVALIDMON" property="ctvalidmon" jdbcType="DECIMAL" />
+    <result column="CTJFRATE" property="ctjfrate" jdbcType="DECIMAL" />
+    <result column="CTISFL" property="ctisfl" jdbcType="CHAR" />
+    <result column="CTFLJS" property="ctfljs" jdbcType="DECIMAL" />
+    <result column="CTZKL" property="ctzkl" jdbcType="DECIMAL" />
+    <result column="CTCHR1" property="ctchr1" jdbcType="VARCHAR" />
+    <result column="CTCHR2" property="ctchr2" jdbcType="VARCHAR" />
+    <result column="CTCHR3" property="ctchr3" jdbcType="VARCHAR" />
+    <result column="CTCHR4" property="ctchr4" jdbcType="VARCHAR" />
+    <result column="CTCHR5" property="ctchr5" jdbcType="VARCHAR" />
+    <result column="CTCHR6" property="ctchr6" jdbcType="VARCHAR" />
+    <result column="CTCHR7" property="ctchr7" jdbcType="VARCHAR" />
+    <result column="CTCHR8" property="ctchr8" jdbcType="VARCHAR" />
+    <result column="CTCHR9" property="ctchr9" jdbcType="VARCHAR" />
+    <result column="CTCHR10" property="ctchr10" jdbcType="VARCHAR" />
+    <result column="CTCHR11" property="ctchr11" jdbcType="VARCHAR" />
+    <result column="CTCHR12" property="ctchr12" jdbcType="VARCHAR" />
+    <result column="CTCHR13" property="ctchr13" jdbcType="VARCHAR" />
+    <result column="CTCHR14" property="ctchr14" jdbcType="VARCHAR" />
+    <result column="CTCHR15" property="ctchr15" jdbcType="VARCHAR" />
+    <result column="CTCHR16" property="ctchr16" jdbcType="VARCHAR" />
+    <result column="CTCHR17" property="ctchr17" jdbcType="VARCHAR" />
+    <result column="CTCHR18" property="ctchr18" jdbcType="VARCHAR" />
+    <result column="CTCHR19" property="ctchr19" jdbcType="VARCHAR" />
+    <result column="CTCHR20" property="ctchr20" jdbcType="VARCHAR" />
+    <result column="CTNUM1" property="ctnum1" jdbcType="DECIMAL" />
+    <result column="CTNUM2" property="ctnum2" jdbcType="DECIMAL" />
+    <result column="CTNUM3" property="ctnum3" jdbcType="DECIMAL" />
+    <result column="CTNUM4" property="ctnum4" jdbcType="DECIMAL" />
+    <result column="CTNUM5" property="ctnum5" jdbcType="DECIMAL" />
+    <result column="CTNUM6" property="ctnum6" jdbcType="DECIMAL" />
+    <result column="CTNUM7" property="ctnum7" jdbcType="DECIMAL" />
+    <result column="CTNUM8" property="ctnum8" jdbcType="DECIMAL" />
+    <result column="CTNUM9" property="ctnum9" jdbcType="DECIMAL" />
+    <result column="CTNUM10" property="ctnum10" jdbcType="DECIMAL" />
+    <result column="CTNUM11" property="ctnum11" jdbcType="DECIMAL" />
+    <result column="CTNUM12" property="ctnum12" jdbcType="DECIMAL" />
+    <result column="CTNUM13" property="ctnum13" jdbcType="DECIMAL" />
+    <result column="CTNUM14" property="ctnum14" jdbcType="DECIMAL" />
+    <result column="CTNUM15" property="ctnum15" jdbcType="DECIMAL" />
+    <result column="CTGFJE" property="ctgfje" jdbcType="DECIMAL" />
+    <result column="CTHYQY" property="cthyqy" jdbcType="VARCHAR" />
+    <result column="CTCZZ" property="ctczz" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CTCODE, CTNAME, CTPRESTR, CTLASTSTR, CTSTARTNO, CTENDNO, CTCHKLEN, CTISPWD, CTVALIDMON, 
+    CTJFRATE, CTISFL, CTFLJS, CTZKL, CTCHR1, CTCHR2, CTCHR3, CTCHR4, CTCHR5, CTCHR6, 
+    CTCHR7, CTCHR8, CTCHR9, CTCHR10, CTCHR11, CTCHR12, CTCHR13, CTCHR14, CTCHR15, CTCHR16, 
+    CTCHR17, CTCHR18, CTCHR19, CTCHR20, CTNUM1, CTNUM2, CTNUM3, CTNUM4, CTNUM5, CTNUM6, 
+    CTNUM7, CTNUM8, CTNUM9, CTNUM10, CTNUM11, CTNUM12, CTNUM13, CTNUM14, CTNUM15, CTGFJE, 
+    CTHYQY, CTCZZ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CUSTTYPE
+    where CTCODE = #{ctcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CUSTTYPE
+    where CTCODE = #{ctcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ld.sso.crm.domain.CusttypeModel" >
+    insert into CUSTTYPE (CTCODE, CTNAME, CTPRESTR, 
+      CTLASTSTR, CTSTARTNO, CTENDNO, 
+      CTCHKLEN, CTISPWD, CTVALIDMON, 
+      CTJFRATE, CTISFL, CTFLJS, 
+      CTZKL, CTCHR1, CTCHR2, 
+      CTCHR3, CTCHR4, CTCHR5, 
+      CTCHR6, CTCHR7, CTCHR8, 
+      CTCHR9, CTCHR10, CTCHR11, 
+      CTCHR12, CTCHR13, CTCHR14, 
+      CTCHR15, CTCHR16, CTCHR17, 
+      CTCHR18, CTCHR19, CTCHR20, 
+      CTNUM1, CTNUM2, CTNUM3, 
+      CTNUM4, CTNUM5, CTNUM6, 
+      CTNUM7, CTNUM8, CTNUM9, 
+      CTNUM10, CTNUM11, CTNUM12, 
+      CTNUM13, CTNUM14, CTNUM15, 
+      CTGFJE, CTHYQY, CTCZZ
+      )
+    values (#{ctcode,jdbcType=VARCHAR}, #{ctname,jdbcType=VARCHAR}, #{ctprestr,jdbcType=VARCHAR}, 
+      #{ctlaststr,jdbcType=VARCHAR}, #{ctstartno,jdbcType=VARCHAR}, #{ctendno,jdbcType=VARCHAR}, 
+      #{ctchklen,jdbcType=DECIMAL}, #{ctispwd,jdbcType=CHAR}, #{ctvalidmon,jdbcType=DECIMAL}, 
+      #{ctjfrate,jdbcType=DECIMAL}, #{ctisfl,jdbcType=CHAR}, #{ctfljs,jdbcType=DECIMAL}, 
+      #{ctzkl,jdbcType=DECIMAL}, #{ctchr1,jdbcType=VARCHAR}, #{ctchr2,jdbcType=VARCHAR}, 
+      #{ctchr3,jdbcType=VARCHAR}, #{ctchr4,jdbcType=VARCHAR}, #{ctchr5,jdbcType=VARCHAR}, 
+      #{ctchr6,jdbcType=VARCHAR}, #{ctchr7,jdbcType=VARCHAR}, #{ctchr8,jdbcType=VARCHAR}, 
+      #{ctchr9,jdbcType=VARCHAR}, #{ctchr10,jdbcType=VARCHAR}, #{ctchr11,jdbcType=VARCHAR}, 
+      #{ctchr12,jdbcType=VARCHAR}, #{ctchr13,jdbcType=VARCHAR}, #{ctchr14,jdbcType=VARCHAR}, 
+      #{ctchr15,jdbcType=VARCHAR}, #{ctchr16,jdbcType=VARCHAR}, #{ctchr17,jdbcType=VARCHAR}, 
+      #{ctchr18,jdbcType=VARCHAR}, #{ctchr19,jdbcType=VARCHAR}, #{ctchr20,jdbcType=VARCHAR}, 
+      #{ctnum1,jdbcType=DECIMAL}, #{ctnum2,jdbcType=DECIMAL}, #{ctnum3,jdbcType=DECIMAL}, 
+      #{ctnum4,jdbcType=DECIMAL}, #{ctnum5,jdbcType=DECIMAL}, #{ctnum6,jdbcType=DECIMAL}, 
+      #{ctnum7,jdbcType=DECIMAL}, #{ctnum8,jdbcType=DECIMAL}, #{ctnum9,jdbcType=DECIMAL}, 
+      #{ctnum10,jdbcType=DECIMAL}, #{ctnum11,jdbcType=DECIMAL}, #{ctnum12,jdbcType=DECIMAL}, 
+      #{ctnum13,jdbcType=DECIMAL}, #{ctnum14,jdbcType=DECIMAL}, #{ctnum15,jdbcType=DECIMAL}, 
+      #{ctgfje,jdbcType=DECIMAL}, #{cthyqy,jdbcType=VARCHAR}, #{ctczz,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.sso.crm.domain.CusttypeModel" >
+    insert into CUSTTYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ctcode != null" >
+        CTCODE,
+      </if>
+      <if test="ctname != null" >
+        CTNAME,
+      </if>
+      <if test="ctprestr != null" >
+        CTPRESTR,
+      </if>
+      <if test="ctlaststr != null" >
+        CTLASTSTR,
+      </if>
+      <if test="ctstartno != null" >
+        CTSTARTNO,
+      </if>
+      <if test="ctendno != null" >
+        CTENDNO,
+      </if>
+      <if test="ctchklen != null" >
+        CTCHKLEN,
+      </if>
+      <if test="ctispwd != null" >
+        CTISPWD,
+      </if>
+      <if test="ctvalidmon != null" >
+        CTVALIDMON,
+      </if>
+      <if test="ctjfrate != null" >
+        CTJFRATE,
+      </if>
+      <if test="ctisfl != null" >
+        CTISFL,
+      </if>
+      <if test="ctfljs != null" >
+        CTFLJS,
+      </if>
+      <if test="ctzkl != null" >
+        CTZKL,
+      </if>
+      <if test="ctchr1 != null" >
+        CTCHR1,
+      </if>
+      <if test="ctchr2 != null" >
+        CTCHR2,
+      </if>
+      <if test="ctchr3 != null" >
+        CTCHR3,
+      </if>
+      <if test="ctchr4 != null" >
+        CTCHR4,
+      </if>
+      <if test="ctchr5 != null" >
+        CTCHR5,
+      </if>
+      <if test="ctchr6 != null" >
+        CTCHR6,
+      </if>
+      <if test="ctchr7 != null" >
+        CTCHR7,
+      </if>
+      <if test="ctchr8 != null" >
+        CTCHR8,
+      </if>
+      <if test="ctchr9 != null" >
+        CTCHR9,
+      </if>
+      <if test="ctchr10 != null" >
+        CTCHR10,
+      </if>
+      <if test="ctchr11 != null" >
+        CTCHR11,
+      </if>
+      <if test="ctchr12 != null" >
+        CTCHR12,
+      </if>
+      <if test="ctchr13 != null" >
+        CTCHR13,
+      </if>
+      <if test="ctchr14 != null" >
+        CTCHR14,
+      </if>
+      <if test="ctchr15 != null" >
+        CTCHR15,
+      </if>
+      <if test="ctchr16 != null" >
+        CTCHR16,
+      </if>
+      <if test="ctchr17 != null" >
+        CTCHR17,
+      </if>
+      <if test="ctchr18 != null" >
+        CTCHR18,
+      </if>
+      <if test="ctchr19 != null" >
+        CTCHR19,
+      </if>
+      <if test="ctchr20 != null" >
+        CTCHR20,
+      </if>
+      <if test="ctnum1 != null" >
+        CTNUM1,
+      </if>
+      <if test="ctnum2 != null" >
+        CTNUM2,
+      </if>
+      <if test="ctnum3 != null" >
+        CTNUM3,
+      </if>
+      <if test="ctnum4 != null" >
+        CTNUM4,
+      </if>
+      <if test="ctnum5 != null" >
+        CTNUM5,
+      </if>
+      <if test="ctnum6 != null" >
+        CTNUM6,
+      </if>
+      <if test="ctnum7 != null" >
+        CTNUM7,
+      </if>
+      <if test="ctnum8 != null" >
+        CTNUM8,
+      </if>
+      <if test="ctnum9 != null" >
+        CTNUM9,
+      </if>
+      <if test="ctnum10 != null" >
+        CTNUM10,
+      </if>
+      <if test="ctnum11 != null" >
+        CTNUM11,
+      </if>
+      <if test="ctnum12 != null" >
+        CTNUM12,
+      </if>
+      <if test="ctnum13 != null" >
+        CTNUM13,
+      </if>
+      <if test="ctnum14 != null" >
+        CTNUM14,
+      </if>
+      <if test="ctnum15 != null" >
+        CTNUM15,
+      </if>
+      <if test="ctgfje != null" >
+        CTGFJE,
+      </if>
+      <if test="cthyqy != null" >
+        CTHYQY,
+      </if>
+      <if test="ctczz != null" >
+        CTCZZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ctcode != null" >
+        #{ctcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ctname != null" >
+        #{ctname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctprestr != null" >
+        #{ctprestr,jdbcType=VARCHAR},
+      </if>
+      <if test="ctlaststr != null" >
+        #{ctlaststr,jdbcType=VARCHAR},
+      </if>
+      <if test="ctstartno != null" >
+        #{ctstartno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctendno != null" >
+        #{ctendno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchklen != null" >
+        #{ctchklen,jdbcType=DECIMAL},
+      </if>
+      <if test="ctispwd != null" >
+        #{ctispwd,jdbcType=CHAR},
+      </if>
+      <if test="ctvalidmon != null" >
+        #{ctvalidmon,jdbcType=DECIMAL},
+      </if>
+      <if test="ctjfrate != null" >
+        #{ctjfrate,jdbcType=DECIMAL},
+      </if>
+      <if test="ctisfl != null" >
+        #{ctisfl,jdbcType=CHAR},
+      </if>
+      <if test="ctfljs != null" >
+        #{ctfljs,jdbcType=DECIMAL},
+      </if>
+      <if test="ctzkl != null" >
+        #{ctzkl,jdbcType=DECIMAL},
+      </if>
+      <if test="ctchr1 != null" >
+        #{ctchr1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr2 != null" >
+        #{ctchr2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr3 != null" >
+        #{ctchr3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr4 != null" >
+        #{ctchr4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr5 != null" >
+        #{ctchr5,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr6 != null" >
+        #{ctchr6,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr7 != null" >
+        #{ctchr7,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr8 != null" >
+        #{ctchr8,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr9 != null" >
+        #{ctchr9,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr10 != null" >
+        #{ctchr10,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr11 != null" >
+        #{ctchr11,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr12 != null" >
+        #{ctchr12,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr13 != null" >
+        #{ctchr13,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr14 != null" >
+        #{ctchr14,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr15 != null" >
+        #{ctchr15,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr16 != null" >
+        #{ctchr16,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr17 != null" >
+        #{ctchr17,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr18 != null" >
+        #{ctchr18,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr19 != null" >
+        #{ctchr19,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr20 != null" >
+        #{ctchr20,jdbcType=VARCHAR},
+      </if>
+      <if test="ctnum1 != null" >
+        #{ctnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum2 != null" >
+        #{ctnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum3 != null" >
+        #{ctnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum4 != null" >
+        #{ctnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum5 != null" >
+        #{ctnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum6 != null" >
+        #{ctnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum7 != null" >
+        #{ctnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum8 != null" >
+        #{ctnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum9 != null" >
+        #{ctnum9,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum10 != null" >
+        #{ctnum10,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum11 != null" >
+        #{ctnum11,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum12 != null" >
+        #{ctnum12,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum13 != null" >
+        #{ctnum13,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum14 != null" >
+        #{ctnum14,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum15 != null" >
+        #{ctnum15,jdbcType=DECIMAL},
+      </if>
+      <if test="ctgfje != null" >
+        #{ctgfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cthyqy != null" >
+        #{cthyqy,jdbcType=VARCHAR},
+      </if>
+      <if test="ctczz != null" >
+        #{ctczz,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.sso.crm.domain.CusttypeModel" >
+    update CUSTTYPE
+    <set >
+      <if test="ctname != null" >
+        CTNAME = #{ctname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctprestr != null" >
+        CTPRESTR = #{ctprestr,jdbcType=VARCHAR},
+      </if>
+      <if test="ctlaststr != null" >
+        CTLASTSTR = #{ctlaststr,jdbcType=VARCHAR},
+      </if>
+      <if test="ctstartno != null" >
+        CTSTARTNO = #{ctstartno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctendno != null" >
+        CTENDNO = #{ctendno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchklen != null" >
+        CTCHKLEN = #{ctchklen,jdbcType=DECIMAL},
+      </if>
+      <if test="ctispwd != null" >
+        CTISPWD = #{ctispwd,jdbcType=CHAR},
+      </if>
+      <if test="ctvalidmon != null" >
+        CTVALIDMON = #{ctvalidmon,jdbcType=DECIMAL},
+      </if>
+      <if test="ctjfrate != null" >
+        CTJFRATE = #{ctjfrate,jdbcType=DECIMAL},
+      </if>
+      <if test="ctisfl != null" >
+        CTISFL = #{ctisfl,jdbcType=CHAR},
+      </if>
+      <if test="ctfljs != null" >
+        CTFLJS = #{ctfljs,jdbcType=DECIMAL},
+      </if>
+      <if test="ctzkl != null" >
+        CTZKL = #{ctzkl,jdbcType=DECIMAL},
+      </if>
+      <if test="ctchr1 != null" >
+        CTCHR1 = #{ctchr1,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr2 != null" >
+        CTCHR2 = #{ctchr2,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr3 != null" >
+        CTCHR3 = #{ctchr3,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr4 != null" >
+        CTCHR4 = #{ctchr4,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr5 != null" >
+        CTCHR5 = #{ctchr5,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr6 != null" >
+        CTCHR6 = #{ctchr6,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr7 != null" >
+        CTCHR7 = #{ctchr7,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr8 != null" >
+        CTCHR8 = #{ctchr8,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr9 != null" >
+        CTCHR9 = #{ctchr9,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr10 != null" >
+        CTCHR10 = #{ctchr10,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr11 != null" >
+        CTCHR11 = #{ctchr11,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr12 != null" >
+        CTCHR12 = #{ctchr12,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr13 != null" >
+        CTCHR13 = #{ctchr13,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr14 != null" >
+        CTCHR14 = #{ctchr14,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr15 != null" >
+        CTCHR15 = #{ctchr15,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr16 != null" >
+        CTCHR16 = #{ctchr16,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr17 != null" >
+        CTCHR17 = #{ctchr17,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr18 != null" >
+        CTCHR18 = #{ctchr18,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr19 != null" >
+        CTCHR19 = #{ctchr19,jdbcType=VARCHAR},
+      </if>
+      <if test="ctchr20 != null" >
+        CTCHR20 = #{ctchr20,jdbcType=VARCHAR},
+      </if>
+      <if test="ctnum1 != null" >
+        CTNUM1 = #{ctnum1,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum2 != null" >
+        CTNUM2 = #{ctnum2,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum3 != null" >
+        CTNUM3 = #{ctnum3,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum4 != null" >
+        CTNUM4 = #{ctnum4,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum5 != null" >
+        CTNUM5 = #{ctnum5,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum6 != null" >
+        CTNUM6 = #{ctnum6,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum7 != null" >
+        CTNUM7 = #{ctnum7,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum8 != null" >
+        CTNUM8 = #{ctnum8,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum9 != null" >
+        CTNUM9 = #{ctnum9,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum10 != null" >
+        CTNUM10 = #{ctnum10,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum11 != null" >
+        CTNUM11 = #{ctnum11,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum12 != null" >
+        CTNUM12 = #{ctnum12,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum13 != null" >
+        CTNUM13 = #{ctnum13,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum14 != null" >
+        CTNUM14 = #{ctnum14,jdbcType=DECIMAL},
+      </if>
+      <if test="ctnum15 != null" >
+        CTNUM15 = #{ctnum15,jdbcType=DECIMAL},
+      </if>
+      <if test="ctgfje != null" >
+        CTGFJE = #{ctgfje,jdbcType=DECIMAL},
+      </if>
+      <if test="cthyqy != null" >
+        CTHYQY = #{cthyqy,jdbcType=VARCHAR},
+      </if>
+      <if test="ctczz != null" >
+        CTCZZ = #{ctczz,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CTCODE = #{ctcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.sso.crm.domain.CusttypeModel" >
+    update CUSTTYPE
+    set CTNAME = #{ctname,jdbcType=VARCHAR},
+      CTPRESTR = #{ctprestr,jdbcType=VARCHAR},
+      CTLASTSTR = #{ctlaststr,jdbcType=VARCHAR},
+      CTSTARTNO = #{ctstartno,jdbcType=VARCHAR},
+      CTENDNO = #{ctendno,jdbcType=VARCHAR},
+      CTCHKLEN = #{ctchklen,jdbcType=DECIMAL},
+      CTISPWD = #{ctispwd,jdbcType=CHAR},
+      CTVALIDMON = #{ctvalidmon,jdbcType=DECIMAL},
+      CTJFRATE = #{ctjfrate,jdbcType=DECIMAL},
+      CTISFL = #{ctisfl,jdbcType=CHAR},
+      CTFLJS = #{ctfljs,jdbcType=DECIMAL},
+      CTZKL = #{ctzkl,jdbcType=DECIMAL},
+      CTCHR1 = #{ctchr1,jdbcType=VARCHAR},
+      CTCHR2 = #{ctchr2,jdbcType=VARCHAR},
+      CTCHR3 = #{ctchr3,jdbcType=VARCHAR},
+      CTCHR4 = #{ctchr4,jdbcType=VARCHAR},
+      CTCHR5 = #{ctchr5,jdbcType=VARCHAR},
+      CTCHR6 = #{ctchr6,jdbcType=VARCHAR},
+      CTCHR7 = #{ctchr7,jdbcType=VARCHAR},
+      CTCHR8 = #{ctchr8,jdbcType=VARCHAR},
+      CTCHR9 = #{ctchr9,jdbcType=VARCHAR},
+      CTCHR10 = #{ctchr10,jdbcType=VARCHAR},
+      CTCHR11 = #{ctchr11,jdbcType=VARCHAR},
+      CTCHR12 = #{ctchr12,jdbcType=VARCHAR},
+      CTCHR13 = #{ctchr13,jdbcType=VARCHAR},
+      CTCHR14 = #{ctchr14,jdbcType=VARCHAR},
+      CTCHR15 = #{ctchr15,jdbcType=VARCHAR},
+      CTCHR16 = #{ctchr16,jdbcType=VARCHAR},
+      CTCHR17 = #{ctchr17,jdbcType=VARCHAR},
+      CTCHR18 = #{ctchr18,jdbcType=VARCHAR},
+      CTCHR19 = #{ctchr19,jdbcType=VARCHAR},
+      CTCHR20 = #{ctchr20,jdbcType=VARCHAR},
+      CTNUM1 = #{ctnum1,jdbcType=DECIMAL},
+      CTNUM2 = #{ctnum2,jdbcType=DECIMAL},
+      CTNUM3 = #{ctnum3,jdbcType=DECIMAL},
+      CTNUM4 = #{ctnum4,jdbcType=DECIMAL},
+      CTNUM5 = #{ctnum5,jdbcType=DECIMAL},
+      CTNUM6 = #{ctnum6,jdbcType=DECIMAL},
+      CTNUM7 = #{ctnum7,jdbcType=DECIMAL},
+      CTNUM8 = #{ctnum8,jdbcType=DECIMAL},
+      CTNUM9 = #{ctnum9,jdbcType=DECIMAL},
+      CTNUM10 = #{ctnum10,jdbcType=DECIMAL},
+      CTNUM11 = #{ctnum11,jdbcType=DECIMAL},
+      CTNUM12 = #{ctnum12,jdbcType=DECIMAL},
+      CTNUM13 = #{ctnum13,jdbcType=DECIMAL},
+      CTNUM14 = #{ctnum14,jdbcType=DECIMAL},
+      CTNUM15 = #{ctnum15,jdbcType=DECIMAL},
+      CTGFJE = #{ctgfje,jdbcType=DECIMAL},
+      CTHYQY = #{cthyqy,jdbcType=VARCHAR},
+      CTCZZ = #{ctczz,jdbcType=DECIMAL}
+    where CTCODE = #{ctcode,jdbcType=VARCHAR}
+  </update>
+</mapper>
