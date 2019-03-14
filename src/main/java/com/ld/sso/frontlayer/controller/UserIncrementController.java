@@ -70,13 +70,17 @@ public class UserIncrementController {
         int pageNo;
         int pageSize;
         try {
-            date = checkParams("updateTime", longConverter, params);
-            pageNo = checkParams("pageNo", intConverter, params);
-            pageSize = checkParams("pageSize", intConverter, params);
+            date = checkParams("updateTime", longConverter, params, null);
+            pageNo = checkParams("pageNo", intConverter, params, 1);
+            pageSize = checkParams("pageSize", intConverter, params, 10);
         } catch (RuntimeException e) {
             info.setCode("9004");
             info.setMsg("无效参数或不符合JSON格式规范：" + e.toString());
             return info;
+        }
+
+        if (pageSize > 30) {
+            pageSize = 30;
         }
 
         int startRow = (pageNo - 1) * pageSize + 1;
@@ -102,16 +106,18 @@ public class UserIncrementController {
     /**
      * 检查参数是否存在，类型是否合法
      *
-     * @param paramKey  参数 key
-     * @param converter 参数类型转换器
-     * @param params    参数容器
-     * @param <T>       参数类型
+     * @param paramKey     参数 key
+     * @param converter    参数类型转换器
+     * @param params       参数容器
+     * @param <T>          参数类型
+     * @param defaultValue 默认值，没有传 null
      * @return 检查后参数
      * @throws RuntimeException 参数不存在或者转换报错后抛出
      */
     private <T> T checkParams(String paramKey,
                               Converter<T> converter,
-                              Map<String, Object> params) throws RuntimeException {
+                              Map<String, Object> params,
+                              T defaultValue) throws RuntimeException {
         if (params == null) {
             throw new RuntimeException(String.format("请求缺少 %s 字段", paramKey));
         }
@@ -119,7 +125,10 @@ public class UserIncrementController {
         Object param = params.get(paramKey);
 
         if (param == null) {
-            throw new RuntimeException(String.format("请求缺少 %s 字段", paramKey));
+            if (defaultValue == null) {
+                throw new RuntimeException(String.format("请求缺少 %s 字段", paramKey));
+            }
+            return defaultValue;
         }
 
         try {
