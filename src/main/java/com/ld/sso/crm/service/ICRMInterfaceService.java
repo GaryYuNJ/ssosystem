@@ -43,5 +43,13 @@ public interface ICRMInterfaceService {
 
 	List<CardJFLogModel> getJFHistoryListByCustId(String cmcustid,
 			int startRow, int pageSize);
-	
+
+	/**
+	 * 根据最后维护时间返回一个用户列表
+	 *
+	 * @param maintainMillis 最后维护时间
+	 * @return 返回此维护时间之后的用户列表
+	 */
+	List<CRMCustmemberModel> getCustomerInfoAfterMaintainDate(long maintainMillis,
+															  int startRow, int pageSize);
 }

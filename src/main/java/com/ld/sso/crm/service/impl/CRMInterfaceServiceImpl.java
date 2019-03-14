@@ -259,5 +259,9 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 		
 		return restTemplate.postForObject(requestUrl, requestparam, ResponseFromCRMData.class); 
 	}
-	
+
+	@Override
+	public List<CRMCustmemberModel> getCustomerInfoAfterMaintainDate(long maintainMillis, int startRow, int pageSize) {
+		return custmemberMapper.selectMemberInfoAfterMaintainDate(new Date(maintainMillis), startRow, pageSize);
+	}
 }

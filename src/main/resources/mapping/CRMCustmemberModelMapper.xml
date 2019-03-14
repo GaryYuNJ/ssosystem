@@ -2294,7 +2294,20 @@
       CMTOKENDATE = #{cmtokendate,jdbcType=TIMESTAMP}
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </update>
-  
 
-	
+  <select id="selectMemberInfoAfterMaintainDate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from (
+    select t.*, ROWNUM AS rowno from
+    (
+    select <include refid="Base_Column_List" />
+    from CUSTMEMBER
+    where CMMAINTDATE >= #{cmmaintdate,jdbcType=TIMESTAMP}
+    order by CMMAINTDATE asc
+    ) t
+    )
+    where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER}
+  </select>
+
 </mapper>
