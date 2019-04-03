@@ -48,5 +48,7 @@ public interface IuserInfoService {
 
 	CommonResponseInfo queryJFHistoryList(String ticket, int startRow,
 			int pageSize, int type);
+
+	CommonResponseInfo queryJFBalanceByCMcustid(String mobile, String cmcustid);
 	 
 }

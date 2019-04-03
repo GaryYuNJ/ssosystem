@@ -261,7 +261,19 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	}
 
 	@Override
-	public List<CRMCustmemberModel> getCustomerInfoAfterMaintainDate(long maintainMillis, int startRow, int pageSize) {
+	public List<CRMCustmemberModel> getCustomerBaseInfoAfterMaintainDate(long maintainMillis, int startRow, int pageSize) {
 		return custmemberMapper.selectMemberInfoAfterMaintainDate(new Date(maintainMillis), startRow, pageSize);
 	}
+	@Override
+	public List<CRMCustmemberModel> getMemberSelectedInfoAfterMaintainDate(long maintainMillis, int startRow, int pageSize) {
+		return custmemberMapper.selectMemberSelectedInfoAfterMaintainDate(new Date(maintainMillis), startRow, pageSize);
+	}
+	
+	
+	@Override
+	public Integer getMemberCountAfterMaintainDate(long maintainMillis) {
+		return custmemberMapper.selectMemberCountAfterMaintainDate(new Date(maintainMillis));
+	}
+	
+	
 }

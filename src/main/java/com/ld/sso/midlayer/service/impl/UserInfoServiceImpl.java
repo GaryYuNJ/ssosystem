@@ -240,6 +240,42 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		// TODO Auto-generated method stub
 		return response;
 	}
+	
+	//根据查询用户积分余额
+	@Override
+	public CommonResponseInfo queryJFBalanceByCMcustid(String mobile, String cmcustid) {
+		final String methodName = "queryJFBalance()";
+		
+		logger.info("~~~"+methodName+"~~~start~~cmcustid:{}",cmcustid);
+		logger.info("~~~"+methodName+"~~~start~~mobile:{}",mobile);
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			
+			if(StringUtil.isNotEmpty(cmcustid)){
+				
+				BigDecimal jfBalance = cRMInterfaceService.getCurJFYEByCustId(cmcustid);
+				
+				Map<String,Integer> map = new HashMap<String,Integer>();
+				map.put("jfBalance", 0);
+				if(null != jfBalance){
+					map.put("jfBalance", jfBalance.intValue());
+				}
+				response.setCode("0");
+				response.setData(map);
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		logger.info("~~~"+methodName+"~~~end~~");
+		// TODO Auto-generated method stub
+		return response;
+	}
 
 	//查询用户概要。包含积分余额，总历史消费积分，总历史获取积分
 	@Override

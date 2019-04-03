@@ -182,11 +182,13 @@
         <result column="CTNAME" property="ctname" />
     </association>
   </resultMap>
+  
   <resultMap id="BasicInfoResultMap" type="com.ld.sso.crm.domain.CRMCustmemberModel" >
     <id column="CMMEMID" property="cmmemid" jdbcType="VARCHAR" />
     <result column="CMCUSTID" property="cmcustid" jdbcType="VARCHAR" />
     <result column="CMMOBILE1" property="cmmobile1" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     CMMEMID, CMCUSTID, CMISOWNER, CMRELATION, CMGRADE, CMFLAG1, CMFLAG2, CMFLAG3, CMLMYKJF, 
     CMJFXFXE, CMLCZHYE, CMN1, CMN2, CMN3, CMN4, CMN5, CMN6, CMN7, CMN8, CMN9, CMJFA, 
@@ -205,9 +207,11 @@
     CMJJDATE, CMASTRO, CMFSTDATE, CMTOKEN, CMTOKEN2, CMTOKENDATE, CMPWD, CMSSQY, CMQYJS, 
     CMJTJS, CMPTNAME, CMCZZ, CMREFEREE
   </sql>
+  
   <sql id="BasicInfo_Column_List" >
     CMMEMID,CMCUSTID,CMMOBILE1
   </sql>
+  
   <sql id="FullInfo_Column_List" >
     CUS.CMMEMID,CUS.CMCUSTID,CUS.CMRELATION,CUS.CMTOTJF,CUS.CMNAME,
 	CUS.CMBIRTHDAY,CUS.CMSEX,CUS.CMADDR,CUS.CMIDTYPE,CUS.CMIDNO,CUS.CMMOBILE1,
@@ -215,6 +219,18 @@
 	Cardmain.CDMNO,Cardmain.CDMMAXDATE,Cardmain.CDMMINDATE,Cardmain.CDMTYPE,Cardmain.CDMSTATUS,
 	Custtype.CTCODE,Custtype.CTNAME 
   </sql>
+   <sql id="NoTag_FullInfo_Column_List" >
+	  CMMEMID, CMCUSTID, CMRELATION, CMTOTJF, CMNAME,  
+	 CMBIRTHDAY, CMSEX, CMADDR,CMIDTYPE,CMIDNO,CMMOBILE1,  
+	CMEMAIL,CMCOMPANY,CMMKT,CMPTNAME,CMCZZ,CMREFEREE,CMLCZHYE, 
+	 CDMNO,CDMMAXDATE,CDMMINDATE,CDMTYPE,CDMSTATUS, 
+	 CTCODE,CTNAME
+	</sql>
+  
+  <resultMap id="resultOfInteger" type="java.lang.Integer">  
+       <result column="totalCount" property="totalCount" jdbcType="INTEGER" />  
+  </resultMap> 
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -2308,6 +2324,30 @@
     ) t
     )
     where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectMemberSelectedInfoAfterMaintainDate" resultMap="FullInfoResultMap" >
+   select
+    <include refid="NoTag_FullInfo_Column_List" />
+    from (
+	    select t.*, ROWNUM AS rowno from
+	    (
+		    select 
+		    <include refid="FullInfo_Column_List" />
+		    from CUSTMEMBER CUS, CARDMAIN Cardmain, CUSTTYPE Custtype
+		    where CUS.CMMEMID = Cardmain.CDMOWNER
+		    and Cardmain.CDMTYPE = Custtype.CTCODE
+		    and CUS.CMMAINTDATE >= #{cmmaintdate,jdbcType=TIMESTAMP}
+		    order by CUS.CMMAINTDATE asc
+	    ) t
+    )
+    where  rowno &gt;= #{startRow,jdbcType=INTEGER} and ROWNUM &lt;= #{pageSize, jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectMemberCountAfterMaintainDate" resultMap="resultOfInteger">
+    select  count(1) AS totalCount
+    from CUSTMEMBER
+    where CMMAINTDATE >= #{cmmaintdate,jdbcType=TIMESTAMP}
   </select>
 
 </mapper>

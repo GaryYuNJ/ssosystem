@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ld.sso.crm.domain.CRMCustmemberModel;
+
 import org.apache.ibatis.annotations.Param;
 
 
@@ -36,4 +37,11 @@ public interface CRMCustmemberModelMapper  {
 	List<CRMCustmemberModel> selectMemberInfoAfterMaintainDate(@Param("cmmaintdate") Date lastMaintainDate,
                                                                @Param("startRow") int startRow,
                                                                @Param("pageSize") int pageSize);
+
+	
+	List<CRMCustmemberModel> selectMemberSelectedInfoAfterMaintainDate(@Param("cmmaintdate") Date lastMaintainDate,
+														            @Param("startRow") int startRow,
+														            @Param("pageSize") int pageSize);
+	
+	Integer selectMemberCountAfterMaintainDate(@Param("cmmaintdate") Date lastMaintainDate);
 }

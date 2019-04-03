@@ -50,6 +50,13 @@ public interface ICRMInterfaceService {
 	 * @param maintainMillis 最后维护时间
 	 * @return 返回此维护时间之后的用户列表
 	 */
-	List<CRMCustmemberModel> getCustomerInfoAfterMaintainDate(long maintainMillis,
-															  int startRow, int pageSize);
+	List<CRMCustmemberModel> getMemberSelectedInfoAfterMaintainDate(
+			long maintainMillis, int startRow, int pageSize);
+
+	List<CRMCustmemberModel> getCustomerBaseInfoAfterMaintainDate(
+			long maintainMillis, int startRow, int pageSize);
+
+	Integer getMemberCountAfterMaintainDate(long maintainMillis);
+
+	
 }
