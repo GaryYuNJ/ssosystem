@@ -31,6 +31,10 @@ queryBalanceRecordCode=8025
 queryJFSummaryCode=80091
 #80092 根据类型（增加、扣减、所有）查询会员积分历史列表查询
 queryJFHistoryCode=80092
+#80093 发送短信验证码，返回messageId
+sendVerifyCode=80093
+#80094 验证短信码，返回成功、失败
+verifyCode=80094
 
 */
 
@@ -60,9 +64,22 @@ public class CRMInterfaceProperties {
 	private String newPasswordCode;
 	private String queryJFSummaryCode;
 	private String queryJFHistoryCode;
+	private String sendVerifyCode;
+	private String verifyCode;
 	
 	
-	
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
+	public String getSendVerifyCode() {
+		return sendVerifyCode;
+	}
+	public void setSendVerifyCode(String sendVerifyCode) {
+		this.sendVerifyCode = sendVerifyCode;
+	}
 	public String getQueryJFHistoryCode() {
 		return queryJFHistoryCode;
 	}

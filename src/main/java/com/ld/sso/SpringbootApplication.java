@@ -1,12 +1,16 @@
 package com.ld.sso;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -14,15 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ld.sso.crm.mapper.CRMCustmemberModelMapper;
+import com.ld.sso.crm.mapper.CardJFLogModelMapper;
 import com.ld.sso.crm.properties.CRMInterfaceProperties;
 import com.ld.sso.crm.service.ICRMInterfaceService;
 import com.ld.sso.midlayer.service.IuserInfoService;
 import com.ld.sso.redis.service.IRedisService;
 
 
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) //多数据源
 @SpringBootApplication
 @RestController
-@MapperScan(basePackages = "com.ld.sso.crm.mapper")
+//@MapperScan(basePackages = "com.ld.sso.crm.mapper")
 @EnableCaching
 @EnableScheduling
 @EnableConfigurationProperties(CRMInterfaceProperties.class)
@@ -30,6 +36,9 @@ public class SpringbootApplication {
 	
 	@Autowired
 	private CRMCustmemberModelMapper custmemberMapper;
+	
+	@Autowired
+	private CardJFLogModelMapper cardJFLogModelMapper;
 	
 	@Resource
     private IRedisService redisService;
@@ -75,7 +84,28 @@ public class SpringbootApplication {
 //    	 //System.out.println("UserToken: "+cRMInterfaceService.getValidUserToken("0000000228"));
 //    	 
     	//System.out.println(this.custmemberMapper.selectByPrimaryKey("0000000228"));
-        return "Hello World!";
+    	Map params = new HashMap();
+		params.put("mobile", "19951956360");
+		params.put("enPasswd", "C36CF7C3A8562393");
+		params.put("passwd", "");
+        
+		custmemberMapper.getDecryptedPasswd(params);
+		System.out.println("~~~~~~~~"+params.get("passwd"));
+		
+//		String [] mobiles ={
+//				
+//				"13585386909",
+//				"13775970289"
+//		};
+//		
+//		for(int i=0;i<mobiles.length;i++){
+//			
+//			System.out.println(mobiles[i]+"	"
+//			+  (cardJFLogModelMapper.selectCurJFYEByMobile(mobiles[i]) == null? 0:cardJFLogModelMapper.selectCurJFYEByMobile(mobiles[i]).getCdlcurjfye()));
+//			
+//		}
+		
+        return "Hello World!"+params.get("passwd");
     }
     
   

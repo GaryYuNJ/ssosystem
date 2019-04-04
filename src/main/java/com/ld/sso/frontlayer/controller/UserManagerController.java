@@ -27,6 +27,7 @@ import com.ld.sso.frontlayer.databean.CommonResponseInfo;
 import com.ld.sso.frontlayer.util.SignVerification;
 import com.ld.sso.midlayer.databean.CRMCustmemberBasicInfo;
 import com.ld.sso.midlayer.service.IuserInfoService;
+import com.ld.sso.midlayer.service.SMSService;
 
 @RestController
 @RequestMapping(value = "RestAPI")
@@ -35,6 +36,8 @@ public class UserManagerController {
 	
 	@Resource
 	private IuserInfoService userInfoService;
+	@Autowired
+	SMSService smsService;
 	@Autowired 
 	private CRMInterfaceProperties crmInterfaceProperties; 
 
@@ -90,6 +93,10 @@ public class UserManagerController {
 			return this.queryJFSummary(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getQueryJFHistoryCode())){
 			return this.queryJFHistoryList(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getSendVerifyCode())){
+			return this.sendVerifySMSCode(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getVerifyCode())){
+			return this.verifySMSCode(param);
 		}else{
 			return userInfoService.sendCommonRequestToCRM(interfaceCode, param);
 		}
@@ -382,4 +389,35 @@ public class UserManagerController {
 		return response;
 	}
 	
+	public CommonResponseInfo sendVerifySMSCode(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())
+				){
+		
+			return smsService.sendVerifyCodeByTicket(param.getParams().get("ticket").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+		
+	}
+	public CommonResponseInfo verifySMSCode(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("smsCode") 
+				&& StringUtil.isNotEmpty(param.getParams().get("smsCode").toString())
+				&& null != param.getParams().get("msgId") 
+				&& StringUtil.isNotEmpty(param.getParams().get("msgId").toString())){
+		
+			return smsService.verifySMSCode(param.getParams().get("smsCode").toString(), param.getParams().get("msgId").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
 }
