@@ -50,5 +50,9 @@ public interface IuserInfoService {
 			int pageSize, int type);
 
 	CommonResponseInfo queryJFBalanceByCMcustid(String mobile, String cmcustid);
+
+	CommonResponseInfo migrateMobile(String smsCode, String msgId, String ticket, String newMobile);
+
+	CommonResponseInfo checkMobileRegStatus(String string, String string2);
 	 
 }

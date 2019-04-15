@@ -275,5 +275,49 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 		return custmemberMapper.selectMemberCountAfterMaintainDate(new Date(maintainMillis));
 	}
 	
+	@Override
+	public int changeAndEnableUserMobileByCMmemId(String oldMobile, String newMobile, String cmmemId) {
+		logger.info("~~~modifyPasswordByMobile()~~~start~~oldMobile:{},newMobile:{}", oldMobile,newMobile);
+		if(StringUtil.isNotEmpty(newMobile) 
+				&& StringUtil.isNotEmpty(oldMobile)
+				&& StringUtil.isNotEmpty(cmmemId)){
+			
+			CRMCustmemberModel cusModel = new CRMCustmemberModel();
+			cusModel.setCmmemid(cmmemId);
+			cusModel.setCmmobile1(newMobile);
+			cusModel.setCmmobile2(oldMobile);
+			cusModel.setCmmaintdate(new Date());
+			cusModel.setCmflag1("Y");
+			
+			return custmemberMapper.updateByPrimaryKeySelective(cusModel);
+		}
+		
+		return 0;
+	}
 	
+	@Override
+	public int changeAndDisableUserMobileByCMmemId(String oldMobile, String newMobile, String cmmemId) {
+		logger.info("~~~modifyPasswordByMobile()~~~start~~oldMobile:{},newMobile:{}", oldMobile,newMobile);
+		if(StringUtil.isNotEmpty(newMobile) 
+				&& StringUtil.isNotEmpty(oldMobile)
+				&& StringUtil.isNotEmpty(cmmemId)){
+			
+			CRMCustmemberModel cusModel = new CRMCustmemberModel();
+			cusModel.setCmmemid(cmmemId);
+			cusModel.setCmmobile1(newMobile);
+			cusModel.setCmmobile2(oldMobile);
+			cusModel.setCmmaintdate(new Date());
+			cusModel.setCmflag1("N");
+			
+			return custmemberMapper.updateByPrimaryKeySelective(cusModel);
+		}
+		
+		return 0;
+	}
+	
+	
+	@Override
+	public CRMCustmemberModel selectByMobile(String mobile) {
+		return custmemberMapper.selectByMobile(mobile);
+	}
 }

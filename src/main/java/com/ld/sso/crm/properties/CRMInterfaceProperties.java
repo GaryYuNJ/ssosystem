@@ -35,7 +35,10 @@ queryJFHistoryCode=80092
 sendVerifyCode=80093
 #80094 验证短信码，返回成功、失败
 verifyCode=80094
-
+#80095 迁移手机号
+migrateMobile=80095
+#80095 验证手机号是否已注册
+checkMobileRegStatus=80096
 */
 
 @ConfigurationProperties(prefix = "crm.interface")
@@ -66,8 +69,22 @@ public class CRMInterfaceProperties {
 	private String queryJFHistoryCode;
 	private String sendVerifyCode;
 	private String verifyCode;
+	private String migrateMobile;
+	private String checkMobileRegStatus;
 	
 	
+	public String getCheckMobileRegStatus() {
+		return checkMobileRegStatus;
+	}
+	public void setCheckMobileRegStatus(String checkMobileRegStatus) {
+		this.checkMobileRegStatus = checkMobileRegStatus;
+	}
+	public String getMigrateMobile() {
+		return migrateMobile;
+	}
+	public void setMigrateMobile(String migrateMobile) {
+		this.migrateMobile = migrateMobile;
+	}
 	public String getVerifyCode() {
 		return verifyCode;
 	}

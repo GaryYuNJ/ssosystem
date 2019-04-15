@@ -1,5 +1,6 @@
 package com.ld.sso.midlayer.service;
 
+import com.ld.sso.core.model.SmsCode;
 import com.ld.sso.frontlayer.databean.CommonResponseInfo;
 
 public interface SMSService {
@@ -9,5 +10,9 @@ public interface SMSService {
 	CommonResponseInfo sendVerifyCodeByMobile(String mobile);
 
 	CommonResponseInfo verifySMSCode(String smsCode, String msgId);
+
+	SmsCode queryByCodeAndMsgId(String smsCodeStr, String msgId);
+
+	CommonResponseInfo sendVerifyCode(String ticket, String mobile);
 
 }

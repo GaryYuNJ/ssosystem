@@ -237,6 +237,14 @@
     from CUSTMEMBER
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CUSTMEMBER
+    where CMMOBILE1 = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectTokenInfoByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     CMMEMID,CMCUSTID,CMTOKEN,CMTOKEN2,CMTOKENDATE
@@ -1708,7 +1716,13 @@
     </set>
     where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
   </update>
-  
+  <!-- 
+  <update id="updateMobileMemberId" parameterType="com.ld.sso.crm.domain.CRMCustmemberModel" >
+    update CUSTMEMBER
+      set  CMMOBILE1 = #{cmmobile1,jdbcType=VARCHAR},   CMMOBILE2 = #{cmmobile2,jdbcType=VARCHAR},
+    where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
+  </update>
+   -->
   <update id="updateByMobileSelective" parameterType="com.ld.sso.crm.domain.CRMCustmemberModel" >
     update CUSTMEMBER
     <set >

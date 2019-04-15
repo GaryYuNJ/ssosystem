@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.util.StringUtil;
 
 import com.alibaba.fastjson.JSONArray;
+import com.ld.sso.core.model.SmsCode;
 import com.ld.sso.crm.databean.CRMAccessTokenInfo;
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
@@ -33,6 +34,7 @@ import com.ld.sso.midlayer.databean.CRMCustmemberFullInfo;
 import com.ld.sso.midlayer.databean.CardJFLogSimpleDataBean;
 import com.ld.sso.midlayer.dataconvert.CustModelToFullInfoConverter;
 import com.ld.sso.midlayer.service.IuserInfoService;
+import com.ld.sso.midlayer.service.SMSService;
 import com.ld.sso.redis.service.IRedisService;
 
 @Service
@@ -50,6 +52,9 @@ public class UserInfoServiceImpl implements IuserInfoService {
 	
 	@Autowired 
 	private CRMInterfaceProperties crmInterfaceProperties; 
+	
+	@Resource
+    private SMSService smsService;
 
 	@Override
 	public CommonResponseInfo loginWithPwd(String mobile, String password, String source) {
@@ -700,5 +705,96 @@ public class UserInfoServiceImpl implements IuserInfoService {
 		logger.info("~~~changeCusJFByMemId()~~~JSONArray.toJSON(response):{}", JSONArray.toJSON(response));
 		return response;
 		
+	}
+
+	@Override
+	public CommonResponseInfo migrateMobile(String smsCodeStr, String msgId, String ticket, String newMobile) {
+		final String methodName = "sendVerifyCodeByTicket()";
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			//获取缓存的用户基本信息
+			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
+			
+			//获取短信验证码对应的新手机号
+			SmsCode smsCodeModel = smsService.queryByCodeAndMsgId(smsCodeStr, msgId);
+			
+			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmobile())
+					&& null != smsCodeModel && newMobile.equals(smsCodeModel.getMobile())){
+				String oldMobile = basicInfo.getCmmobile();
+
+				//查询新手机号是否已注册
+				CRMCustmemberModel custModelTmp = cRMInterfaceService.selectByMobile(newMobile);
+				
+				//如果迁移的新手机已注册过，更新手机号为废弃，原手机号放在mobile2
+				if(null != custModelTmp && StringUtil.isNotEmpty(custModelTmp.getCmmemid())){
+					cRMInterfaceService.changeAndDisableUserMobileByCMmemId(newMobile, newMobile+"_1", custModelTmp.getCmmemid());
+				}
+				
+				//更新老账号里的手机号为新手机号，老手机号作为mobile2存储
+				int result = cRMInterfaceService.changeAndEnableUserMobileByCMmemId(oldMobile, newMobile, basicInfo.getCmmemid());
+				if(result > 0){
+					
+					//通知OA
+					
+					//通知会议室预定系统
+					
+					//通知pop
+					
+					//权限系统会自动拉取数据更新，此处不做处理
+					
+					response.setCode("0");
+					response.setMsg("手机号更换成功");
+				}else{
+					response.setCode("9901");
+					response.setMsg("更新失败");
+				}
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		// TODO Auto-generated method stub
+		return response;
+	}
+
+	@Override
+	public CommonResponseInfo checkMobileRegStatus(String ticket, String mobile) {
+		final String methodName = "checkMobileRegStatus()";
+		logger.info("~~~"+methodName+"~~~start~~");
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			//获取缓存的用户基本信息
+			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
+			
+			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmobile())){
+
+				//查询新手机号是否已注册
+				CRMCustmemberModel custModelTmp = cRMInterfaceService.selectByMobile(mobile);
+				
+				//如果迁移的新手机已注册过，更新手机号为废弃，原手机号放在mobile2
+				if(null != custModelTmp && StringUtil.isNotEmpty(custModelTmp.getCmmemid())){
+					response.setCode("1");
+					response.setMsg("手机号已注册");
+				}else{
+					response.setCode("0");
+					response.setMsg("手机号未注册");
+				}
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		// TODO Auto-generated method stub
+		return response;
 	}
 }

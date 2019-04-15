@@ -97,12 +97,16 @@ public class UserManagerController {
 			return this.sendVerifySMSCode(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getVerifyCode())){
 			return this.verifySMSCode(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getMigrateMobile())){
+			return this.migrateMobile(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getCheckMobileRegStatus())){
+			return this.checkMobileRegStatus(param);
 		}else{
 			return userInfoService.sendCommonRequestToCRM(interfaceCode, param);
 		}
 	}
 	
-	
+
 	//扣减积分，两种方式。1. 用户登录，有ticket; 2. pop后台job调用，只有cmmemberId
 	public CommonResponseInfo changeCusJF(String interfaceCode, CommonRequestParam param){
 		logger.warn("~~~changeCusJF~~~JSONArray.toJSON(param):{}", JSONArray.toJSON(param));
@@ -389,13 +393,16 @@ public class UserManagerController {
 		return response;
 	}
 	
+	@RequestMapping(value = "/sendVerifySMSCode", method = { RequestMethod.POST }, 
+			produces = "application/json; charset=utf-8")
 	public CommonResponseInfo sendVerifySMSCode(CommonRequestParam param){
 		
 		if(null != param && null != param.getParams()
 				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())
+						&& null != param.getParams().get("mobile") && StringUtil.isNotEmpty(param.getParams().get("mobile").toString())
 				){
 		
-			return smsService.sendVerifyCodeByTicket(param.getParams().get("ticket").toString());
+			return smsService.sendVerifyCode(param.getParams().get("ticket").toString(), param.getParams().get("mobile").toString());
 		}
 		
 		CommonResponseInfo response = new CommonResponseInfo();
@@ -404,6 +411,9 @@ public class UserManagerController {
 		return response;
 		
 	}
+	
+	@RequestMapping(value = "/verifySMSCode", method = { RequestMethod.POST }, 
+			produces = "application/json; charset=utf-8")
 	public CommonResponseInfo verifySMSCode(CommonRequestParam param){
 		
 		if(null != param && null != param.getParams()
@@ -413,6 +423,48 @@ public class UserManagerController {
 				&& StringUtil.isNotEmpty(param.getParams().get("msgId").toString())){
 		
 			return smsService.verifySMSCode(param.getParams().get("smsCode").toString(), param.getParams().get("msgId").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+	
+
+	@RequestMapping(value = "/migrateMobile", method = { RequestMethod.POST }, 
+			produces = "application/json; charset=utf-8")
+	private CommonResponseInfo migrateMobile(CommonRequestParam param) {
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("smsCode") 
+				&& StringUtil.isNotEmpty(param.getParams().get("smsCode").toString())
+				&& null != param.getParams().get("msgId")
+				&& StringUtil.isNotEmpty(param.getParams().get("msgId").toString())
+				&& null != param.getParams().get("ticket") 
+				&& StringUtil.isNotEmpty(param.getParams().get("ticket").toString())
+				&& null != param.getParams().get("newMobile") 
+				&& StringUtil.isNotEmpty(param.getParams().get("newMobile").toString())){
+		
+			return userInfoService.migrateMobile(param.getParams().get("smsCode").toString(), 
+					param.getParams().get("msgId").toString(), param.getParams().get("ticket").toString(),param.getParams().get("newMobile").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+	
+	@RequestMapping(value = "/checkMobileRegStatus", method = { RequestMethod.POST }, 
+			produces = "application/json; charset=utf-8")
+	private CommonResponseInfo checkMobileRegStatus(CommonRequestParam param) {
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") 
+				&& StringUtil.isNotEmpty(param.getParams().get("ticket").toString())
+				&& null != param.getParams().get("newMobile") 
+				&& StringUtil.isNotEmpty(param.getParams().get("newMobile").toString())){
+		
+			return userInfoService.checkMobileRegStatus(param.getParams().get("ticket").toString(),param.getParams().get("newMobile").toString());
 		}
 		
 		CommonResponseInfo response = new CommonResponseInfo();

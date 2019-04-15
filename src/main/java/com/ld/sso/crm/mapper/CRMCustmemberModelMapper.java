@@ -44,4 +44,8 @@ public interface CRMCustmemberModelMapper  {
 														            @Param("pageSize") int pageSize);
 	
 	Integer selectMemberCountAfterMaintainDate(@Param("cmmaintdate") Date lastMaintainDate);
+	
+//	int updateMobileMemberId(CRMCustmemberModel record);
+	
+	CRMCustmemberModel selectByMobile(String mobile);
 }

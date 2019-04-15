@@ -58,5 +58,13 @@ public interface ICRMInterfaceService {
 
 	Integer getMemberCountAfterMaintainDate(long maintainMillis);
 
+	int changeAndEnableUserMobileByCMmemId(String oldMobile, String newMobile,
+			String cmmemId);
+
+	int changeAndDisableUserMobileByCMmemId(String oldMobile, String newMobile,
+			String cmmemId);
+
+	CRMCustmemberModel selectByMobile(String mobile);
+
 	
 }

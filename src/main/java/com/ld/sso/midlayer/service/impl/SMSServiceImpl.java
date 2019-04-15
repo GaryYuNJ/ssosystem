@@ -55,6 +55,30 @@ public class SMSServiceImpl implements SMSService {
 	}
 
 	@Override
+	public CommonResponseInfo sendVerifyCode(String ticket, String mobile) {
+		final String methodName = "sendVerifyCode()";
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			//验证ticket
+			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
+			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmemid())){
+				
+				response = this.sendVerifyCodeByMobile(mobile);
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		// TODO Auto-generated method stub
+		return response;
+	}
+
+	@Override
 	public CommonResponseInfo sendVerifyCodeByMobile(String mobile) {
 		final String methodName = "sendVerifyCodeByTicket()";
 		CommonResponseInfo response = new CommonResponseInfo();
@@ -124,6 +148,27 @@ public class SMSServiceImpl implements SMSService {
 		logger.info("~~~"+methodName+"~~~~~end~~~~~~~~~");
 		
 		return response;
+	}
+	
+
+	@Override
+	public SmsCode queryByCodeAndMsgId(String smsCodeStr, String msgId) {
+		final String methodName = "queryByCodeAndMsgId()";
+		logger.info("~~~"+methodName+"~~~start~~~");
+		
+		try{
+			SmsCode smsCode = smsCodeMapper.selectByPrimaryKey(Long.parseLong(msgId));
+			if(null != smsCode && smsCodeStr.equals(smsCode.getCode())){
+				return smsCode;
+			}
+		}catch(Exception e){
+			logger.error("~~~~~~ verify code error~~~~~~",e);
+			e.printStackTrace();
+		}
+		
+		logger.info("~~~"+methodName+"~~~~~end~~~~~~~~~");
+		
+		return null;
 	}
 
 }
