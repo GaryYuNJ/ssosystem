@@ -18,28 +18,28 @@ import com.alibaba.druid.pool.DruidDataSource;
 
 @Configuration
 //扫描 Mapper 接口并容器管理
-@MapperScan(basePackages = SSODataSourceConfig.PACKAGE, sqlSessionFactoryRef = "ssoSqlSessionFactory")
-public class SSODataSourceConfig {
+@MapperScan(basePackages = RoomRentDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "roomrentSqlSessionFactory")
+public class RoomRentDataSourceConfig {
 
  // 精确到  目录，以便跟其他数据源隔离
- static final String PACKAGE = "com.ld.sso.core.mapper";
- static final String MAPPER_LOCATION = "classpath:sso_mapper/*.xml";
+ static final String PACKAGE = "com.ld.sso.roomrent.mapper";
+ static final String MAPPER_LOCATION = "classpath:roomrent_mapper/*.xml";
 
- @Value("${sso.datasource.url}")
+ @Value("${roomrent.datasource.url}")
  private String url;
 
- @Value("${sso.datasource.username}")
+ @Value("${roomrent.datasource.username}")
  private String user;
 
- @Value("${sso.datasource.password}")
+ @Value("${roomrent.datasource.password}")
  private String password;
 
  @Value("${mysql.datasource.driverClassName}")
  private String driverClass;
 
- @Bean(name = "ssoDataSource")
+ @Bean(name = "roomrentDataSource")
 // @Primary
- public DataSource ssoDataSource() {
+ public DataSource roomrentDataSource() {
      DruidDataSource dataSource = new DruidDataSource();
      dataSource.setDriverClassName(driverClass);
      dataSource.setUrl(url);
@@ -48,20 +48,20 @@ public class SSODataSourceConfig {
      return dataSource;
  }
 
- @Bean(name = "ssoTransactionManager")
+ @Bean(name = "roomrentTransactionManager")
  //@Primary
- public DataSourceTransactionManager ssoTransactionManager() {
-     return new DataSourceTransactionManager(ssoDataSource());
+ public DataSourceTransactionManager roomrentTransactionManager() {
+     return new DataSourceTransactionManager(roomrentDataSource());
  }
 
- @Bean(name = "ssoSqlSessionFactory")
+ @Bean(name = "roomrentSqlSessionFactory")
  //@Primary
- public SqlSessionFactory ssoSqlSessionFactory(@Qualifier("ssoDataSource") DataSource ssoDataSource)
+ public SqlSessionFactory roomrentSqlSessionFactory(@Qualifier("roomrentDataSource") DataSource roomrentDataSource)
          throws Exception {
      final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-     sessionFactory.setDataSource(ssoDataSource);
+     sessionFactory.setDataSource(roomrentDataSource);
      sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-             .getResources(SSODataSourceConfig.MAPPER_LOCATION));
+             .getResources(RoomRentDataSourceConfig.MAPPER_LOCATION));
      return sessionFactory.getObject();
  }
 }

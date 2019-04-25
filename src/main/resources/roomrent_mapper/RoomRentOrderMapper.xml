@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.sso.roomrent.mapper.RoomRentOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.sso.roomrent.model.RoomRentOrder" >
+    <id column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="rent_type" property="rentType" jdbcType="VARCHAR" />
+    <result column="reserve_id" property="reserveId" jdbcType="BIGINT" />
+    <result column="proj_id" property="projId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="shop_num" property="shopNum" jdbcType="DECIMAL" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
+    <result column="is_bill" property="isBill" jdbcType="VARCHAR" />
+    <result column="bill_rise" property="billRise" jdbcType="VARCHAR" />
+    <result column="bill_tax" property="billTax" jdbcType="VARCHAR" />
+    <result column="bill_type" property="billType" jdbcType="VARCHAR" />
+    <result column="bill_addr" property="billAddr" jdbcType="VARCHAR" />
+    <result column="bill_phone" property="billPhone" jdbcType="VARCHAR" />
+    <result column="bill_bank" property="billBank" jdbcType="VARCHAR" />
+    <result column="bill_account" property="billAccount" jdbcType="VARCHAR" />
+    <result column="is_coupon" property="isCoupon" jdbcType="VARCHAR" />
+    <result column="user_coupon_id" property="userCouponId" jdbcType="VARCHAR" />
+    <result column="is_integral" property="isIntegral" jdbcType="VARCHAR" />
+    <result column="used_integral_num" property="usedIntegralNum" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="contact_person" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="access_bluetooth_status" property="accessBluetoothStatus" jdbcType="VARCHAR" />
+    <result column="access_bluetooth_num" property="accessBluetoothNum" jdbcType="DECIMAL" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="record_state" property="recordState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, rent_type, reserve_id, proj_id, user_id, order_no, shop_num, start_time, 
+    end_time, money, order_status, trade_time, is_bill, bill_rise, bill_tax, bill_type, 
+    bill_addr, bill_phone, bill_bank, bill_account, is_coupon, user_coupon_id, is_integral, 
+    used_integral_num, remark, contact_person, contact_phone, access_bluetooth_status, 
+    access_bluetooth_num, create_date, create_user, update_date, update_user, record_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ld.sso.roomrent.model.RoomRentOrder" >
+    insert into t_order (order_id, rent_type, reserve_id, 
+      proj_id, user_id, order_no, 
+      shop_num, start_time, end_time, 
+      money, order_status, trade_time, 
+      is_bill, bill_rise, bill_tax, 
+      bill_type, bill_addr, bill_phone, 
+      bill_bank, bill_account, is_coupon, 
+      user_coupon_id, is_integral, used_integral_num, 
+      remark, contact_person, contact_phone, 
+      access_bluetooth_status, access_bluetooth_num, 
+      create_date, create_user, update_date, 
+      update_user, record_state)
+    values (#{orderId,jdbcType=BIGINT}, #{rentType,jdbcType=VARCHAR}, #{reserveId,jdbcType=BIGINT}, 
+      #{projId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{shopNum,jdbcType=DECIMAL}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{money,jdbcType=DECIMAL}, #{orderStatus,jdbcType=VARCHAR}, #{tradeTime,jdbcType=TIMESTAMP}, 
+      #{isBill,jdbcType=VARCHAR}, #{billRise,jdbcType=VARCHAR}, #{billTax,jdbcType=VARCHAR}, 
+      #{billType,jdbcType=VARCHAR}, #{billAddr,jdbcType=VARCHAR}, #{billPhone,jdbcType=VARCHAR}, 
+      #{billBank,jdbcType=VARCHAR}, #{billAccount,jdbcType=VARCHAR}, #{isCoupon,jdbcType=VARCHAR}, 
+      #{userCouponId,jdbcType=VARCHAR}, #{isIntegral,jdbcType=VARCHAR}, #{usedIntegralNum,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{accessBluetoothStatus,jdbcType=VARCHAR}, #{accessBluetoothNum,jdbcType=DECIMAL}, 
+      #{createDate,jdbcType=DATE}, #{createUser,jdbcType=VARCHAR}, #{updateDate,jdbcType=DATE}, 
+      #{updateUser,jdbcType=VARCHAR}, #{recordState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.sso.roomrent.model.RoomRentOrder" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="rentType != null" >
+        rent_type,
+      </if>
+      <if test="reserveId != null" >
+        reserve_id,
+      </if>
+      <if test="projId != null" >
+        proj_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="shopNum != null" >
+        shop_num,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="tradeTime != null" >
+        trade_time,
+      </if>
+      <if test="isBill != null" >
+        is_bill,
+      </if>
+      <if test="billRise != null" >
+        bill_rise,
+      </if>
+      <if test="billTax != null" >
+        bill_tax,
+      </if>
+      <if test="billType != null" >
+        bill_type,
+      </if>
+      <if test="billAddr != null" >
+        bill_addr,
+      </if>
+      <if test="billPhone != null" >
+        bill_phone,
+      </if>
+      <if test="billBank != null" >
+        bill_bank,
+      </if>
+      <if test="billAccount != null" >
+        bill_account,
+      </if>
+      <if test="isCoupon != null" >
+        is_coupon,
+      </if>
+      <if test="userCouponId != null" >
+        user_coupon_id,
+      </if>
+      <if test="isIntegral != null" >
+        is_integral,
+      </if>
+      <if test="usedIntegralNum != null" >
+        used_integral_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="contactPerson != null" >
+        contact_person,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="accessBluetoothStatus != null" >
+        access_bluetooth_status,
+      </if>
+      <if test="accessBluetoothNum != null" >
+        access_bluetooth_num,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="recordState != null" >
+        record_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="rentType != null" >
+        #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveId != null" >
+        #{reserveId,jdbcType=BIGINT},
+      </if>
+      <if test="projId != null" >
+        #{projId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopNum != null" >
+        #{shopNum,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTime != null" >
+        #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isBill != null" >
+        #{isBill,jdbcType=VARCHAR},
+      </if>
+      <if test="billRise != null" >
+        #{billRise,jdbcType=VARCHAR},
+      </if>
+      <if test="billTax != null" >
+        #{billTax,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        #{billType,jdbcType=VARCHAR},
+      </if>
+      <if test="billAddr != null" >
+        #{billAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="billPhone != null" >
+        #{billPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="billBank != null" >
+        #{billBank,jdbcType=VARCHAR},
+      </if>
+      <if test="billAccount != null" >
+        #{billAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="isCoupon != null" >
+        #{isCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="userCouponId != null" >
+        #{userCouponId,jdbcType=VARCHAR},
+      </if>
+      <if test="isIntegral != null" >
+        #{isIntegral,jdbcType=VARCHAR},
+      </if>
+      <if test="usedIntegralNum != null" >
+        #{usedIntegralNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accessBluetoothStatus != null" >
+        #{accessBluetoothStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="accessBluetoothNum != null" >
+        #{accessBluetoothNum,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        #{recordState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.sso.roomrent.model.RoomRentOrder" >
+    update t_order
+    <set >
+      <if test="rentType != null" >
+        rent_type = #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveId != null" >
+        reserve_id = #{reserveId,jdbcType=BIGINT},
+      </if>
+      <if test="projId != null" >
+        proj_id = #{projId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopNum != null" >
+        shop_num = #{shopNum,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTime != null" >
+        trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isBill != null" >
+        is_bill = #{isBill,jdbcType=VARCHAR},
+      </if>
+      <if test="billRise != null" >
+        bill_rise = #{billRise,jdbcType=VARCHAR},
+      </if>
+      <if test="billTax != null" >
+        bill_tax = #{billTax,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null" >
+        bill_type = #{billType,jdbcType=VARCHAR},
+      </if>
+      <if test="billAddr != null" >
+        bill_addr = #{billAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="billPhone != null" >
+        bill_phone = #{billPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="billBank != null" >
+        bill_bank = #{billBank,jdbcType=VARCHAR},
+      </if>
+      <if test="billAccount != null" >
+        bill_account = #{billAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="isCoupon != null" >
+        is_coupon = #{isCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="userCouponId != null" >
+        user_coupon_id = #{userCouponId,jdbcType=VARCHAR},
+      </if>
+      <if test="isIntegral != null" >
+        is_integral = #{isIntegral,jdbcType=VARCHAR},
+      </if>
+      <if test="usedIntegralNum != null" >
+        used_integral_num = #{usedIntegralNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        contact_person = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accessBluetoothStatus != null" >
+        access_bluetooth_status = #{accessBluetoothStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="accessBluetoothNum != null" >
+        access_bluetooth_num = #{accessBluetoothNum,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        record_state = #{recordState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.sso.roomrent.model.RoomRentOrder" >
+    update t_order
+    set rent_type = #{rentType,jdbcType=VARCHAR},
+      reserve_id = #{reserveId,jdbcType=BIGINT},
+      proj_id = #{projId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      shop_num = #{shopNum,jdbcType=DECIMAL},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+      is_bill = #{isBill,jdbcType=VARCHAR},
+      bill_rise = #{billRise,jdbcType=VARCHAR},
+      bill_tax = #{billTax,jdbcType=VARCHAR},
+      bill_type = #{billType,jdbcType=VARCHAR},
+      bill_addr = #{billAddr,jdbcType=VARCHAR},
+      bill_phone = #{billPhone,jdbcType=VARCHAR},
+      bill_bank = #{billBank,jdbcType=VARCHAR},
+      bill_account = #{billAccount,jdbcType=VARCHAR},
+      is_coupon = #{isCoupon,jdbcType=VARCHAR},
+      user_coupon_id = #{userCouponId,jdbcType=VARCHAR},
+      is_integral = #{isIntegral,jdbcType=VARCHAR},
+      used_integral_num = #{usedIntegralNum,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      contact_person = #{contactPerson,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      access_bluetooth_status = #{accessBluetoothStatus,jdbcType=VARCHAR},
+      access_bluetooth_num = #{accessBluetoothNum,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=DATE},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=DATE},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      record_state = #{recordState,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateMobileByOldMobile" >
+    update t_order
+    set 
+    contact_phone = #{newMobile,jdbcType=VARCHAR}
+    where contact_phone = #{oldMobile,jdbcType=VARCHAR}	
+  </update>
+
+</mapper>

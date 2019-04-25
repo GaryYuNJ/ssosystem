@@ -35,7 +35,9 @@ import com.ld.sso.midlayer.databean.CardJFLogSimpleDataBean;
 import com.ld.sso.midlayer.dataconvert.CustModelToFullInfoConverter;
 import com.ld.sso.midlayer.service.IuserInfoService;
 import com.ld.sso.midlayer.service.SMSService;
+import com.ld.sso.oa.service.IOAService;
 import com.ld.sso.redis.service.IRedisService;
+import com.ld.sso.roomrent.service.IRoomRentService;
 
 @Service
 public class UserInfoServiceImpl implements IuserInfoService {
@@ -55,6 +57,12 @@ public class UserInfoServiceImpl implements IuserInfoService {
 	
 	@Resource
     private SMSService smsService;
+
+	@Resource
+    private IOAService oAService;
+
+	@Resource
+    private IRoomRentService roomRentService;
 
 	@Override
 	public CommonResponseInfo loginWithPwd(String mobile, String password, String source) {
@@ -732,15 +740,30 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				
 				//更新老账号里的手机号为新手机号，老手机号作为mobile2存储
 				int result = cRMInterfaceService.changeAndEnableUserMobileByCMmemId(oldMobile, newMobile, basicInfo.getCmmemid());
+
+				//老手机号换位之前新手机号对应的账户
+				cRMInterfaceService.changeAndDisableUserMobileByCMmemId(newMobile+"_1", oldMobile, custModelTmp.getCmmemid());
 				if(result > 0){
+					try{
+						//通知OA
+						oAService.changeUserMobile(oldMobile, newMobile);
+						//通知会议室预定系统
+						
+					}catch(Exception e){
+						e.printStackTrace();
+						logger.error("通知OA修改手机号报错。oldMobile:"+oldMobile+";newMobile:"+newMobile,e);
+					}
 					
-					//通知OA
-					
-					//通知会议室预定系统
-					
-					//通知pop
-					
-					//权限系统会自动拉取数据更新，此处不做处理
+					try{
+						
+						//通知会议室预定系统
+						roomRentService.changeUserMobile(oldMobile, newMobile);
+						//通知pop -- pop自动更新数据
+						//权限系统会自动拉取数据更新，此处不做处理
+					}catch(Exception e){
+						e.printStackTrace();
+						logger.error("通知会议室预定系统修改手机号报错。oldMobile:"+oldMobile+";newMobile:"+newMobile,e);
+					}
 					
 					response.setCode("0");
 					response.setMsg("手机号更换成功");

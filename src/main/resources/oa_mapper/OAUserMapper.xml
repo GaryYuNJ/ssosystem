@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ld.sso.oa.mapper.OAUserMapper" >
+  <resultMap id="BaseResultMap" type="com.ld.sso.oa.model.OAUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="locked" property="locked" jdbcType="BIT" />
+    <result column="organization_id" property="organizationId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createuser" property="createuser" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="modifytime" property="modifytime" jdbcType="TIMESTAMP" />
+    <result column="modifyuser" property="modifyuser" jdbcType="VARCHAR" />
+    <result column="userno" property="userno" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="superior" property="superior" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="fromtype" property="fromtype" jdbcType="INTEGER" />
+    <result column="breakfast" property="breakfast" jdbcType="INTEGER" />
+    <result column="dinner" property="dinner" jdbcType="INTEGER" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="isregist" property="isregist" jdbcType="INTEGER" />
+    <result column="attendance_group_id" property="attendanceGroupId" jdbcType="VARCHAR" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="record_state" property="recordState" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="orgSort" property="orgsort" jdbcType="INTEGER" />
+    <result column="job_time" property="jobTime" jdbcType="TIMESTAMP" />
+    <result column="quit_time" property="quitTime" jdbcType="TIMESTAMP" />
+    <result column="business_travel" property="businessTravel" jdbcType="VARCHAR" />
+    <result column="manufacture" property="manufacture" jdbcType="VARCHAR" />
+    <result column="phonemodel" property="phonemodel" jdbcType="VARCHAR" />
+    <result column="udid" property="udid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, locked, organization_id, password, salt, username, createtime, createuser, icon, 
+    modifytime, modifyuser, userno, status, superior, telephone, fromtype, breakfast, 
+    dinner, realname, isregist, attendance_group_id, project_name, record_state, sort, 
+    orgSort, job_time, quit_time, business_travel, manufacture, phonemodel, udid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from admin_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ld.sso.oa.model.OAUser" >
+    insert into admin_user (id, locked, organization_id, 
+      password, salt, username, 
+      createtime, createuser, icon, 
+      modifytime, modifyuser, userno, 
+      status, superior, telephone, 
+      fromtype, breakfast, dinner, 
+      realname, isregist, attendance_group_id, 
+      project_name, record_state, sort, 
+      orgSort, job_time, quit_time, 
+      business_travel, manufacture, phonemodel, 
+      udid)
+    values (#{id,jdbcType=VARCHAR}, #{locked,jdbcType=BIT}, #{organizationId,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{modifytime,jdbcType=TIMESTAMP}, #{modifyuser,jdbcType=VARCHAR}, #{userno,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{superior,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{fromtype,jdbcType=INTEGER}, #{breakfast,jdbcType=INTEGER}, #{dinner,jdbcType=INTEGER}, 
+      #{realname,jdbcType=VARCHAR}, #{isregist,jdbcType=INTEGER}, #{attendanceGroupId,jdbcType=VARCHAR}, 
+      #{projectName,jdbcType=VARCHAR}, #{recordState,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{orgsort,jdbcType=INTEGER}, #{jobTime,jdbcType=TIMESTAMP}, #{quitTime,jdbcType=TIMESTAMP}, 
+      #{businessTravel,jdbcType=VARCHAR}, #{manufacture,jdbcType=VARCHAR}, #{phonemodel,jdbcType=VARCHAR}, 
+      #{udid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ld.sso.oa.model.OAUser" >
+    insert into admin_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="locked != null" >
+        locked,
+      </if>
+      <if test="organizationId != null" >
+        organization_id,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="modifytime != null" >
+        modifytime,
+      </if>
+      <if test="modifyuser != null" >
+        modifyuser,
+      </if>
+      <if test="userno != null" >
+        userno,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="superior != null" >
+        superior,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="fromtype != null" >
+        fromtype,
+      </if>
+      <if test="breakfast != null" >
+        breakfast,
+      </if>
+      <if test="dinner != null" >
+        dinner,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="isregist != null" >
+        isregist,
+      </if>
+      <if test="attendanceGroupId != null" >
+        attendance_group_id,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="recordState != null" >
+        record_state,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="orgsort != null" >
+        orgSort,
+      </if>
+      <if test="jobTime != null" >
+        job_time,
+      </if>
+      <if test="quitTime != null" >
+        quit_time,
+      </if>
+      <if test="businessTravel != null" >
+        business_travel,
+      </if>
+      <if test="manufacture != null" >
+        manufacture,
+      </if>
+      <if test="phonemodel != null" >
+        phonemodel,
+      </if>
+      <if test="udid != null" >
+        udid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null" >
+        #{locked,jdbcType=BIT},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null" >
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="superior != null" >
+        #{superior,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtype != null" >
+        #{fromtype,jdbcType=INTEGER},
+      </if>
+      <if test="breakfast != null" >
+        #{breakfast,jdbcType=INTEGER},
+      </if>
+      <if test="dinner != null" >
+        #{dinner,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="isregist != null" >
+        #{isregist,jdbcType=INTEGER},
+      </if>
+      <if test="attendanceGroupId != null" >
+        #{attendanceGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        #{recordState,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="orgsort != null" >
+        #{orgsort,jdbcType=INTEGER},
+      </if>
+      <if test="jobTime != null" >
+        #{jobTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quitTime != null" >
+        #{quitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessTravel != null" >
+        #{businessTravel,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacture != null" >
+        #{manufacture,jdbcType=VARCHAR},
+      </if>
+      <if test="phonemodel != null" >
+        #{phonemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="udid != null" >
+        #{udid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ld.sso.oa.model.OAUser" >
+    update admin_user
+    <set >
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=BIT},
+      </if>
+      <if test="organizationId != null" >
+        organization_id = #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        modifyuser = #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null" >
+        userno = #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="superior != null" >
+        superior = #{superior,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fromtype != null" >
+        fromtype = #{fromtype,jdbcType=INTEGER},
+      </if>
+      <if test="breakfast != null" >
+        breakfast = #{breakfast,jdbcType=INTEGER},
+      </if>
+      <if test="dinner != null" >
+        dinner = #{dinner,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="isregist != null" >
+        isregist = #{isregist,jdbcType=INTEGER},
+      </if>
+      <if test="attendanceGroupId != null" >
+        attendance_group_id = #{attendanceGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        record_state = #{recordState,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="orgsort != null" >
+        orgSort = #{orgsort,jdbcType=INTEGER},
+      </if>
+      <if test="jobTime != null" >
+        job_time = #{jobTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quitTime != null" >
+        quit_time = #{quitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessTravel != null" >
+        business_travel = #{businessTravel,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacture != null" >
+        manufacture = #{manufacture,jdbcType=VARCHAR},
+      </if>
+      <if test="phonemodel != null" >
+        phonemodel = #{phonemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="udid != null" >
+        udid = #{udid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ld.sso.oa.model.OAUser" >
+    update admin_user
+    set locked = #{locked,jdbcType=BIT},
+      organization_id = #{organizationId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      createuser = #{createuser,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      modifyuser = #{modifyuser,jdbcType=VARCHAR},
+      userno = #{userno,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      superior = #{superior,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      fromtype = #{fromtype,jdbcType=INTEGER},
+      breakfast = #{breakfast,jdbcType=INTEGER},
+      dinner = #{dinner,jdbcType=INTEGER},
+      realname = #{realname,jdbcType=VARCHAR},
+      isregist = #{isregist,jdbcType=INTEGER},
+      attendance_group_id = #{attendanceGroupId,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      record_state = #{recordState,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      orgSort = #{orgsort,jdbcType=INTEGER},
+      job_time = #{jobTime,jdbcType=TIMESTAMP},
+      quit_time = #{quitTime,jdbcType=TIMESTAMP},
+      business_travel = #{businessTravel,jdbcType=VARCHAR},
+      manufacture = #{manufacture,jdbcType=VARCHAR},
+      phonemodel = #{phonemodel,jdbcType=VARCHAR},
+      udid = #{udid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateMobileByOldMobile" >
+    update admin_user
+    set 
+    userno = #{newMobile,jdbcType=VARCHAR},
+    telephone = #{newMobile,jdbcType=VARCHAR}
+    where telephone = #{oldMobile,jdbcType=VARCHAR}	
+  </update>
+  
+  <select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin_user
+    where telephone = #{mobile,jdbcType=VARCHAR} order by modifytime desc limit 1
+  </select>
+</mapper>

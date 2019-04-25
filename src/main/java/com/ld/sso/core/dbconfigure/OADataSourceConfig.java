@@ -18,28 +18,28 @@ import com.alibaba.druid.pool.DruidDataSource;
 
 @Configuration
 //扫描 Mapper 接口并容器管理
-@MapperScan(basePackages = SSODataSourceConfig.PACKAGE, sqlSessionFactoryRef = "ssoSqlSessionFactory")
-public class SSODataSourceConfig {
+@MapperScan(basePackages = OADataSourceConfig.PACKAGE, sqlSessionFactoryRef = "oaSqlSessionFactory")
+public class OADataSourceConfig {
 
  // 精确到  目录，以便跟其他数据源隔离
- static final String PACKAGE = "com.ld.sso.core.mapper";
- static final String MAPPER_LOCATION = "classpath:sso_mapper/*.xml";
+ static final String PACKAGE = "com.ld.sso.oa.mapper";
+ static final String MAPPER_LOCATION = "classpath:oa_mapper/*.xml";
 
- @Value("${sso.datasource.url}")
+ @Value("${oa.datasource.url}")
  private String url;
 
- @Value("${sso.datasource.username}")
+ @Value("${oa.datasource.username}")
  private String user;
 
- @Value("${sso.datasource.password}")
+ @Value("${oa.datasource.password}")
  private String password;
 
  @Value("${mysql.datasource.driverClassName}")
  private String driverClass;
 
- @Bean(name = "ssoDataSource")
+ @Bean(name = "oaDataSource")
 // @Primary
- public DataSource ssoDataSource() {
+ public DataSource oaDataSource() {
      DruidDataSource dataSource = new DruidDataSource();
      dataSource.setDriverClassName(driverClass);
      dataSource.setUrl(url);
@@ -48,20 +48,20 @@ public class SSODataSourceConfig {
      return dataSource;
  }
 
- @Bean(name = "ssoTransactionManager")
+ @Bean(name = "oaTransactionManager")
  //@Primary
- public DataSourceTransactionManager ssoTransactionManager() {
-     return new DataSourceTransactionManager(ssoDataSource());
+ public DataSourceTransactionManager oaTransactionManager() {
+     return new DataSourceTransactionManager(oaDataSource());
  }
 
- @Bean(name = "ssoSqlSessionFactory")
+ @Bean(name = "oaSqlSessionFactory")
  //@Primary
- public SqlSessionFactory ssoSqlSessionFactory(@Qualifier("ssoDataSource") DataSource ssoDataSource)
+ public SqlSessionFactory oaSqlSessionFactory(@Qualifier("oaDataSource") DataSource oaDataSource)
          throws Exception {
      final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-     sessionFactory.setDataSource(ssoDataSource);
+     sessionFactory.setDataSource(oaDataSource);
      sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-             .getResources(SSODataSourceConfig.MAPPER_LOCATION));
+             .getResources(OADataSourceConfig.MAPPER_LOCATION));
      return sessionFactory.getObject();
  }
 }
