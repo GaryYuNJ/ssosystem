@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +32,7 @@ import com.ld.sso.redis.service.IRedisService;
 //@MapperScan(basePackages = "com.ld.sso.crm.mapper")
 @EnableCaching
 @EnableScheduling
+@EnableAsync //开启异步操作,调用被@Async标记的方法的调用者不能和被调用的方法在同一类中不然不会起作用
 @EnableConfigurationProperties(CRMInterfaceProperties.class)
 public class SpringbootApplication {
 	

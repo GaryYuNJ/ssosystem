@@ -741,13 +741,16 @@ public class UserInfoServiceImpl implements IuserInfoService {
 				//更新老账号里的手机号为新手机号，老手机号作为mobile2存储
 				int result = cRMInterfaceService.changeAndEnableUserMobileByCMmemId(oldMobile, newMobile, basicInfo.getCmmemid());
 
-				//老手机号换位之前新手机号对应的账户
-				cRMInterfaceService.changeAndDisableUserMobileByCMmemId(newMobile+"_1", oldMobile, custModelTmp.getCmmemid());
+				//老手机号换为新手机号之前对应的账户
+				if(null != custModelTmp && StringUtil.isNotEmpty(custModelTmp.getCmmemid())){
+					cRMInterfaceService.changeAndDisableUserMobileByCMmemId(newMobile+"_1", oldMobile, custModelTmp.getCmmemid());
+				}
+				
 				if(result > 0){
 					try{
+						logger.warn("~~start process oa~~");
 						//通知OA
 						oAService.changeUserMobile(oldMobile, newMobile);
-						//通知会议室预定系统
 						
 					}catch(Exception e){
 						e.printStackTrace();
@@ -755,7 +758,7 @@ public class UserInfoServiceImpl implements IuserInfoService {
 					}
 					
 					try{
-						
+						logger.warn("~~start process roomrent~~");
 						//通知会议室预定系统
 						roomRentService.changeUserMobile(oldMobile, newMobile);
 						//通知pop -- pop自动更新数据
