@@ -46,9 +46,15 @@ public class OAService implements IOAService {
 		logger.warn("~~OAService.changeUserMobile~~~update db result:"+result);
 				
 		//更新考勤打卡数据，最好异步处理
-		if(result > 0){
-			this.changeUserMobileInMongo(oldMobile, newMobile);
+		try{
+			if(result > 0){
+				this.changeUserMobileInMongo(oldMobile, newMobile);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error("修改OA考勤报表手机号报错。oldMobile:"+oldMobile+";newMobile:"+newMobile,e);
 		}
+		
 		
 		logger.warn("~~OAService.changeUserMobile~~~end~~~~~~");
 	}
