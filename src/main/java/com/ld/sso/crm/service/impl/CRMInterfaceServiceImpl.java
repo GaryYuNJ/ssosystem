@@ -320,4 +320,15 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	public CRMCustmemberModel selectByMobile(String mobile) {
 		return custmemberMapper.selectByMobile(mobile);
 	}
+
+	//CMMEMID,CMCUSTID,CMMOBILE1,CMNAME,CMPTNAME
+	@Override
+	public CRMCustmemberModel selectSimpleInfoByPrimaryKey(String cmmemid) {
+		// TODO Auto-generated method stub
+		CRMCustmemberModel cusModel =  custmemberMapper.selectSimpleInfoByMemId(cmmemid);
+		
+		cusModel.setCmname(null != cusModel.getCmname() ? CRMCharacterConverter.convert8859P1ToGBK(cusModel.getCmname()):null);
+		
+		return cusModel;
+	}
 }

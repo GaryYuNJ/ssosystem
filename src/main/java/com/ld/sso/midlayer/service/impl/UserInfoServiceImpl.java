@@ -21,6 +21,7 @@ import tk.mybatis.mapper.util.StringUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.ld.sso.core.model.SmsCode;
 import com.ld.sso.crm.databean.CRMAccessTokenInfo;
+import com.ld.sso.crm.databean.CRMCustmemberSimpleData;
 import com.ld.sso.crm.databean.ResponseFromCRMData;
 import com.ld.sso.crm.domain.CRMCustmemberModel;
 import com.ld.sso.crm.domain.CardJFLogModel;
@@ -38,6 +39,7 @@ import com.ld.sso.midlayer.service.SMSService;
 import com.ld.sso.oa.service.IOAService;
 import com.ld.sso.redis.service.IRedisService;
 import com.ld.sso.roomrent.service.IRoomRentService;
+import com.mysql.jdbc.StringUtils;
 
 @Service
 public class UserInfoServiceImpl implements IuserInfoService {
@@ -820,6 +822,60 @@ public class UserInfoServiceImpl implements IuserInfoService {
 			response.setMsg("系统异常");
 			logger.error("~~~"+methodName+"~~~exception~~",e);
 		}
+		// TODO Auto-generated method stub
+		return response;
+	}
+	//CMMEMID,CMCUSTID,CMMOBILE1,CMNAME,CMPTNAME
+	@Override
+	public CommonResponseInfo queryUserSimpleInfo(String ticket) {
+		final String methodName = "queryUserFullInfoByTicket()";
+		
+		logger.info("~~~"+methodName+"~~~start~~ticket:{}",ticket);
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			
+			CRMCustmemberBasicInfo basicInfo = redisService.getUserInfoByTicket(ticket);
+			
+			if(null != basicInfo && StringUtil.isNotEmpty(basicInfo.getCmmemid())){
+				//查询数据库，获CMMEMID,CMCUSTID,CMMOBILE1,CMNAME,CMPTNAME
+				CRMCustmemberModel cusModel = cRMInterfaceService.selectSimpleInfoByPrimaryKey(basicInfo.getCmmemid());
+				
+				if(null != cusModel && StringUtil.isNotEmpty(cusModel.getCmmemid())){
+					
+					CRMCustmemberSimpleData simpleData  = new CRMCustmemberSimpleData();
+					simpleData.setCmcustid(cusModel.getCmcustid());
+					simpleData.setCmmaintdate(cusModel.getCmmaintdate());
+					simpleData.setCmmemid(cusModel.getCmmemid());
+					simpleData.setCmmobile(cusModel.getCmmobile1());
+					simpleData.setCmname(cusModel.getCmname());
+					if(!StringUtils.isNullOrEmpty(cusModel.getCmptname())){
+						if(cusModel.getCmptname().contains("http:")
+								|| cusModel.getCmptname().contains("https:")){
+							simpleData.setCmptname(cusModel.getCmptname());
+						}else{
+							simpleData.setCmptname(crmInterfaceProperties.getImageurlPrefix()+cusModel.getCmptname());
+						}
+					}
+					
+					response.setCode("0");
+					response.setData(simpleData);
+				}else{
+					response.setCode("9903");
+					response.setMsg("数据库获取用户信息失败");
+					response.setData(basicInfo);
+					logger.error("~~~"+methodName+"~~~get fullInfo failed~~");
+				}
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		logger.info("~~~"+methodName+"~~~end~~");
 		// TODO Auto-generated method stub
 		return response;
 	}

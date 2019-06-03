@@ -48,4 +48,6 @@ public interface CRMCustmemberModelMapper  {
 //	int updateMobileMemberId(CRMCustmemberModel record);
 	
 	CRMCustmemberModel selectByMobile(String mobile);
+
+	CRMCustmemberModel selectSimpleInfoByMemId(String cmmemid);
 }

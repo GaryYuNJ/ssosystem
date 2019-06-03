@@ -66,5 +66,7 @@ public interface ICRMInterfaceService {
 
 	CRMCustmemberModel selectByMobile(String mobile);
 
+	CRMCustmemberModel selectSimpleInfoByPrimaryKey(String cmmemid);
+
 	
 }

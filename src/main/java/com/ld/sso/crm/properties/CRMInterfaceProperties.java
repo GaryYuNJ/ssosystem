@@ -71,8 +71,23 @@ public class CRMInterfaceProperties {
 	private String verifyCode;
 	private String migrateMobile;
 	private String checkMobileRegStatus;
+	private String queryusersimpleinfoCode;
+	private String imageurlPrefix;
 	
 	
+	
+	public String getImageurlPrefix() {
+		return imageurlPrefix;
+	}
+	public void setImageurlPrefix(String imageurlPrefix) {
+		this.imageurlPrefix = imageurlPrefix;
+	}
+	public String getQueryusersimpleinfoCode() {
+		return queryusersimpleinfoCode;
+	}
+	public void setQueryusersimpleinfoCode(String queryusersimpleinfoCode) {
+		this.queryusersimpleinfoCode = queryusersimpleinfoCode;
+	}
 	public String getCheckMobileRegStatus() {
 		return checkMobileRegStatus;
 	}

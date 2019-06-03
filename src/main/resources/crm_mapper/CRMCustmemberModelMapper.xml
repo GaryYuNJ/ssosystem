@@ -211,7 +211,10 @@
   <sql id="BasicInfo_Column_List" >
     CMMEMID,CMCUSTID,CMMOBILE1
   </sql>
-  
+    
+  <sql id="SimpleInfo_Column_List" >
+    CMMEMID,CMCUSTID,CMMOBILE1,CMNAME,CMPTNAME,CMMAINTDATE
+  </sql>
   <sql id="FullInfo_Column_List" >
     CUS.CMMEMID,CUS.CMCUSTID,CUS.CMRELATION,CUS.CMTOTJF,CUS.CMNAME,
 	CUS.CMBIRTHDAY,CUS.CMSEX,CUS.CMADDR,CUS.CMIDTYPE,CUS.CMIDNO,CUS.CMMOBILE1,
@@ -259,6 +262,14 @@
     and CUS.CMMEMID = Cardmain.CDMOWNER
     and Cardmain.CDMTYPE = Custtype.CTCODE
   </select>
+  
+  <select id="selectSimpleInfoByMemId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="SimpleInfo_Column_List" />
+    from CUSTMEMBER CUS
+    where CMMEMID = #{cmmemid,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectBasicInfoByMobileAndEnPasswd" resultMap="BasicInfoResultMap" parameterType="java.util.Map" >
   	select <include refid="BasicInfo_Column_List" /> from 
   	(

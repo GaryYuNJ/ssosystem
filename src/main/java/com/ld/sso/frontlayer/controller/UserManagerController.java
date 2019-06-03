@@ -101,6 +101,8 @@ public class UserManagerController {
 			return this.migrateMobile(param);
 		}else if(interfaceCode.equals(crmInterfaceProperties.getCheckMobileRegStatus())){
 			return this.checkMobileRegStatus(param);
+		}else if(interfaceCode.equals(crmInterfaceProperties.getQueryusersimpleinfoCode())){
+			return this.queryUserSimpleInfo(param);
 		}else{
 			return userInfoService.sendCommonRequestToCRM(interfaceCode, param);
 		}
@@ -287,7 +289,21 @@ public class UserManagerController {
 		response.setMsg("无效参数或不符合JSON格式规范");
 		return response;
 	}
-	
+
+	public CommonResponseInfo queryUserSimpleInfo(CommonRequestParam param){
+		
+		if(null != param && null != param.getParams()
+				&& null != param.getParams().get("ticket") && StringUtil.isNotEmpty(param.getParams().get("ticket").toString())){
+		
+			return userInfoService.queryUserSimpleInfo(param.getParams().get("ticket").toString());
+		}
+		
+		CommonResponseInfo response = new CommonResponseInfo();
+		response.setCode("9004");
+		response.setMsg("无效参数或不符合JSON格式规范");
+		return response;
+	}
+
 	public CommonResponseInfo modifyPassword(CommonRequestParam param){
 		
 		if(null != param && null != param.getParams()

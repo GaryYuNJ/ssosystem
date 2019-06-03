@@ -54,5 +54,7 @@ public interface IuserInfoService {
 	CommonResponseInfo migrateMobile(String smsCode, String msgId, String ticket, String newMobile);
 
 	CommonResponseInfo checkMobileRegStatus(String string, String string2);
+
+	CommonResponseInfo queryUserSimpleInfo(String ticket);
 	 
 }
