@@ -73,9 +73,16 @@ public class CRMInterfaceProperties {
 	private String checkMobileRegStatus;
 	private String queryusersimpleinfoCode;
 	private String imageurlPrefix;
+	private String querysimpleinfoByMemid;
 	
 	
 	
+	public String getQuerysimpleinfoByMemid() {
+		return querysimpleinfoByMemid;
+	}
+	public void setQuerysimpleinfoByMemid(String querysimpleinfoByMemid) {
+		this.querysimpleinfoByMemid = querysimpleinfoByMemid;
+	}
 	public String getImageurlPrefix() {
 		return imageurlPrefix;
 	}

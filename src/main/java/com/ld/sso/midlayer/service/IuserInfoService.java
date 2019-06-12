@@ -56,5 +56,7 @@ public interface IuserInfoService {
 	CommonResponseInfo checkMobileRegStatus(String string, String string2);
 
 	CommonResponseInfo queryUserSimpleInfo(String ticket);
+
+	CommonResponseInfo querysimpleinfoByMemid(String cmmemid);
 	 
 }

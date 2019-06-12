@@ -828,7 +828,7 @@ public class UserInfoServiceImpl implements IuserInfoService {
 	//CMMEMID,CMCUSTID,CMMOBILE1,CMNAME,CMPTNAME
 	@Override
 	public CommonResponseInfo queryUserSimpleInfo(String ticket) {
-		final String methodName = "queryUserFullInfoByTicket()";
+		final String methodName = "queryUserSimpleInfo()";
 		
 		logger.info("~~~"+methodName+"~~~start~~ticket:{}",ticket);
 		CommonResponseInfo response = new CommonResponseInfo();
@@ -869,6 +869,59 @@ public class UserInfoServiceImpl implements IuserInfoService {
 			}else{
 				response.setCode("9909");
 				response.setMsg("ticket 不存在");
+			}
+		}catch(Exception e){
+			response.setCode("9901");
+			response.setMsg("系统异常");
+			logger.error("~~~"+methodName+"~~~exception~~",e);
+		}
+		logger.info("~~~"+methodName+"~~~end~~");
+		// TODO Auto-generated method stub
+		return response;
+	}
+	
+	//CMMEMID,CMCUSTID,CMMOBILE1,CMNAME,CMPTNAME
+	@Override
+	public CommonResponseInfo querysimpleinfoByMemid(String cmmemid) {
+		final String methodName = "querysimpleinfoByMemid()";
+		
+		logger.info("~~~"+methodName+"~~~start~~cmmemid:{}",cmmemid);
+		CommonResponseInfo response = new CommonResponseInfo();
+		try{
+			
+			if(StringUtil.isNotEmpty(cmmemid)){
+				//查询数据库，获CMMEMID,CMCUSTID,CMMOBILE1,CMNAME,CMPTNAME
+				CRMCustmemberModel cusModel = cRMInterfaceService.selectSimpleInfoByPrimaryKey(cmmemid);
+				
+				if(null != cusModel && StringUtil.isNotEmpty(cusModel.getCmmemid())){
+					
+					CRMCustmemberSimpleData simpleData  = new CRMCustmemberSimpleData();
+					simpleData.setCmcustid(cusModel.getCmcustid());
+					simpleData.setCmmaintdate(cusModel.getCmmaintdate());
+					simpleData.setCmmemid(cusModel.getCmmemid());
+					simpleData.setCmmobile(cusModel.getCmmobile1());
+					simpleData.setCmname(cusModel.getCmname());
+					if(!StringUtils.isNullOrEmpty(cusModel.getCmptname())){
+						if(cusModel.getCmptname().contains("http:")
+								|| cusModel.getCmptname().contains("https:")){
+							simpleData.setCmptname(cusModel.getCmptname());
+						}else{
+							simpleData.setCmptname(crmInterfaceProperties.getImageurlPrefix()+cusModel.getCmptname());
+						}
+					}
+					
+					response.setCode("0");
+					response.setData(simpleData);
+				}else{
+					response.setCode("9903");
+					response.setMsg("根据cmmemid获取用户信息为空");
+					response.setData(null);
+					logger.error("~~~"+methodName+"~~~get info failed~~");
+				}
+				
+			}else{
+				response.setCode("9909");
+				response.setMsg("cmmemid为空");
 			}
 		}catch(Exception e){
 			response.setCode("9901");

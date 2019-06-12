@@ -326,9 +326,9 @@ public class CRMInterfaceServiceImpl implements ICRMInterfaceService {
 	public CRMCustmemberModel selectSimpleInfoByPrimaryKey(String cmmemid) {
 		// TODO Auto-generated method stub
 		CRMCustmemberModel cusModel =  custmemberMapper.selectSimpleInfoByMemId(cmmemid);
-		
-		cusModel.setCmname(null != cusModel.getCmname() ? CRMCharacterConverter.convert8859P1ToGBK(cusModel.getCmname()):null);
-		
+		if(null != cusModel){
+			cusModel.setCmname(null != cusModel.getCmname() ? CRMCharacterConverter.convert8859P1ToGBK(cusModel.getCmname()):null);
+		}
 		return cusModel;
 	}
 }
